@@ -1,0 +1,6032 @@
+[
+  {
+    "english": "egg",
+    "japanese": "卵",
+    "level": "中1"
+  },
+  {
+    "english": "bag",
+    "japanese": "カバン",
+    "level": "中1"
+  },
+  {
+    "english": "rose",
+    "japanese": "バラ",
+    "level": "中1"
+  },
+  {
+    "english": "chair",
+    "japanese": "いす",
+    "level": "中1"
+  },
+  {
+    "english": "bat",
+    "japanese": "バット",
+    "level": "中1"
+  },
+  {
+    "english": "fish",
+    "japanese": "魚",
+    "level": "中1"
+  },
+  {
+    "english": "notebook",
+    "japanese": "ノート",
+    "level": "中1"
+  },
+  {
+    "english": "pencil",
+    "japanese": "鉛筆",
+    "level": "中1"
+  },
+  {
+    "english": "dog",
+    "japanese": "犬",
+    "level": "中1"
+  },
+  {
+    "english": "desk",
+    "japanese": "机",
+    "level": "中1"
+  },
+  {
+    "english": "watch",
+    "japanese": "腕時計",
+    "level": "中1"
+  },
+  {
+    "english": "mitt",
+    "japanese": "ミット",
+    "level": "中1"
+  },
+  {
+    "english": "milk",
+    "japanese": "牛乳",
+    "level": "中1"
+  },
+  {
+    "english": "flower",
+    "japanese": "花",
+    "level": "中1"
+  },
+  {
+    "english": "door",
+    "japanese": "ドア",
+    "level": "中1"
+  },
+  {
+    "english": "boat",
+    "japanese": "ボート",
+    "level": "中1"
+  },
+  {
+    "english": "piano",
+    "japanese": "ピアノ",
+    "level": "中1"
+  },
+  {
+    "english": "orange",
+    "japanese": "オレンジ",
+    "level": "中1"
+  },
+  {
+    "english": "bird",
+    "japanese": "鳥",
+    "level": "中1"
+  },
+  {
+    "english": "sheep",
+    "japanese": "羊",
+    "level": "中1"
+  },
+  {
+    "english": "cup",
+    "japanese": "カップ",
+    "level": "中1"
+  },
+  {
+    "english": "bus",
+    "japanese": "バス",
+    "level": "中1"
+  },
+  {
+    "english": "apple",
+    "japanese": "りんご",
+    "level": "中1"
+  },
+  {
+    "english": "fruit",
+    "japanese": "果物",
+    "level": "中1"
+  },
+  {
+    "english": "car",
+    "japanese": "自動車",
+    "level": "中1"
+  },
+  {
+    "english": "cake",
+    "japanese": "ケーキ",
+    "level": "中1"
+  },
+  {
+    "english": "picture",
+    "japanese": "絵",
+    "level": "中1"
+  },
+  {
+    "english": "picture",
+    "japanese": "写真",
+    "level": "中1"
+  },
+  {
+    "english": "cat",
+    "japanese": "猫",
+    "level": "中1"
+  },
+  {
+    "english": "stamp",
+    "japanese": "切手",
+    "level": "中1"
+  },
+  {
+    "english": "plane",
+    "japanese": "飛行機",
+    "level": "中1"
+  },
+  {
+    "english": "book",
+    "japanese": "本",
+    "level": "中1"
+  },
+  {
+    "english": "racket",
+    "japanese": "ラケット",
+    "level": "中1"
+  },
+  {
+    "english": "glass",
+    "japanese": "コップ",
+    "level": "中1"
+  },
+  {
+    "english": "glass",
+    "japanese": "ガラス",
+    "level": "中1"
+  },
+  {
+    "english": "bed",
+    "japanese": "ベッド",
+    "level": "中1"
+  },
+  {
+    "english": "letter",
+    "japanese": "手紙",
+    "level": "中1"
+  },
+  {
+    "english": "tape",
+    "japanese": "テープ",
+    "level": "中1"
+  },
+  {
+    "english": "cap",
+    "japanese": "帽子",
+    "level": "中1"
+  },
+  {
+    "english": "mail",
+    "japanese": "郵便",
+    "level": "中1"
+  },
+  {
+    "english": "box",
+    "japanese": "箱",
+    "level": "中1"
+  },
+  {
+    "english": "bread",
+    "japanese": "パン",
+    "level": "中1"
+  },
+  {
+    "english": "doll",
+    "japanese": "人形",
+    "level": "中1"
+  },
+  {
+    "english": "table",
+    "japanese": "テーブル",
+    "level": "中1"
+  },
+  {
+    "english": "tree",
+    "japanese": "木",
+    "level": "中1"
+  },
+  {
+    "english": "pen",
+    "japanese": "ペン",
+    "level": "中1"
+  },
+  {
+    "english": "map",
+    "japanese": "地図",
+    "level": "中1"
+  },
+  {
+    "english": "cow",
+    "japanese": "雌牛",
+    "level": "中1"
+  },
+  {
+    "english": "pot",
+    "japanese": "ポット",
+    "level": "中1"
+  },
+  {
+    "english": "camera",
+    "japanese": "カメラ",
+    "level": "中1"
+  },
+  {
+    "english": "hand",
+    "japanese": "手",
+    "level": "中1"
+  },
+  {
+    "english": "lemon",
+    "japanese": "レモン",
+    "level": "中1"
+  },
+  {
+    "english": "city",
+    "japanese": "都会",
+    "level": "中1"
+  },
+  {
+    "english": "floor",
+    "japanese": "階",
+    "level": "中1"
+  },
+  {
+    "english": "yard",
+    "japanese": "中庭",
+    "level": "中1"
+  },
+  {
+    "english": "bank",
+    "japanese": "銀行",
+    "level": "中1"
+  },
+  {
+    "english": "bank (embankment)",
+    "japanese": "土手",
+    "level": "中1"
+  },
+  {
+    "english": "library",
+    "japanese": "図書館",
+    "level": "中1"
+  },
+  {
+    "english": "hospital",
+    "japanese": "病院",
+    "level": "中1"
+  },
+  {
+    "english": "hotel",
+    "japanese": "ホテル",
+    "level": "中1"
+  },
+  {
+    "english": "village",
+    "japanese": "村",
+    "level": "中1"
+  },
+  {
+    "english": "kitchen",
+    "japanese": "台所",
+    "level": "中1"
+  },
+  {
+    "english": "wall",
+    "japanese": "壁",
+    "level": "中1"
+  },
+  {
+    "english": "park",
+    "japanese": "公園",
+    "level": "中1"
+  },
+  {
+    "english": "girl",
+    "japanese": "少女",
+    "level": "中1"
+  },
+  {
+    "english": "father",
+    "japanese": "父",
+    "level": "中1"
+  },
+  {
+    "english": "doctor",
+    "japanese": "医者",
+    "level": "中1"
+  },
+  {
+    "english": "pilot",
+    "japanese": "パイロット",
+    "level": "中1"
+  },
+  {
+    "english": "man",
+    "japanese": "男の人",
+    "level": "中1"
+  },
+  {
+    "english": "cook",
+    "japanese": "料理人",
+    "level": "中1"
+  },
+  {
+    "english": "sister",
+    "japanese": "姉妹",
+    "level": "中1"
+  },
+  {
+    "english": "mother",
+    "japanese": "母",
+    "level": "中1"
+  },
+  {
+    "english": "city",
+    "japanese": "市",
+    "level": "中1"
+  },
+  {
+    "english": "window",
+    "japanese": "窓",
+    "level": "中1"
+  },
+  {
+    "english": "church",
+    "japanese": "教会",
+    "level": "中1"
+  },
+  {
+    "english": "school",
+    "japanese": "学校",
+    "level": "中1"
+  },
+  {
+    "english": "country",
+    "japanese": "国",
+    "level": "中1"
+  },
+  {
+    "english": "country",
+    "japanese": "いなか",
+    "level": "中1"
+  },
+  {
+    "english": "country",
+    "japanese": "地方",
+    "level": "中1"
+  },
+  {
+    "english": "office",
+    "japanese": "事務所",
+    "level": "中1"
+  },
+  {
+    "english": "garden",
+    "japanese": "庭",
+    "level": "中1"
+  },
+  {
+    "english": "town",
+    "japanese": "町",
+    "level": "中1"
+  },
+  {
+    "english": "brother",
+    "japanese": "兄弟",
+    "level": "中1"
+  },
+  {
+    "english": "woman",
+    "japanese": "女性",
+    "level": "中1"
+  },
+  {
+    "english": "citizen",
+    "japanese": "市民",
+    "level": "中1"
+  },
+  {
+    "english": "parent",
+    "japanese": "親",
+    "level": "中1"
+  },
+  {
+    "english": "student",
+    "japanese": "学生",
+    "level": "中1"
+  },
+  {
+    "english": "clerk",
+    "japanese": "店員",
+    "level": "中1"
+  },
+  {
+    "english": "family",
+    "japanese": "家族",
+    "level": "中1"
+  },
+  {
+    "english": "teacher",
+    "japanese": "先生",
+    "level": "中1"
+  },
+  {
+    "english": "player",
+    "japanese": "選手",
+    "level": "中1"
+  },
+  {
+    "english": "player",
+    "japanese": "演奏者",
+    "level": "中1"
+  },
+  {
+    "english": "floor",
+    "japanese": "床",
+    "level": "中1"
+  },
+  {
+    "english": "store",
+    "japanese": "店",
+    "level": "中1"
+  },
+  {
+    "english": "station",
+    "japanese": "駅",
+    "level": "中1"
+  },
+  {
+    "english": "house",
+    "japanese": "家",
+    "level": "中1"
+  },
+  {
+    "english": "field",
+    "japanese": "野原競技場",
+    "level": "中1"
+  },
+  {
+    "english": "Japan",
+    "japanese": "日本",
+    "level": "中1"
+  },
+  {
+    "english": "gate",
+    "japanese": "門",
+    "level": "中1"
+  },
+  {
+    "english": "room",
+    "japanese": "部屋",
+    "level": "中1"
+  },
+  {
+    "english": "aunt",
+    "japanese": "おば",
+    "level": "中1"
+  },
+  {
+    "english": "boy",
+    "japanese": "少年",
+    "level": "中1"
+  },
+  {
+    "english": "son",
+    "japanese": "息子",
+    "level": "中1"
+  },
+  {
+    "english": "nurse",
+    "japanese": "看護婦",
+    "level": "中1"
+  },
+  {
+    "english": "friend",
+    "japanese": "友人",
+    "level": "中1"
+  },
+  {
+    "english": "uncle",
+    "japanese": "おじ",
+    "level": "中1"
+  },
+  {
+    "english": "singer",
+    "japanese": "歌手",
+    "level": "中1"
+  },
+  {
+    "english": "daughter",
+    "japanese": "娘",
+    "level": "中1"
+  },
+  {
+    "english": "evening",
+    "japanese": "晩",
+    "level": "中1"
+  },
+  {
+    "english": "morning",
+    "japanese": "朝",
+    "level": "中1"
+  },
+  {
+    "english": "night",
+    "japanese": "夜",
+    "level": "中1"
+  },
+  {
+    "english": "noon",
+    "japanese": "正午",
+    "level": "中1"
+  },
+  {
+    "english": "tomorrow",
+    "japanese": "明日",
+    "level": "中1"
+  },
+  {
+    "english": "time",
+    "japanese": "時，～回",
+    "level": "中1"
+  },
+  {
+    "english": "afternoon",
+    "japanese": "午後",
+    "level": "中1"
+  },
+  {
+    "english": "diary",
+    "japanese": "日記",
+    "level": "中1"
+  },
+  {
+    "english": "meal",
+    "japanese": "食事",
+    "level": "中1"
+  },
+  {
+    "english": "breakfast",
+    "japanese": "朝食",
+    "level": "中1"
+  },
+  {
+    "english": "lunch",
+    "japanese": "昼食",
+    "level": "中1"
+  },
+  {
+    "english": "dinner",
+    "japanese": "夕食",
+    "level": "中1"
+  },
+  {
+    "english": "supper",
+    "japanese": "夕食",
+    "level": "中1"
+  },
+  {
+    "english": "walk",
+    "japanese": "散歩",
+    "level": "中1"
+  },
+  {
+    "english": "work",
+    "japanese": "仕事作品",
+    "level": "中1"
+  },
+  {
+    "english": "basketball",
+    "japanese": "バスケットボール",
+    "level": "中1"
+  },
+  {
+    "english": "baseball",
+    "japanese": "野球",
+    "level": "中1"
+  },
+  {
+    "english": "tennis",
+    "japanese": "テニス",
+    "level": "中1"
+  },
+  {
+    "english": "homework",
+    "japanese": "宿題",
+    "level": "中1"
+  },
+  {
+    "english": "season",
+    "japanese": "季節",
+    "level": "中1"
+  },
+  {
+    "english": "spring",
+    "japanese": "春",
+    "level": "中1"
+  },
+  {
+    "english": "summer",
+    "japanese": "夏",
+    "level": "中1"
+  },
+  {
+    "english": "autumn",
+    "japanese": "秋",
+    "level": "中1"
+  },
+  {
+    "english": "fall",
+    "japanese": "秋",
+    "level": "中1"
+  },
+  {
+    "english": "winter",
+    "japanese": "冬",
+    "level": "中1"
+  },
+  {
+    "english": "minute",
+    "japanese": "分ちょっとの間",
+    "level": "中1"
+  },
+  {
+    "english": "week",
+    "japanese": "週",
+    "level": "中1"
+  },
+  {
+    "english": "month",
+    "japanese": "月",
+    "level": "中1"
+  },
+  {
+    "english": "year",
+    "japanese": "年",
+    "level": "中1"
+  },
+  {
+    "english": "hour",
+    "japanese": "時間",
+    "level": "中1"
+  },
+  {
+    "english": "day",
+    "japanese": "日",
+    "level": "中1"
+  },
+  {
+    "english": "January",
+    "japanese": "１月",
+    "level": "中1"
+  },
+  {
+    "english": "February",
+    "japanese": "２月",
+    "level": "中1"
+  },
+  {
+    "english": "March",
+    "japanese": "３月",
+    "level": "中1"
+  },
+  {
+    "english": "April",
+    "japanese": "４月",
+    "level": "中1"
+  },
+  {
+    "english": "May",
+    "japanese": "５月",
+    "level": "中1"
+  },
+  {
+    "english": "June",
+    "japanese": "６月",
+    "level": "中1"
+  },
+  {
+    "english": "July",
+    "japanese": "７月",
+    "level": "中1"
+  },
+  {
+    "english": "August",
+    "japanese": "８月",
+    "level": "中1"
+  },
+  {
+    "english": "September",
+    "japanese": "９月",
+    "level": "中1"
+  },
+  {
+    "english": "October",
+    "japanese": "１０月",
+    "level": "中1"
+  },
+  {
+    "english": "November",
+    "japanese": "１１月",
+    "level": "中1"
+  },
+  {
+    "english": "December",
+    "japanese": "１２月",
+    "level": "中1"
+  },
+  {
+    "english": "Sunday",
+    "japanese": "日曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Monday",
+    "japanese": "月曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Tuesday",
+    "japanese": "火曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Wednesday",
+    "japanese": "水曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Thursday",
+    "japanese": "木曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Friday",
+    "japanese": "金曜日",
+    "level": "中1"
+  },
+  {
+    "english": "Saturday",
+    "japanese": "土曜日",
+    "level": "中1"
+  },
+  {
+    "english": "like",
+    "japanese": "好む",
+    "level": "中1"
+  },
+  {
+    "english": "look",
+    "japanese": "見る～に見える",
+    "level": "中1"
+  },
+  {
+    "english": "read",
+    "japanese": "読む",
+    "level": "中1"
+  },
+  {
+    "english": "drink",
+    "japanese": "飲む",
+    "level": "中1"
+  },
+  {
+    "english": "walk",
+    "japanese": "歩く",
+    "level": "中1"
+  },
+  {
+    "english": "wash",
+    "japanese": "洗う",
+    "level": "中1"
+  },
+  {
+    "english": "run",
+    "japanese": "走る",
+    "level": "中1"
+  },
+  {
+    "english": "stop",
+    "japanese": "止める止まる",
+    "level": "中1"
+  },
+  {
+    "english": "have",
+    "japanese": "持っている食べる",
+    "level": "中1"
+  },
+  {
+    "english": "wait",
+    "japanese": "待つ",
+    "level": "中1"
+  },
+  {
+    "english": "collect",
+    "japanese": "集める",
+    "level": "中1"
+  },
+  {
+    "english": "send",
+    "japanese": "送る",
+    "level": "中1"
+  },
+  {
+    "english": "come",
+    "japanese": "来る",
+    "level": "中1"
+  },
+  {
+    "english": "want",
+    "japanese": "欲しい",
+    "level": "中1"
+  },
+  {
+    "english": "do",
+    "japanese": "する",
+    "level": "中1"
+  },
+  {
+    "english": "make",
+    "japanese": "作る～を～にする",
+    "level": "中1"
+  },
+  {
+    "english": "ride",
+    "japanese": "乗る",
+    "level": "中1"
+  },
+  {
+    "english": "enjoy",
+    "japanese": "楽しむ",
+    "level": "中1"
+  },
+  {
+    "english": "play",
+    "japanese": "遊ぶ(スポーツを)する演奏する",
+    "level": "中1"
+  },
+  {
+    "english": "sing",
+    "japanese": "歌う",
+    "level": "中1"
+  },
+  {
+    "english": "speak",
+    "japanese": "話す",
+    "level": "中1"
+  },
+  {
+    "english": "cook",
+    "japanese": "料理する",
+    "level": "中1"
+  },
+  {
+    "english": "swim",
+    "japanese": "泳ぐ",
+    "level": "中1"
+  },
+  {
+    "english": "write",
+    "japanese": "書く手紙を書く",
+    "level": "中1"
+  },
+  {
+    "english": "catch",
+    "japanese": "捕まえる(列車に)間に合う",
+    "level": "中1"
+  },
+  {
+    "english": "open",
+    "japanese": "開ける",
+    "level": "中1"
+  },
+  {
+    "english": "move",
+    "japanese": "動く感動させる",
+    "level": "中1"
+  },
+  {
+    "english": "help",
+    "japanese": "助ける",
+    "level": "中1"
+  },
+  {
+    "english": "buy",
+    "japanese": "買う",
+    "level": "中1"
+  },
+  {
+    "english": "leave",
+    "japanese": "去る残す置いて行く",
+    "level": "中1"
+  },
+  {
+    "english": "meet",
+    "japanese": "会う",
+    "level": "中1"
+  },
+  {
+    "english": "live",
+    "japanese": "住む生きる",
+    "level": "中1"
+  },
+  {
+    "english": "work",
+    "japanese": "働く",
+    "level": "中1"
+  },
+  {
+    "english": "go",
+    "japanese": "行く",
+    "level": "中1"
+  },
+  {
+    "english": "know",
+    "japanese": "知っている",
+    "level": "中1"
+  },
+  {
+    "english": "study",
+    "japanese": "勉強する",
+    "level": "中1"
+  },
+  {
+    "english": "eat",
+    "japanese": "食べる",
+    "level": "中1"
+  },
+  {
+    "english": "learn",
+    "japanese": "学ぶ覚える",
+    "level": "中1"
+  },
+  {
+    "english": "stand",
+    "japanese": "立つ",
+    "level": "中1"
+  },
+  {
+    "english": "dance",
+    "japanese": "踊る",
+    "level": "中1"
+  },
+  {
+    "english": "sell",
+    "japanese": "売る",
+    "level": "中1"
+  },
+  {
+    "english": "arrive",
+    "japanese": "到着する",
+    "level": "中1"
+  },
+  {
+    "english": "get",
+    "japanese": "得る着く乗る",
+    "level": "中1"
+  },
+  {
+    "english": "put",
+    "japanese": "置く",
+    "level": "中1"
+  },
+  {
+    "english": "stay",
+    "japanese": "滞在する",
+    "level": "中1"
+  },
+  {
+    "english": "try",
+    "japanese": "試す",
+    "level": "中1"
+  },
+  {
+    "english": "give",
+    "japanese": "与える(会などを)開く",
+    "level": "中1"
+  },
+  {
+    "english": "use",
+    "japanese": "使う",
+    "level": "中1"
+  },
+  {
+    "english": "visit",
+    "japanese": "訪問する",
+    "level": "中1"
+  },
+  {
+    "english": "need",
+    "japanese": "必要とする",
+    "level": "中1"
+  },
+  {
+    "english": "sad",
+    "japanese": "悲しい",
+    "level": "中1"
+  },
+  {
+    "english": "high",
+    "japanese": "高い",
+    "level": "中1"
+  },
+  {
+    "english": "slow",
+    "japanese": "遅い",
+    "level": "中1"
+  },
+  {
+    "english": "nice",
+    "japanese": "すばらしい",
+    "level": "中1"
+  },
+  {
+    "english": "these",
+    "japanese": "これらの",
+    "level": "中1"
+  },
+  {
+    "english": "all",
+    "japanese": "すべての",
+    "level": "中1"
+  },
+  {
+    "english": "that",
+    "japanese": "あの",
+    "level": "中1"
+  },
+  {
+    "english": "red",
+    "japanese": "赤い",
+    "level": "中1"
+  },
+  {
+    "english": "green",
+    "japanese": "緑の",
+    "level": "中1"
+  },
+  {
+    "english": "strong",
+    "japanese": "強いじょうぶな",
+    "level": "中1"
+  },
+  {
+    "english": "big",
+    "japanese": "大きい",
+    "level": "中1"
+  },
+  {
+    "english": "fine",
+    "japanese": "すばらしい元気な晴れた",
+    "level": "中1"
+  },
+  {
+    "english": "happy",
+    "japanese": "幸福な楽しい",
+    "level": "中1"
+  },
+  {
+    "english": "busy",
+    "japanese": "忙しい",
+    "level": "中1"
+  },
+  {
+    "english": "sorry",
+    "japanese": "残念な",
+    "level": "中1"
+  },
+  {
+    "english": "honest",
+    "japanese": "正直な",
+    "level": "中1"
+  },
+  {
+    "english": "poor",
+    "japanese": "貧乏なかわいそうな不十分な",
+    "level": "中1"
+  },
+  {
+    "english": "later",
+    "japanese": "後で",
+    "level": "中1"
+  },
+  {
+    "english": "soon",
+    "japanese": "すぐに",
+    "level": "中1"
+  },
+  {
+    "english": "yesterday",
+    "japanese": "昨日",
+    "level": "中1"
+  },
+  {
+    "english": "o&#8217;clock",
+    "japanese": "～時",
+    "level": "中1"
+  },
+  {
+    "english": "already",
+    "japanese": "すでに",
+    "level": "中1"
+  },
+  {
+    "english": "up",
+    "japanese": "上へ",
+    "level": "中1"
+  },
+  {
+    "english": "there",
+    "japanese": "そこに",
+    "level": "中1"
+  },
+  {
+    "english": "well",
+    "japanese": "よくじょうずに",
+    "level": "中1"
+  },
+  {
+    "english": "so",
+    "japanese": "そんなに",
+    "level": "中1"
+  },
+  {
+    "english": "slowly",
+    "japanese": "ゆっくりと",
+    "level": "中1"
+  },
+  {
+    "english": "yet",
+    "japanese": "まだ(～でない)",
+    "level": "中1"
+  },
+  {
+    "english": "why",
+    "japanese": "なぜ",
+    "level": "中1"
+  },
+  {
+    "english": "best",
+    "japanese": "一番良い",
+    "level": "中1"
+  },
+  {
+    "english": "bad",
+    "japanese": "悪い",
+    "level": "中1"
+  },
+  {
+    "english": "clean",
+    "japanese": "きれいな",
+    "level": "中1"
+  },
+  {
+    "english": "fast",
+    "japanese": "速い",
+    "level": "中1"
+  },
+  {
+    "english": "large",
+    "japanese": "大きい，広い",
+    "level": "中1"
+  },
+  {
+    "english": "easy",
+    "japanese": "やさしい気楽に",
+    "level": "中1"
+  },
+  {
+    "english": "tall",
+    "japanese": "背の高い",
+    "level": "中1"
+  },
+  {
+    "english": "some",
+    "japanese": "いくつかの",
+    "level": "中1"
+  },
+  {
+    "english": "early",
+    "japanese": "早い",
+    "level": "中1"
+  },
+  {
+    "english": "this",
+    "japanese": "この",
+    "level": "中1"
+  },
+  {
+    "english": "those",
+    "japanese": "あれらの",
+    "level": "中1"
+  },
+  {
+    "english": "warm",
+    "japanese": "温暖な",
+    "level": "中1"
+  },
+  {
+    "english": "cool",
+    "japanese": "涼しい",
+    "level": "中1"
+  },
+  {
+    "english": "new",
+    "japanese": "新しい",
+    "level": "中1"
+  },
+  {
+    "english": "short",
+    "japanese": "短い背が低い",
+    "level": "中1"
+  },
+  {
+    "english": "little",
+    "japanese": "小さい幼いちょっとした",
+    "level": "中1"
+  },
+  {
+    "english": "dark",
+    "japanese": "暗い黒い",
+    "level": "中1"
+  },
+  {
+    "english": "old",
+    "japanese": "年をとった古い",
+    "level": "中1"
+  },
+  {
+    "english": "careful",
+    "japanese": "注意深い",
+    "level": "中1"
+  },
+  {
+    "english": "junior",
+    "japanese": "年下の下級の",
+    "level": "中1"
+  },
+  {
+    "english": "hungry",
+    "japanese": "空腹の",
+    "level": "中1"
+  },
+  {
+    "english": "ill",
+    "japanese": "病気の",
+    "level": "中1"
+  },
+  {
+    "english": "usually",
+    "japanese": "ふつう",
+    "level": "中1"
+  },
+  {
+    "english": "today",
+    "japanese": "今日現在",
+    "level": "中1"
+  },
+  {
+    "english": "fast",
+    "japanese": "速く",
+    "level": "中1"
+  },
+  {
+    "english": "now",
+    "japanese": "今",
+    "level": "中1"
+  },
+  {
+    "english": "ago",
+    "japanese": "前",
+    "level": "中1"
+  },
+  {
+    "english": "where",
+    "japanese": "どこに",
+    "level": "中1"
+  },
+  {
+    "english": "home",
+    "japanese": "家を家へ",
+    "level": "中1"
+  },
+  {
+    "english": "much",
+    "japanese": "ずっとたいへん",
+    "level": "中1"
+  },
+  {
+    "english": "yes",
+    "japanese": "はい",
+    "level": "中1"
+  },
+  {
+    "english": "also",
+    "japanese": "もまた",
+    "level": "中1"
+  },
+  {
+    "english": "not",
+    "japanese": "～でない",
+    "level": "中1"
+  },
+  {
+    "english": "together",
+    "japanese": "一緒に",
+    "level": "中1"
+  },
+  {
+    "english": "sick",
+    "japanese": "病��で病気の",
+    "level": "中1"
+  },
+  {
+    "english": "kind",
+    "japanese": "親切な",
+    "level": "中1"
+  },
+  {
+    "english": "glad",
+    "japanese": "うれしい",
+    "level": "中1"
+  },
+  {
+    "english": "good",
+    "japanese": "良い",
+    "level": "中1"
+  },
+  {
+    "english": "young",
+    "japanese": "若い",
+    "level": "中1"
+  },
+  {
+    "english": "sometimes",
+    "japanese": "時々",
+    "level": "中1"
+  },
+  {
+    "english": "often",
+    "japanese": "しばしば",
+    "level": "中1"
+  },
+  {
+    "english": "early",
+    "japanese": "早く",
+    "level": "中1"
+  },
+  {
+    "english": "always",
+    "japanese": "いつも",
+    "level": "中1"
+  },
+  {
+    "english": "again",
+    "japanese": "再び",
+    "level": "中1"
+  },
+  {
+    "english": "far",
+    "japanese": "遠くにはるかに",
+    "level": "中1"
+  },
+  {
+    "english": "here",
+    "japanese": "ここに",
+    "level": "中1"
+  },
+  {
+    "english": "very",
+    "japanese": "非常に",
+    "level": "中1"
+  },
+  {
+    "english": "how",
+    "japanese": "どのくらい",
+    "level": "中1"
+  },
+  {
+    "english": "too",
+    "japanese": "～もまた～すぎる",
+    "level": "中1"
+  },
+  {
+    "english": "no",
+    "japanese": "いいえ",
+    "level": "中1"
+  },
+  {
+    "english": "beautiful",
+    "japanese": "美しい",
+    "level": "中1"
+  },
+  {
+    "english": "next",
+    "japanese": "次の隣の",
+    "level": "中1"
+  },
+  {
+    "english": "long",
+    "japanese": "長い",
+    "level": "中1"
+  },
+  {
+    "english": "rich",
+    "japanese": "金持ちの豊かな",
+    "level": "中1"
+  },
+  {
+    "english": "able",
+    "japanese": "できる有能な",
+    "level": "中1"
+  },
+  {
+    "english": "hot",
+    "japanese": "暑い",
+    "level": "中1"
+  },
+  {
+    "english": "small",
+    "japanese": "小さな",
+    "level": "中1"
+  },
+  {
+    "english": "white",
+    "japanese": "白い",
+    "level": "中1"
+  },
+  {
+    "english": "black",
+    "japanese": "黒い",
+    "level": "中1"
+  },
+  {
+    "english": "TRUE",
+    "japanese": "ほんとうの",
+    "level": "中1"
+  },
+  {
+    "english": "much",
+    "japanese": "多量の",
+    "level": "中1"
+  },
+  {
+    "english": "every",
+    "japanese": "毎～",
+    "level": "中1"
+  },
+  {
+    "english": "many",
+    "japanese": "多くの",
+    "level": "中1"
+  },
+  {
+    "english": "cold",
+    "japanese": "冷たい寒い",
+    "level": "中1"
+  },
+  {
+    "english": "famous",
+    "japanese": "有名な",
+    "level": "中1"
+  },
+  {
+    "english": "blue",
+    "japanese": "青い",
+    "level": "中1"
+  },
+  {
+    "english": "one",
+    "japanese": "1",
+    "level": "中1"
+  },
+  {
+    "english": "two",
+    "japanese": "2",
+    "level": "中1"
+  },
+  {
+    "english": "three",
+    "japanese": "3",
+    "level": "中1"
+  },
+  {
+    "english": "four",
+    "japanese": "4",
+    "level": "中1"
+  },
+  {
+    "english": "five",
+    "japanese": "5",
+    "level": "中1"
+  },
+  {
+    "english": "six",
+    "japanese": "6",
+    "level": "中1"
+  },
+  {
+    "english": "seven",
+    "japanese": "7",
+    "level": "中1"
+  },
+  {
+    "english": "eight",
+    "japanese": "8",
+    "level": "中1"
+  },
+  {
+    "english": "nine",
+    "japanese": "9",
+    "level": "中1"
+  },
+  {
+    "english": "ten",
+    "japanese": "10",
+    "level": "中1"
+  },
+  {
+    "english": "eleven",
+    "japanese": "11",
+    "level": "中1"
+  },
+  {
+    "english": "twelve",
+    "japanese": "12",
+    "level": "中1"
+  },
+  {
+    "english": "thirteen",
+    "japanese": "13",
+    "level": "中1"
+  },
+  {
+    "english": "fourteen",
+    "japanese": "14",
+    "level": "中1"
+  },
+  {
+    "english": "fifteen",
+    "japanese": "15",
+    "level": "中1"
+  },
+  {
+    "english": "sixteen",
+    "japanese": "16",
+    "level": "中1"
+  },
+  {
+    "english": "seventeen",
+    "japanese": "17",
+    "level": "中1"
+  },
+  {
+    "english": "eighteen",
+    "japanese": "18",
+    "level": "中1"
+  },
+  {
+    "english": "nineteen",
+    "japanese": "19",
+    "level": "中1"
+  },
+  {
+    "english": "twenty",
+    "japanese": "20",
+    "level": "中1"
+  },
+  {
+    "english": "thirty",
+    "japanese": "30",
+    "level": "中1"
+  },
+  {
+    "english": "forty",
+    "japanese": "40",
+    "level": "中1"
+  },
+  {
+    "english": "fifty",
+    "japanese": "50",
+    "level": "中1"
+  },
+  {
+    "english": "sixty",
+    "japanese": "60",
+    "level": "中1"
+  },
+  {
+    "english": "seventy",
+    "japanese": "70",
+    "level": "中1"
+  },
+  {
+    "english": "eighty",
+    "japanese": "80",
+    "level": "中1"
+  },
+  {
+    "english": "ninety",
+    "japanese": "90",
+    "level": "中1"
+  },
+  {
+    "english": "present",
+    "japanese": "プレゼント",
+    "level": "中1"
+  },
+  {
+    "english": "way",
+    "japanese": "道方法",
+    "level": "中1"
+  },
+  {
+    "english": "west",
+    "japanese": "西",
+    "level": "中1"
+  },
+  {
+    "english": "chance",
+    "japanese": "機会",
+    "level": "中1"
+  },
+  {
+    "english": "age",
+    "japanese": "年齢時代",
+    "level": "中1"
+  },
+  {
+    "english": "right",
+    "japanese": "右権利",
+    "level": "中1"
+  },
+  {
+    "english": "half",
+    "japanese": "半分",
+    "level": "中1"
+  },
+  {
+    "english": "north",
+    "japanese": "北",
+    "level": "中1"
+  },
+  {
+    "english": "class",
+    "japanese": "学級授業",
+    "level": "中1"
+  },
+  {
+    "english": "danger",
+    "japanese": "危険",
+    "level": "中1"
+  },
+  {
+    "english": "lot",
+    "japanese": "たくさん",
+    "level": "中1"
+  },
+  {
+    "english": "south",
+    "japanese": "南",
+    "level": "中1"
+  },
+  {
+    "english": "subject",
+    "japanese": "科目題目",
+    "level": "中1"
+  },
+  {
+    "english": "east",
+    "japanese": "東",
+    "level": "中1"
+  },
+  {
+    "english": "number",
+    "japanese": "数",
+    "level": "中1"
+  },
+  {
+    "english": "color",
+    "japanese": "色",
+    "level": "中1"
+  },
+  {
+    "english": "line",
+    "japanese": "線列",
+    "level": "中1"
+  },
+  {
+    "english": "place",
+    "japanese": "場所",
+    "level": "中1"
+  },
+  {
+    "english": "meter",
+    "japanese": "メートル",
+    "level": "中1"
+  },
+  {
+    "english": "thing",
+    "japanese": "こと・物",
+    "level": "中1"
+  },
+  {
+    "english": "name",
+    "japanese": "名前",
+    "level": "中1"
+  },
+  {
+    "english": "science",
+    "japanese": "科学",
+    "level": "中1"
+  },
+  {
+    "english": "left",
+    "japanese": "左",
+    "level": "中1"
+  },
+  {
+    "english": "I",
+    "japanese": "私は(が)",
+    "level": "中1"
+  },
+  {
+    "english": "my",
+    "japanese": "私の",
+    "level": "中1"
+  },
+  {
+    "english": "me",
+    "japanese": "私を",
+    "level": "中1"
+  },
+  {
+    "english": "mine",
+    "japanese": "私のもの",
+    "level": "中1"
+  },
+  {
+    "english": "you",
+    "japanese": "あなたに(を)あなたがたを",
+    "level": "中1"
+  },
+  {
+    "english": "your",
+    "japanese": "あなたのあなたがたの",
+    "level": "中1"
+  },
+  {
+    "english": "you",
+    "japanese": "あなたはあなたがたは",
+    "level": "中1"
+  },
+  {
+    "english": "yours",
+    "japanese": "あなたのものあなたがたのもの",
+    "level": "中1"
+  },
+  {
+    "english": "he",
+    "japanese": "彼は",
+    "level": "中1"
+  },
+  {
+    "english": "his",
+    "japanese": "彼の",
+    "level": "中1"
+  },
+  {
+    "english": "him",
+    "japanese": "彼を彼に",
+    "level": "中1"
+  },
+  {
+    "english": "his",
+    "japanese": "彼のもの",
+    "level": "中1"
+  },
+  {
+    "english": "she",
+    "japanese": "彼女は",
+    "level": "中1"
+  },
+  {
+    "english": "her",
+    "japanese": "彼女の",
+    "level": "中1"
+  },
+  {
+    "english": "her",
+    "japanese": "彼女を彼女に",
+    "level": "中1"
+  },
+  {
+    "english": "hers",
+    "japanese": "彼女のもの",
+    "level": "中1"
+  },
+  {
+    "english": "it",
+    "japanese": "それは",
+    "level": "中1"
+  },
+  {
+    "english": "its",
+    "japanese": "それの",
+    "level": "中1"
+  },
+  {
+    "english": "it",
+    "japanese": "それをそれに",
+    "level": "中1"
+  },
+  {
+    "english": "we",
+    "japanese": "私たちは",
+    "level": "中1"
+  },
+  {
+    "english": "our",
+    "japanese": "私たちの",
+    "level": "中1"
+  },
+  {
+    "english": "us",
+    "japanese": "私たちを私たちに",
+    "level": "中1"
+  },
+  {
+    "english": "ours",
+    "japanese": "私たちのもの",
+    "level": "中1"
+  },
+  {
+    "english": "they",
+    "japanese": "それらは彼らは彼女らは (this is not common)",
+    "level": "中1"
+  },
+  {
+    "english": "their",
+    "japanese": "彼らの彼女らの女らの",
+    "level": "中1"
+  },
+  {
+    "english": "them",
+    "japanese": "彼らを彼らに彼女らを (this is not common)彼女らに (this is not common)",
+    "level": "中1"
+  },
+  {
+    "english": "theirs",
+    "japanese": "彼らのもの彼女らのもの",
+    "level": "中1"
+  },
+  {
+    "english": "myself",
+    "japanese": "私自身を",
+    "level": "中1"
+  },
+  {
+    "english": "yourself",
+    "japanese": "あなた自���",
+    "level": "中1"
+  },
+  {
+    "english": "himself",
+    "japanese": "彼自身",
+    "level": "中1"
+  },
+  {
+    "english": "herself",
+    "japanese": "彼女自身",
+    "level": "中1"
+  },
+  {
+    "english": "itself",
+    "japanese": "それ自身",
+    "level": "中1"
+  },
+  {
+    "english": "ourselves",
+    "japanese": "私たち自身を",
+    "level": "中1"
+  },
+  {
+    "english": "themselves",
+    "japanese": "彼ら自身彼女ら自身 (this is not common)",
+    "level": "中1"
+  },
+  {
+    "english": "this",
+    "japanese": "これは",
+    "level": "中1"
+  },
+  {
+    "english": "that",
+    "japanese": "あれは",
+    "level": "中1"
+  },
+  {
+    "english": "these",
+    "japanese": "これらは",
+    "level": "中1"
+  },
+  {
+    "english": "those",
+    "japanese": "あれらは",
+    "level": "中1"
+  },
+  {
+    "english": "everyone",
+    "japanese": "みんな",
+    "level": "中1"
+  },
+  {
+    "english": "someone",
+    "japanese": "だれか",
+    "level": "中1"
+  },
+  {
+    "english": "nobody",
+    "japanese": "だれも～ない",
+    "level": "中1"
+  },
+  {
+    "english": "none",
+    "japanese": "何も～ない (things)(だれも)～ない (people)",
+    "level": "中1"
+  },
+  {
+    "english": "everything",
+    "japanese": "すべてのもの",
+    "level": "中1"
+  },
+  {
+    "english": "everybody",
+    "japanese": "だれでも・みな",
+    "level": "中1"
+  },
+  {
+    "english": "nothing",
+    "japanese": "何も～ない",
+    "level": "中1"
+  },
+  {
+    "english": "both",
+    "japanese": "両方",
+    "level": "中1"
+  },
+  {
+    "english": "all",
+    "japanese": "みんな",
+    "level": "中1"
+  },
+  {
+    "english": "most",
+    "japanese": "ほとんど",
+    "level": "中1"
+  },
+  {
+    "english": "who",
+    "japanese": "だれ",
+    "level": "中1"
+  },
+  {
+    "english": "what",
+    "japanese": "何",
+    "level": "中1"
+  },
+  {
+    "english": "which",
+    "japanese": "どちら",
+    "level": "中1"
+  },
+  {
+    "english": "whose",
+    "japanese": "だれの(もの)",
+    "level": "中1"
+  },
+  {
+    "english": "something",
+    "japanese": "何か",
+    "level": "中1"
+  },
+  {
+    "english": "face",
+    "japanese": "顔",
+    "level": "中2"
+  },
+  {
+    "english": "clock",
+    "japanese": "置き時計",
+    "level": "中2"
+  },
+  {
+    "english": "lion",
+    "japanese": "ライオン",
+    "level": "中2"
+  },
+  {
+    "english": "foot",
+    "japanese": "足",
+    "level": "中2"
+  },
+  {
+    "english": "gun",
+    "japanese": "鉄砲",
+    "level": "中2"
+  },
+  {
+    "english": "hair",
+    "japanese": "髪",
+    "level": "中2"
+  },
+  {
+    "english": "dictionary",
+    "japanese": "辞書",
+    "level": "中2"
+  },
+  {
+    "english": "computer",
+    "japanese": "コンピュータ",
+    "level": "中2"
+  },
+  {
+    "english": "radio",
+    "japanese": "ラジオ",
+    "level": "中2"
+  },
+  {
+    "english": "baby",
+    "japanese": "赤ん坊",
+    "level": "中2"
+  },
+  {
+    "english": "coin",
+    "japanese": "硬貨",
+    "level": "中2"
+  },
+  {
+    "english": "knife",
+    "japanese": "ナイフ",
+    "level": "中2"
+  },
+  {
+    "english": "arm",
+    "japanese": "腕",
+    "level": "中2"
+  },
+  {
+    "english": "album",
+    "japanese": "アルバム",
+    "level": "中2"
+  },
+  {
+    "english": "ship",
+    "japanese": "船",
+    "level": "中2"
+  },
+  {
+    "english": "shoe",
+    "japanese": "靴",
+    "level": "中2"
+  },
+  {
+    "english": "card",
+    "japanese": "カード",
+    "level": "中2"
+  },
+  {
+    "english": "record",
+    "japanese": "レコード",
+    "level": "中2"
+  },
+  {
+    "english": "glove",
+    "japanese": "グローブ",
+    "level": "中2"
+  },
+  {
+    "english": "animal",
+    "japanese": "動物",
+    "level": "中2"
+  },
+  {
+    "english": "hat",
+    "japanese": "帽子",
+    "level": "中2"
+  },
+  {
+    "english": "pocket",
+    "japanese": "ポケット",
+    "level": "中2"
+  },
+  {
+    "english": "mouth",
+    "japanese": "口",
+    "level": "中2"
+  },
+  {
+    "english": "head",
+    "japanese": "頭先頭",
+    "level": "中2"
+  },
+  {
+    "english": "coat",
+    "japanese": "コート",
+    "level": "中2"
+  },
+  {
+    "english": "rice",
+    "japanese": "ご飯",
+    "level": "中2"
+  },
+  {
+    "english": "nose",
+    "japanese": "鼻",
+    "level": "中2"
+  },
+  {
+    "english": "finger",
+    "japanese": "指",
+    "level": "中2"
+  },
+  {
+    "english": "meat",
+    "japanese": "肉",
+    "level": "中2"
+  },
+  {
+    "english": "shirt",
+    "japanese": "シャツ",
+    "level": "中2"
+  },
+  {
+    "english": "bench",
+    "japanese": "ベンチ",
+    "level": "中2"
+  },
+  {
+    "english": "eye",
+    "japanese": "目",
+    "level": "中2"
+  },
+  {
+    "english": "leg",
+    "japanese": "脚",
+    "level": "中2"
+  },
+  {
+    "english": "bath",
+    "japanese": "風呂",
+    "level": "中2"
+  },
+  {
+    "english": "train",
+    "japanese": "列車",
+    "level": "中2"
+  },
+  {
+    "english": "bicycle",
+    "japanese": "自転車",
+    "level": "中2"
+  },
+  {
+    "english": "ball",
+    "japanese": "ボール",
+    "level": "中2"
+  },
+  {
+    "english": "building",
+    "japanese": "建物",
+    "level": "中2"
+  },
+  {
+    "english": "mouse",
+    "japanese": "はつかねずみねずみ",
+    "level": "中2"
+  },
+  {
+    "english": "child",
+    "japanese": "子供",
+    "level": "中2"
+  },
+  {
+    "english": "chicken",
+    "japanese": "ニワトリ",
+    "level": "中2"
+  },
+  {
+    "english": "leaf",
+    "japanese": "葉",
+    "level": "中2"
+  },
+  {
+    "english": "money",
+    "japanese": "お金",
+    "level": "中2"
+  },
+  {
+    "english": "coffee",
+    "japanese": "コーヒー",
+    "level": "中2"
+  },
+  {
+    "english": "dish",
+    "japanese": "皿，料理",
+    "level": "中2"
+  },
+  {
+    "english": "paper",
+    "japanese": "紙，レポート",
+    "level": "中2"
+  },
+  {
+    "english": "ear",
+    "japanese": "耳",
+    "level": "中2"
+  },
+  {
+    "english": "bridge",
+    "japanese": "橋",
+    "level": "中2"
+  },
+  {
+    "english": "newspaper",
+    "japanese": "新聞",
+    "level": "中2"
+  },
+  {
+    "english": "body",
+    "japanese": "身体",
+    "level": "中2"
+  },
+  {
+    "english": "farm",
+    "japanese": "農場",
+    "level": "中2"
+  },
+  {
+    "english": "market",
+    "japanese": "市場",
+    "level": "中2"
+  },
+  {
+    "english": "college",
+    "japanese": "大学",
+    "level": "中2"
+  },
+  {
+    "english": "top",
+    "japanese": "頂上",
+    "level": "中2"
+  },
+  {
+    "english": "shop",
+    "japanese": "店",
+    "level": "中2"
+  },
+  {
+    "english": "corner",
+    "japanese": "かど",
+    "level": "中2"
+  },
+  {
+    "english": "center",
+    "japanese": "中央",
+    "level": "中2"
+  },
+  {
+    "english": "people",
+    "japanese": "人々",
+    "level": "中2"
+  },
+  {
+    "english": "life",
+    "japanese": "生活，生命，人生",
+    "level": "中2"
+  },
+  {
+    "english": "word",
+    "japanese": "言葉",
+    "level": "中2"
+  },
+  {
+    "english": "English",
+    "japanese": "英語",
+    "level": "中2"
+  },
+  {
+    "english": "voice",
+    "japanese": "声",
+    "level": "中2"
+  },
+  {
+    "english": "moon",
+    "japanese": "月",
+    "level": "中2"
+  },
+  {
+    "english": "sky",
+    "japanese": "空",
+    "level": "中2"
+  },
+  {
+    "english": "sea",
+    "japanese": "海",
+    "level": "中2"
+  },
+  {
+    "english": "cloud",
+    "japanese": "雲",
+    "level": "中2"
+  },
+  {
+    "english": "wind",
+    "japanese": "風",
+    "level": "中2"
+  },
+  {
+    "english": "airport",
+    "japanese": "空港",
+    "level": "中2"
+  },
+  {
+    "english": "ground",
+    "japanese": "地面",
+    "level": "中2"
+  },
+  {
+    "english": "classroom",
+    "japanese": "教室",
+    "level": "中2"
+  },
+  {
+    "english": "museum",
+    "japanese": "博物館",
+    "level": "中2"
+  },
+  {
+    "english": "factory",
+    "japanese": "工場",
+    "level": "中2"
+  },
+  {
+    "english": "land",
+    "japanese": "陸地，土地",
+    "level": "中2"
+  },
+  {
+    "english": "member",
+    "japanese": "会員",
+    "level": "中2"
+  },
+  {
+    "english": "last",
+    "japanese": "最後",
+    "level": "中2"
+  },
+  {
+    "english": "question",
+    "japanese": "質問",
+    "level": "中2"
+  },
+  {
+    "english": "story",
+    "japanese": "話",
+    "level": "中2"
+  },
+  {
+    "english": "heart",
+    "japanese": "心",
+    "level": "中2"
+  },
+  {
+    "english": "sport",
+    "japanese": "スポーツ",
+    "level": "中2"
+  },
+  {
+    "english": "water",
+    "japanese": "水",
+    "level": "中2"
+  },
+  {
+    "english": "sun",
+    "japanese": "太陽",
+    "level": "中2"
+  },
+  {
+    "english": "tea",
+    "japanese": "お茶",
+    "level": "中2"
+  },
+  {
+    "english": "star",
+    "japanese": "星スター",
+    "level": "中2"
+  },
+  {
+    "english": "street",
+    "japanese": "通り",
+    "level": "中2"
+  },
+  {
+    "english": "America",
+    "japanese": "アメリカ",
+    "level": "中2"
+  },
+  {
+    "english": "road",
+    "japanese": "道",
+    "level": "中2"
+  },
+  {
+    "english": "island",
+    "japanese": "島",
+    "level": "中2"
+  },
+  {
+    "english": "earth",
+    "japanese": "地球大地",
+    "level": "中2"
+  },
+  {
+    "english": "hill",
+    "japanese": "丘",
+    "level": "中2"
+  },
+  {
+    "english": "wife",
+    "japanese": "妻",
+    "level": "中2"
+  },
+  {
+    "english": "club",
+    "japanese": "クラブ",
+    "level": "中2"
+  },
+  {
+    "english": "game",
+    "japanese": "試合",
+    "level": "中2"
+  },
+  {
+    "english": "music",
+    "japanese": "音楽",
+    "level": "中2"
+  },
+  {
+    "english": "hobby",
+    "japanese": "趣味",
+    "level": "中2"
+  },
+  {
+    "english": "news",
+    "japanese": "ニュース",
+    "level": "中2"
+  },
+  {
+    "english": "river",
+    "japanese": "川",
+    "level": "中2"
+  },
+  {
+    "english": "light",
+    "japanese": "光（light）明かり（brightness）信号（traffic lights）",
+    "level": "中2"
+  },
+  {
+    "english": "lake",
+    "japanese": "湖",
+    "level": "中2"
+  },
+  {
+    "english": "stone",
+    "japanese": "石",
+    "level": "中2"
+  },
+  {
+    "english": "hundred",
+    "japanese": "百",
+    "level": "中2"
+  },
+  {
+    "english": "guitar",
+    "japanese": "ギター",
+    "level": "中2"
+  },
+  {
+    "english": "potato",
+    "japanese": "じゃがいも",
+    "level": "中2"
+  },
+  {
+    "english": "belt",
+    "japanese": "ベルト",
+    "level": "中2"
+  },
+  {
+    "english": "vegetable",
+    "japanese": "野菜",
+    "level": "中2"
+  },
+  {
+    "english": "song",
+    "japanese": "歌",
+    "level": "中2"
+  },
+  {
+    "english": "fun",
+    "japanese": "楽しみ",
+    "level": "中2"
+  },
+  {
+    "english": "soccer",
+    "japanese": "サッカー",
+    "level": "中2"
+  },
+  {
+    "english": "speech",
+    "japanese": "演説",
+    "level": "中2"
+  },
+  {
+    "english": "business",
+    "japanese": "商売",
+    "level": "中2"
+  },
+  {
+    "english": "health",
+    "japanese": "健康",
+    "level": "中2"
+  },
+  {
+    "english": "idea",
+    "japanese": "考え",
+    "level": "中2"
+  },
+  {
+    "english": "advice",
+    "japanese": "忠告",
+    "level": "中2"
+  },
+  {
+    "english": "mistake",
+    "japanese": "誤り",
+    "level": "中2"
+  },
+  {
+    "english": "feeling",
+    "japanese": "感覚",
+    "level": "中2"
+  },
+  {
+    "english": "camp",
+    "japanese": "キャンプ",
+    "level": "中2"
+  },
+  {
+    "english": "party",
+    "japanese": "パーティー",
+    "level": "中2"
+  },
+  {
+    "english": "million",
+    "japanese": "１００万",
+    "level": "中2"
+  },
+  {
+    "english": "tooth",
+    "japanese": "歯",
+    "level": "中2"
+  },
+  {
+    "english": "TV",
+    "japanese": "テレビ",
+    "level": "中2"
+  },
+  {
+    "english": "duck",
+    "japanese": "あひる",
+    "level": "中2"
+  },
+  {
+    "english": "magazine",
+    "japanese": "雑誌",
+    "level": "中2"
+  },
+  {
+    "english": "show",
+    "japanese": "ショー",
+    "level": "中2"
+  },
+  {
+    "english": "trip",
+    "japanese": "旅行",
+    "level": "中2"
+  },
+  {
+    "english": "travel",
+    "japanese": "旅行",
+    "level": "中2"
+  },
+  {
+    "english": "police",
+    "japanese": "警察",
+    "level": "中2"
+  },
+  {
+    "english": "success",
+    "japanese": "成功",
+    "level": "中2"
+  },
+  {
+    "english": "peace",
+    "japanese": "平和",
+    "level": "中2"
+  },
+  {
+    "english": "rock",
+    "japanese": "ロック",
+    "level": "中2"
+  },
+  {
+    "english": "vacation",
+    "japanese": "休暇",
+    "level": "中2"
+  },
+  {
+    "english": "dream",
+    "japanese": "夢",
+    "level": "中2"
+  },
+  {
+    "english": "love",
+    "japanese": "愛愛する人",
+    "level": "中2"
+  },
+  {
+    "english": "picnic",
+    "japanese": "ピクニック",
+    "level": "中2"
+  },
+  {
+    "english": "lesson",
+    "japanese": "授業課",
+    "level": "中2"
+  },
+  {
+    "english": "thousand",
+    "japanese": "千",
+    "level": "中2"
+  },
+  {
+    "english": "photo",
+    "japanese": "写真",
+    "level": "中2"
+  },
+  {
+    "english": "textbook",
+    "japanese": "教科書",
+    "level": "中2"
+  },
+  {
+    "english": "video",
+    "japanese": "ビデオ",
+    "level": "中2"
+  },
+  {
+    "english": "horse",
+    "japanese": "馬",
+    "level": "中2"
+  },
+  {
+    "english": "war",
+    "japanese": "戦争",
+    "level": "中2"
+  },
+  {
+    "english": "lie",
+    "japanese": "嘘",
+    "level": "中2"
+  },
+  {
+    "english": "contest",
+    "japanese": "コンテスト",
+    "level": "中2"
+  },
+  {
+    "english": "culture",
+    "japanese": "文化",
+    "level": "中2"
+  },
+  {
+    "english": "job",
+    "japanese": "仕事",
+    "level": "中2"
+  },
+  {
+    "english": "homeroom",
+    "japanese": "ホームルーム",
+    "level": "中2"
+  },
+  {
+    "english": "smile",
+    "japanese": "ほお笑み (ほほ笑み)",
+    "level": "中2"
+  },
+  {
+    "english": "happiness",
+    "japanese": "幸福",
+    "level": "中2"
+  },
+  {
+    "english": "football",
+    "japanese": "フットボール",
+    "level": "中2"
+  },
+  {
+    "english": "hope",
+    "japanese": "希望",
+    "level": "中2"
+  },
+  {
+    "english": "test",
+    "japanese": "試験",
+    "level": "中2"
+  },
+  {
+    "english": "plan",
+    "japanese": "計画",
+    "level": "中2"
+  },
+  {
+    "english": "capital",
+    "japanese": "首都",
+    "level": "中2"
+  },
+  {
+    "english": "roof",
+    "japanese": "屋根",
+    "level": "中2"
+  },
+  {
+    "english": "holiday",
+    "japanese": "休日",
+    "level": "中2"
+  },
+  {
+    "english": "Christmas",
+    "japanese": "クリスマス",
+    "level": "中2"
+  },
+  {
+    "english": "air",
+    "japanese": "空気",
+    "level": "中2"
+  },
+  {
+    "english": "wood",
+    "japanese": "木材",
+    "level": "中2"
+  },
+  {
+    "english": "cloth",
+    "japanese": "布",
+    "level": "中2"
+  },
+  {
+    "english": "oil",
+    "japanese": "油",
+    "level": "中2"
+  },
+  {
+    "english": "sound",
+    "japanese": "音",
+    "level": "中2"
+  },
+  {
+    "english": "piece",
+    "japanese": "断片",
+    "level": "中2"
+  },
+  {
+    "english": "circle",
+    "japanese": "円",
+    "level": "中2"
+  },
+  {
+    "english": "program",
+    "japanese": "番組",
+    "level": "中2"
+  },
+  {
+    "english": "dollar",
+    "japanese": "ドル",
+    "level": "中2"
+  },
+  {
+    "english": "post",
+    "japanese": "郵便",
+    "level": "中2"
+  },
+  {
+    "english": "noise",
+    "japanese": "物音",
+    "level": "中2"
+  },
+  {
+    "english": "law",
+    "japanese": "法律",
+    "level": "中2"
+  },
+  {
+    "english": "front",
+    "japanese": "前",
+    "level": "中2"
+  },
+  {
+    "english": "port",
+    "japanese": "港",
+    "level": "中2"
+  },
+  {
+    "english": "lady",
+    "japanese": "婦人",
+    "level": "中2"
+  },
+  {
+    "english": "date",
+    "japanese": "日付",
+    "level": "中2"
+  },
+  {
+    "english": "pond",
+    "japanese": "池",
+    "level": "中2"
+  },
+  {
+    "english": "salt",
+    "japanese": "塩",
+    "level": "中2"
+  },
+  {
+    "english": "gold",
+    "japanese": "金",
+    "level": "中2"
+  },
+  {
+    "english": "ice",
+    "japanese": "氷",
+    "level": "中2"
+  },
+  {
+    "english": "nature",
+    "japanese": "自然",
+    "level": "中2"
+  },
+  {
+    "english": "planet",
+    "japanese": "惑星",
+    "level": "中2"
+  },
+  {
+    "english": "part",
+    "japanese": "部分",
+    "level": "中2"
+  },
+  {
+    "english": "food",
+    "japanese": "食べ物",
+    "level": "中2"
+  },
+  {
+    "english": "seat",
+    "japanese": "座席",
+    "level": "中2"
+  },
+  {
+    "english": "art",
+    "japanese": "美術芸術",
+    "level": "中2"
+  },
+  {
+    "english": "inside",
+    "japanese": "内側",
+    "level": "中2"
+  },
+  {
+    "english": "math",
+    "japanese": "数学",
+    "level": "中2"
+  },
+  {
+    "english": "mile",
+    "japanese": "マイル",
+    "level": "中2"
+  },
+  {
+    "english": "kind",
+    "japanese": "種類",
+    "level": "中2"
+  },
+  {
+    "english": "space",
+    "japanese": "宇宙",
+    "level": "中2"
+  },
+  {
+    "english": "future",
+    "japanese": "未来",
+    "level": "中2"
+  },
+  {
+    "english": "birthday",
+    "japanese": "誕生日",
+    "level": "中2"
+  },
+  {
+    "english": "snow",
+    "japanese": "雪",
+    "level": "中2"
+  },
+  {
+    "english": "rain",
+    "japanese": "雨",
+    "level": "中2"
+  },
+  {
+    "english": "mountain",
+    "japanese": "山",
+    "level": "中2"
+  },
+  {
+    "english": "grass",
+    "japanese": "草",
+    "level": "中2"
+  },
+  {
+    "english": "sugar",
+    "japanese": "砂糖",
+    "level": "中2"
+  },
+  {
+    "english": "fire",
+    "japanese": "火",
+    "level": "中2"
+  },
+  {
+    "english": "gift",
+    "japanese": "贈り物",
+    "level": "中2"
+  },
+  {
+    "english": "pet",
+    "japanese": "ペット",
+    "level": "中2"
+  },
+  {
+    "english": "home",
+    "japanese": "故郷家",
+    "level": "中2"
+  },
+  {
+    "english": "language",
+    "japanese": "言語",
+    "level": "中2"
+  },
+  {
+    "english": "example",
+    "japanese": "例",
+    "level": "中2"
+  },
+  {
+    "english": "history",
+    "japanese": "歴史",
+    "level": "中2"
+  },
+  {
+    "english": "side",
+    "japanese": "側面",
+    "level": "中2"
+  },
+  {
+    "english": "fork",
+    "japanese": "フォーク",
+    "level": "中2"
+  },
+  {
+    "english": "pie",
+    "japanese": "パイ",
+    "level": "中2"
+  },
+  {
+    "english": "overcoat",
+    "japanese": "オーバー",
+    "level": "中2"
+  },
+  {
+    "english": "mirror",
+    "japanese": "鏡",
+    "level": "中2"
+  },
+  {
+    "english": "locker",
+    "japanese": "ロッカー",
+    "level": "中2"
+  },
+  {
+    "english": "pants",
+    "japanese": "ズボン",
+    "level": "中2"
+  },
+  {
+    "english": "chalk",
+    "japanese": "チョーク",
+    "level": "中2"
+  },
+  {
+    "english": "key",
+    "japanese": "鍵",
+    "level": "中2"
+  },
+  {
+    "english": "candy",
+    "japanese": "キャンディー",
+    "level": "中2"
+  },
+  {
+    "english": "beer",
+    "japanese": "ビール",
+    "level": "中2"
+  },
+  {
+    "english": "beef",
+    "japanese": "牛肉",
+    "level": "中2"
+  },
+  {
+    "english": "medicine",
+    "japanese": "薬",
+    "level": "中2"
+  },
+  {
+    "english": "phone",
+    "japanese": "電話",
+    "level": "中2"
+  },
+  {
+    "english": "fool",
+    "japanese": "馬鹿",
+    "level": "中2"
+  },
+  {
+    "english": "guest",
+    "japanese": "客",
+    "level": "中2"
+  },
+  {
+    "english": "grandmother",
+    "japanese": "祖母",
+    "level": "中2"
+  },
+  {
+    "english": "team",
+    "japanese": "チーム",
+    "level": "中2"
+  },
+  {
+    "english": "eraser",
+    "japanese": "消しゴム",
+    "level": "中2"
+  },
+  {
+    "english": "elevator",
+    "japanese": "エレベーター",
+    "level": "中2"
+  },
+  {
+    "english": "rat",
+    "japanese": "ネズミ",
+    "level": "中2"
+  },
+  {
+    "english": "bell",
+    "japanese": "ベル",
+    "level": "中2"
+  },
+  {
+    "english": "rabbit",
+    "japanese": "ウサギ",
+    "level": "中2"
+  },
+  {
+    "english": "butter",
+    "japanese": "バター",
+    "level": "中2"
+  },
+  {
+    "english": "chain",
+    "japanese": "くさり",
+    "level": "中2"
+  },
+  {
+    "english": "candle",
+    "japanese": "ろうそく",
+    "level": "中2"
+  },
+  {
+    "english": "pork",
+    "japanese": "ブタ肉",
+    "level": "中2"
+  },
+  {
+    "english": "neck",
+    "japanese": "首",
+    "level": "中2"
+  },
+  {
+    "english": "peanut",
+    "japanese": "ピーナッツ",
+    "level": "中2"
+  },
+  {
+    "english": "medal",
+    "japanese": "メダル",
+    "level": "中2"
+  },
+  {
+    "english": "nest",
+    "japanese": "巣",
+    "level": "中2"
+  },
+  {
+    "english": "grandfather",
+    "japanese": "祖父",
+    "level": "中2"
+  },
+  {
+    "english": "fan",
+    "japanese": "ファン",
+    "level": "中2"
+  },
+  {
+    "english": "person",
+    "japanese": "人",
+    "level": "中2"
+  },
+  {
+    "english": "group",
+    "japanese": "グループ",
+    "level": "中2"
+  },
+  {
+    "english": "machine",
+    "japanese": "機械",
+    "level": "中2"
+  },
+  {
+    "english": "skirt",
+    "japanese": "スカート",
+    "level": "中2"
+  },
+  {
+    "english": "ring",
+    "japanese": "指輪",
+    "level": "中2"
+  },
+  {
+    "english": "band",
+    "japanese": "バンド",
+    "level": "中2"
+  },
+  {
+    "english": "monkey",
+    "japanese": "サル",
+    "level": "中2"
+  },
+  {
+    "english": "bar ※not nightclub",
+    "japanese": "棒，横木",
+    "level": "中2"
+  },
+  {
+    "english": "passport",
+    "japanese": "パスポート",
+    "level": "中2"
+  },
+  {
+    "english": "shoulder",
+    "japanese": "肩",
+    "level": "中2"
+  },
+  {
+    "english": "pig",
+    "japanese": "ブタ",
+    "level": "中2"
+  },
+  {
+    "english": "clothes",
+    "japanese": "服",
+    "level": "中2"
+  },
+  {
+    "english": "bear",
+    "japanese": "クマ",
+    "level": "中2"
+  },
+  {
+    "english": "carpet",
+    "japanese": "じゅうたん",
+    "level": "中2"
+  },
+  {
+    "english": "farmer",
+    "japanese": "農場主",
+    "level": "中2"
+  },
+  {
+    "english": "sailor",
+    "japanese": "船員",
+    "level": "中2"
+  },
+  {
+    "english": "gentleman",
+    "japanese": "紳士",
+    "level": "中2"
+  },
+  {
+    "english": "king",
+    "japanese": "王様",
+    "level": "中2"
+  },
+  {
+    "english": "find",
+    "japanese": "見つける～とわかる",
+    "level": "中2"
+  },
+  {
+    "english": "decide",
+    "japanese": "決心する",
+    "level": "中2"
+  },
+  {
+    "english": "seem",
+    "japanese": "～のように思われる",
+    "level": "中2"
+  },
+  {
+    "english": "forget",
+    "japanese": "忘れる",
+    "level": "中2"
+  },
+  {
+    "english": "plan",
+    "japanese": "計画する",
+    "level": "中2"
+  },
+  {
+    "english": "see",
+    "japanese": "見るわかる調査する",
+    "level": "中2"
+  },
+  {
+    "english": "think",
+    "japanese": "考える",
+    "level": "中2"
+  },
+  {
+    "english": "believe",
+    "japanese": "信じる",
+    "level": "中2"
+  },
+  {
+    "english": "grow",
+    "japanese": "成長する（growth, grow up）になる（becomes）増加する（increase, addition）育てる（raise, rear, bring up）栽培する（cultivate）",
+    "level": "中2"
+  },
+  {
+    "english": "talk",
+    "japanese": "話す",
+    "level": "中2"
+  },
+  {
+    "english": "fly",
+    "japanese": "飛行機で行く（fly by plane）飛ぶ（jump, leap, fly, soar）",
+    "level": "中2"
+  },
+  {
+    "english": "hold",
+    "japanese": "握る開催する（hold a meeting）差し出す（submit, hold out）",
+    "level": "中2"
+  },
+  {
+    "english": "sleep",
+    "japanese": "眠る",
+    "level": "中2"
+  },
+  {
+    "english": "laugh",
+    "japanese": "笑う",
+    "level": "中2"
+  },
+  {
+    "english": "say",
+    "japanese": "言う",
+    "level": "中2"
+  },
+  {
+    "english": "hunt",
+    "japanese": "狩りをする",
+    "level": "中2"
+  },
+  {
+    "english": "wear",
+    "japanese": "着る",
+    "level": "中2"
+  },
+  {
+    "english": "watch",
+    "japanese": "見る",
+    "level": "中2"
+  },
+  {
+    "english": "care",
+    "japanese": "気にする",
+    "level": "中2"
+  },
+  {
+    "english": "understand",
+    "japanese": "理解する",
+    "level": "中2"
+  },
+  {
+    "english": "thank",
+    "japanese": "感謝する",
+    "level": "中2"
+  },
+  {
+    "english": "remember",
+    "japanese": "思い出す覚えている",
+    "level": "中2"
+  },
+  {
+    "english": "listen",
+    "japanese": "聴く",
+    "level": "中2"
+  },
+  {
+    "english": "excuse",
+    "japanese": "許す",
+    "level": "中2"
+  },
+  {
+    "english": "love",
+    "japanese": "愛する",
+    "level": "中2"
+  },
+  {
+    "english": "draw",
+    "japanese": "描く（draw a picture）引く（pull an object）",
+    "level": "中2"
+  },
+  {
+    "english": "drive",
+    "japanese": "運転する",
+    "level": "中2"
+  },
+  {
+    "english": "ask",
+    "japanese": "たずねる，頼む",
+    "level": "中2"
+  },
+  {
+    "english": "clean",
+    "japanese": "掃除する",
+    "level": "中2"
+  },
+  {
+    "english": "climb",
+    "japanese": "登る",
+    "level": "中2"
+  },
+  {
+    "english": "call",
+    "japanese": "電話をかける",
+    "level": "中2"
+  },
+  {
+    "english": "wake",
+    "japanese": "目が覚める",
+    "level": "中2"
+  },
+  {
+    "english": "push",
+    "japanese": "押す",
+    "level": "中2"
+  },
+  {
+    "english": "cry",
+    "japanese": "泣く",
+    "level": "中2"
+  },
+  {
+    "english": "hear",
+    "japanese": "聞く",
+    "level": "中2"
+  },
+  {
+    "english": "hope",
+    "japanese": "望む",
+    "level": "中2"
+  },
+  {
+    "english": "discover",
+    "japanese": "発見する",
+    "level": "中2"
+  },
+  {
+    "english": "feel",
+    "japanese": "感じる",
+    "level": "中2"
+  },
+  {
+    "english": "worry",
+    "japanese": "悩ませる",
+    "level": "中2"
+  },
+  {
+    "english": "imagine",
+    "japanese": "想像する",
+    "level": "中2"
+  },
+  {
+    "english": "wish",
+    "japanese": "望む",
+    "level": "中2"
+  },
+  {
+    "english": "dislike",
+    "japanese": "嫌う",
+    "level": "中2"
+  },
+  {
+    "english": "teach",
+    "japanese": "教える",
+    "level": "中2"
+  },
+  {
+    "english": "shout",
+    "japanese": "叫ぶ",
+    "level": "中2"
+  },
+  {
+    "english": "sit",
+    "japanese": "座る",
+    "level": "中2"
+  },
+  {
+    "english": "throw",
+    "japanese": "投げる",
+    "level": "中2"
+  },
+  {
+    "english": "show",
+    "japanese": "見せる",
+    "level": "中2"
+  },
+  {
+    "english": "tell",
+    "japanese": "教える，語る",
+    "level": "中2"
+  },
+  {
+    "english": "enter",
+    "japanese": "入る",
+    "level": "中2"
+  },
+  {
+    "english": "answer",
+    "japanese": "答える",
+    "level": "中2"
+  },
+  {
+    "english": "dress",
+    "japanese": "着る",
+    "level": "中2"
+  },
+  {
+    "english": "sail",
+    "japanese": "(船を)走らせる",
+    "level": "中2"
+  },
+  {
+    "english": "happen",
+    "japanese": "起こる",
+    "level": "中2"
+  },
+  {
+    "english": "keep",
+    "japanese": "保つ～を続ける(～を持ち)",
+    "level": "中2"
+  },
+  {
+    "english": "strike",
+    "japanese": "打つ",
+    "level": "中2"
+  },
+  {
+    "english": "name",
+    "japanese": "名づける",
+    "level": "中2"
+  },
+  {
+    "english": "fail",
+    "japanese": "失敗する",
+    "level": "中2"
+  },
+  {
+    "english": "rest",
+    "japanese": "休息する",
+    "level": "中2"
+  },
+  {
+    "english": "ski",
+    "japanese": "スキーをする",
+    "level": "中2"
+  },
+  {
+    "english": "join",
+    "japanese": "参加する",
+    "level": "中2"
+  },
+  {
+    "english": "win",
+    "japanese": "勝つ",
+    "level": "中2"
+  },
+  {
+    "english": "hurry",
+    "japanese": "急ぐ",
+    "level": "中2"
+  },
+  {
+    "english": "rise",
+    "japanese": "起き上がる，のぼる",
+    "level": "中2"
+  },
+  {
+    "english": "fall",
+    "japanese": "落ちる",
+    "level": "中2"
+  },
+  {
+    "english": "take",
+    "japanese": "(時間が)���かる，連れて行く，持っていく，取る",
+    "level": "中2"
+  },
+  {
+    "english": "end",
+    "japanese": "終わる",
+    "level": "中2"
+  },
+  {
+    "english": "begin",
+    "japanese": "始まる(始める)",
+    "level": "中2"
+  },
+  {
+    "english": "die",
+    "japanese": "死ぬ",
+    "level": "中2"
+  },
+  {
+    "english": "pay",
+    "japanese": "支払う",
+    "level": "中2"
+  },
+  {
+    "english": "paint",
+    "japanese": "描く，(～に)ペンキを塗る",
+    "level": "中2"
+  },
+  {
+    "english": "lend",
+    "japanese": "貸す",
+    "level": "中2"
+  },
+  {
+    "english": "kill",
+    "japanese": "殺す",
+    "level": "中2"
+  },
+  {
+    "english": "close",
+    "japanese": "閉じる",
+    "level": "中2"
+  },
+  {
+    "english": "start",
+    "japanese": "出発する，～を始める",
+    "level": "中2"
+  },
+  {
+    "english": "pick",
+    "japanese": "選ぶ，摘む",
+    "level": "中2"
+  },
+  {
+    "english": "turn",
+    "japanese": "曲がる，回る，変化する",
+    "level": "中2"
+  },
+  {
+    "english": "invite",
+    "japanese": "招待する",
+    "level": "中2"
+  },
+  {
+    "english": "build",
+    "japanese": "建てる",
+    "level": "中2"
+  },
+  {
+    "english": "practice",
+    "japanese": "練習する",
+    "level": "中2"
+  },
+  {
+    "english": "jump",
+    "japanese": "跳ぶ",
+    "level": "中2"
+  },
+  {
+    "english": "dry",
+    "japanese": "乾く",
+    "level": "中2"
+  },
+  {
+    "english": "mean",
+    "japanese": "意味する",
+    "level": "中2"
+  },
+  {
+    "english": "add",
+    "japanese": "加える",
+    "level": "中2"
+  },
+  {
+    "english": "pass",
+    "japanese": "過ぎる，合格する，手渡す",
+    "level": "中2"
+  },
+  {
+    "english": "test",
+    "japanese": "試みる",
+    "level": "中2"
+  },
+  {
+    "english": "carry",
+    "japanese": "運ぶ",
+    "level": "中2"
+  },
+  {
+    "english": "lose",
+    "japanese": "失う，負ける",
+    "level": "中2"
+  },
+  {
+    "english": "cut",
+    "japanese": "切る",
+    "level": "中2"
+  },
+  {
+    "english": "borrow",
+    "japanese": "借りる",
+    "level": "中2"
+  },
+  {
+    "english": "shop",
+    "japanese": "買い物をする",
+    "level": "中2"
+  },
+  {
+    "english": "advise",
+    "japanese": "忠告する，助言する",
+    "level": "中2"
+  },
+  {
+    "english": "skate",
+    "japanese": "スケートをする",
+    "level": "中2"
+  },
+  {
+    "english": "bring",
+    "japanese": "持って来る",
+    "level": "中2"
+  },
+  {
+    "english": "spend",
+    "japanese": "費やす，過ごす",
+    "level": "中2"
+  },
+  {
+    "english": "finish",
+    "japanese": "終える",
+    "level": "中2"
+  },
+  {
+    "english": "set",
+    "japanese": "置く",
+    "level": "中2"
+  },
+  {
+    "english": "change",
+    "japanese": "変わる",
+    "level": "中2"
+  },
+  {
+    "english": "shine",
+    "japanese": "光る，輝く",
+    "level": "中2"
+  },
+  {
+    "english": "rain",
+    "japanese": "雨が降る",
+    "level": "中2"
+  },
+  {
+    "english": "become",
+    "japanese": "～になる",
+    "level": "中2"
+  },
+  {
+    "english": "clever",
+    "japanese": "利口な",
+    "level": "中2"
+  },
+  {
+    "english": "angry",
+    "japanese": "怒って",
+    "level": "中2"
+  },
+  {
+    "english": "dear",
+    "japanese": "親愛なる",
+    "level": "中2"
+  },
+  {
+    "english": "strange",
+    "japanese": "奇妙な",
+    "level": "中2"
+  },
+  {
+    "english": "last",
+    "japanese": "この前の～最後の～",
+    "level": "中2"
+  },
+  {
+    "english": "other",
+    "japanese": "ほかの～",
+    "level": "中2"
+  },
+  {
+    "english": "absent",
+    "japanese": "欠席の～",
+    "level": "中2"
+  },
+  {
+    "english": "ready",
+    "japanese": "用意できている",
+    "level": "中2"
+  },
+  {
+    "english": "right",
+    "japanese": "正しい（correct）右に（on the right）",
+    "level": "中2"
+  },
+  {
+    "english": "full",
+    "japanese": "いっぱいの～",
+    "level": "中2"
+  },
+  {
+    "english": "weak",
+    "japanese": "弱い",
+    "level": "中2"
+  },
+  {
+    "english": "brown",
+    "japanese": "茶色の～",
+    "level": "中2"
+  },
+  {
+    "english": "special",
+    "japanese": "特別の～",
+    "level": "中2"
+  },
+  {
+    "english": "rainy",
+    "japanese": "雨降りの～",
+    "level": "中2"
+  },
+  {
+    "english": "such",
+    "japanese": "そのような",
+    "level": "中2"
+  },
+  {
+    "english": "past",
+    "japanese": "過去の～",
+    "level": "中2"
+  },
+  {
+    "english": "quiet",
+    "japanese": "静かな",
+    "level": "中2"
+  },
+  {
+    "english": "loud",
+    "japanese": "(声の)大きい",
+    "level": "中2"
+  },
+  {
+    "english": "free",
+    "japanese": "自由なひまな",
+    "level": "中2"
+  },
+  {
+    "english": "wonderful",
+    "japanese": "すばらしい",
+    "level": "中2"
+  },
+  {
+    "english": "useful",
+    "japanese": "役に立つ",
+    "level": "中2"
+  },
+  {
+    "english": "light",
+    "japanese": "薄い (light color)",
+    "level": "中2"
+  },
+  {
+    "english": "difficult",
+    "japanese": "むずかしい",
+    "level": "中2"
+  },
+  {
+    "english": "popular",
+    "japanese": "人気のある",
+    "level": "中2"
+  },
+  {
+    "english": "human ～",
+    "japanese": "人間の",
+    "level": "中2"
+  },
+  {
+    "english": "welcome",
+    "japanese": "ようこそ",
+    "level": "中2"
+  },
+  {
+    "english": "own",
+    "japanese": "自分の",
+    "level": "中2"
+  },
+  {
+    "english": "bright",
+    "japanese": "明るい",
+    "level": "中2"
+  },
+  {
+    "english": "deep",
+    "japanese": "深い",
+    "level": "中2"
+  },
+  {
+    "english": "different",
+    "japanese": "違った",
+    "level": "中2"
+  },
+  {
+    "english": "same",
+    "japanese": "同じ",
+    "level": "中2"
+  },
+  {
+    "english": "low",
+    "japanese": "低い",
+    "level": "中2"
+  },
+  {
+    "english": "main",
+    "japanese": "主な",
+    "level": "中2"
+  },
+  {
+    "english": "interesting",
+    "japanese": "おもしろい",
+    "level": "中2"
+  },
+  {
+    "english": "tired",
+    "japanese": "疲れて",
+    "level": "中2"
+  },
+  {
+    "english": "foolish",
+    "japanese": "愚かな",
+    "level": "中2"
+  },
+  {
+    "english": "well",
+    "japanese": "健康な",
+    "level": "中2"
+  },
+  {
+    "english": "usual ～",
+    "japanese": "通常の",
+    "level": "中2"
+  },
+  {
+    "english": "afraid",
+    "japanese": "恐れて",
+    "level": "中2"
+  },
+  {
+    "english": "each",
+    "japanese": "おのおのの～",
+    "level": "中2"
+  },
+  {
+    "english": "lucky",
+    "japanese": "好運な",
+    "level": "中2"
+  },
+  {
+    "english": "few",
+    "japanese": "(aをつけ)少数の～",
+    "level": "中2"
+  },
+  {
+    "english": "cloudy",
+    "japanese": "曇った",
+    "level": "中2"
+  },
+  {
+    "english": "sure",
+    "japanese": "確信して",
+    "level": "中2"
+  },
+  {
+    "english": "enough",
+    "japanese": "十分な",
+    "level": "中2"
+  },
+  {
+    "english": "American",
+    "japanese": "アメリカの",
+    "level": "中2"
+  },
+  {
+    "english": "wide",
+    "japanese": "幅が広い",
+    "level": "中2"
+  },
+  {
+    "english": "important",
+    "japanese": "重要な",
+    "level": "中2"
+  },
+  {
+    "english": "great",
+    "japanese": "すばらしい，広大な",
+    "level": "中2"
+  },
+  {
+    "english": "yellow",
+    "japanese": "黄色の",
+    "level": "中2"
+  },
+  {
+    "english": "wine",
+    "japanese": "ワイン",
+    "level": "中3"
+  },
+  {
+    "english": "arrow",
+    "japanese": "矢",
+    "level": "中3"
+  },
+  {
+    "english": "branch",
+    "japanese": "枝",
+    "level": "中3"
+  },
+  {
+    "english": "taxi",
+    "japanese": "タクシー",
+    "level": "中3"
+  },
+  {
+    "english": "grape",
+    "japanese": "ブドウ",
+    "level": "中3"
+  },
+  {
+    "english": "snake",
+    "japanese": "蛇",
+    "level": "中3"
+  },
+  {
+    "english": "statue",
+    "japanese": "像",
+    "level": "中3"
+  },
+  {
+    "english": "brush",
+    "japanese": "筆",
+    "level": "中3"
+  },
+  {
+    "english": "palace",
+    "japanese": "宮殿",
+    "level": "中3"
+  },
+  {
+    "english": "London",
+    "japanese": "ロンドン",
+    "level": "中3"
+  },
+  {
+    "english": "zoo",
+    "japanese": "動物園",
+    "level": "中3"
+  },
+  {
+    "english": "entrance",
+    "japanese": "入り口入学",
+    "level": "中3"
+  },
+  {
+    "english": "gym",
+    "japanese": "体育館",
+    "level": "中3"
+  },
+  {
+    "english": "tower",
+    "japanese": "塔",
+    "level": "中3"
+  },
+  {
+    "english": "Europe",
+    "japanese": "ヨーロッパ",
+    "level": "中3"
+  },
+  {
+    "english": "host",
+    "japanese": "主人",
+    "level": "中3"
+  },
+  {
+    "english": "dad",
+    "japanese": "お父ちゃん",
+    "level": "中3"
+  },
+  {
+    "english": "elephant",
+    "japanese": "象",
+    "level": "中3"
+  },
+  {
+    "english": "soup",
+    "japanese": "スープ",
+    "level": "中3"
+  },
+  {
+    "english": "tie",
+    "japanese": "ネクタイ",
+    "level": "中3"
+  },
+  {
+    "english": "fox",
+    "japanese": "キツネ",
+    "level": "中3"
+  },
+  {
+    "english": "jeans",
+    "japanese": "ジーンズ",
+    "level": "中3"
+  },
+  {
+    "english": "jam (food, traffic)",
+    "japanese": "ジャム混雑",
+    "level": "中3"
+  },
+  {
+    "english": "suit",
+    "japanese": "スーツ",
+    "level": "中3"
+  },
+  {
+    "english": "ticket",
+    "japanese": "切符",
+    "level": "中3"
+  },
+  {
+    "english": "Canada",
+    "japanese": "カナダ",
+    "level": "中3"
+  },
+  {
+    "english": "fence",
+    "japanese": "塀",
+    "level": "中3"
+  },
+  {
+    "english": "England",
+    "japanese": "イングランド",
+    "level": "中3"
+  },
+  {
+    "english": "Asia",
+    "japanese": "アジア",
+    "level": "中3"
+  },
+  {
+    "english": "hall",
+    "japanese": "玄関の広間ろうか",
+    "level": "中3"
+  },
+  {
+    "english": "forest",
+    "japanese": "森林",
+    "level": "中3"
+  },
+  {
+    "english": "mom",
+    "japanese": "おかあちゃん",
+    "level": "中3"
+  },
+  {
+    "english": "engineer",
+    "japanese": "エンジニア",
+    "level": "中3"
+  },
+  {
+    "english": "policeman",
+    "japanese": "警官",
+    "level": "中3"
+  },
+  {
+    "english": "toy",
+    "japanese": "おもちゃ",
+    "level": "中3"
+  },
+  {
+    "english": "umbrella",
+    "japanese": "かさ",
+    "level": "中3"
+  },
+  {
+    "english": "frog",
+    "japanese": "カエル",
+    "level": "中3"
+  },
+  {
+    "english": "bottle",
+    "japanese": "びん",
+    "level": "中3"
+  },
+  {
+    "english": "ink",
+    "japanese": "インク",
+    "level": "中3"
+  },
+  {
+    "english": "sofa",
+    "japanese": "ソファー",
+    "level": "中3"
+  },
+  {
+    "english": "bomb",
+    "japanese": "爆弾",
+    "level": "中3"
+  },
+  {
+    "english": "China",
+    "japanese": "中国",
+    "level": "中3"
+  },
+  {
+    "english": "desert",
+    "japanese": "砂漠",
+    "level": "中3"
+  },
+  {
+    "english": "Australia",
+    "japanese": "オーストラリア",
+    "level": "中3"
+  },
+  {
+    "english": "beach",
+    "japanese": "砂浜",
+    "level": "中3"
+  },
+  {
+    "english": "theater",
+    "japanese": "劇場",
+    "level": "中3"
+  },
+  {
+    "english": "tent",
+    "japanese": "テント",
+    "level": "中3"
+  },
+  {
+    "english": "restaurant",
+    "japanese": "レストラン",
+    "level": "中3"
+  },
+  {
+    "english": "stranger",
+    "japanese": "見知らぬ人",
+    "level": "中3"
+  },
+  {
+    "english": "driver",
+    "japanese": "運転手",
+    "level": "中3"
+  },
+  {
+    "english": "enemy",
+    "japanese": "敵",
+    "level": "中3"
+  },
+  {
+    "english": "husband",
+    "japanese": "夫",
+    "level": "中3"
+  },
+  {
+    "english": "scientist",
+    "japanese": "科学者",
+    "level": "中3"
+  },
+  {
+    "english": "bathroom",
+    "japanese": "浴室",
+    "level": "中3"
+  },
+  {
+    "english": "runner",
+    "japanese": "ランナー",
+    "level": "中3"
+  },
+  {
+    "english": "artist",
+    "japanese": "芸術家",
+    "level": "中3"
+  },
+  {
+    "english": "visitor",
+    "japanese": "訪問者",
+    "level": "中3"
+  },
+  {
+    "english": "cousin",
+    "japanese": "いとこ",
+    "level": "中3"
+  },
+  {
+    "english": "sunset",
+    "japanese": "日没",
+    "level": "中3"
+  },
+  {
+    "english": "trade",
+    "japanese": "貿易",
+    "level": "中3"
+  },
+  {
+    "english": "match",
+    "japanese": "試合 (sports)",
+    "level": "中3"
+  },
+  {
+    "english": "death",
+    "japanese": "死",
+    "level": "中3"
+  },
+  {
+    "english": "habit",
+    "japanese": "習慣",
+    "level": "中3"
+  },
+  {
+    "english": "joy",
+    "japanese": "喜び",
+    "level": "中3"
+  },
+  {
+    "english": "blood",
+    "japanese": "血",
+    "level": "中3"
+  },
+  {
+    "english": "luck",
+    "japanese": "運",
+    "level": "中3"
+  },
+  {
+    "english": "fishing",
+    "japanese": "魚釣り",
+    "level": "中3"
+  },
+  {
+    "english": "president",
+    "japanese": "大統領",
+    "level": "中3"
+  },
+  {
+    "english": "merchant",
+    "japanese": "商人",
+    "level": "中3"
+  },
+  {
+    "english": "barber",
+    "japanese": "床屋",
+    "level": "中3"
+  },
+  {
+    "english": "army",
+    "japanese": "陸軍",
+    "level": "中3"
+  },
+  {
+    "english": "painter",
+    "japanese": "画家",
+    "level": "中3"
+  },
+  {
+    "english": "reporter",
+    "japanese": "レポーター",
+    "level": "中3"
+  },
+  {
+    "english": "God",
+    "japanese": "神",
+    "level": "中3"
+  },
+  {
+    "english": "century",
+    "japanese": "世紀",
+    "level": "中3"
+  },
+  {
+    "english": "goal",
+    "japanese": "得点ゴール",
+    "level": "中3"
+  },
+  {
+    "english": "training",
+    "japanese": "トレイニング",
+    "level": "中3"
+  },
+  {
+    "english": "disease",
+    "japanese": "病気",
+    "level": "中3"
+  },
+  {
+    "english": "tour",
+    "japanese": "小旅行",
+    "level": "中3"
+  },
+  {
+    "english": "exam",
+    "japanese": "試験",
+    "level": "中3"
+  },
+  {
+    "english": "flight",
+    "japanese": "飛行",
+    "level": "中3"
+  },
+  {
+    "english": "film",
+    "japanese": "映画",
+    "level": "中3"
+  },
+  {
+    "english": "mind",
+    "japanese": "精神",
+    "level": "中3"
+  },
+  {
+    "english": "pain",
+    "japanese": "痛み",
+    "level": "中3"
+  },
+  {
+    "english": "crowd",
+    "japanese": "群衆",
+    "level": "中3"
+  },
+  {
+    "english": "guide",
+    "japanese": "案内人",
+    "level": "中3"
+  },
+  {
+    "english": "queen",
+    "japanese": "女王",
+    "level": "中3"
+  },
+  {
+    "english": "pal",
+    "japanese": "友だち",
+    "level": "中3"
+  },
+  {
+    "english": "captain",
+    "japanese": "船長",
+    "level": "中3"
+  },
+  {
+    "english": "neighbor",
+    "japanese": "隣人",
+    "level": "中3"
+  },
+  {
+    "english": "prince",
+    "japanese": "王子",
+    "level": "中3"
+  },
+  {
+    "english": "midnight",
+    "japanese": "真夜中",
+    "level": "中3"
+  },
+  {
+    "english": "play",
+    "japanese": "劇 (drama)",
+    "level": "中3"
+  },
+  {
+    "english": "tear",
+    "japanese": "涙",
+    "level": "中3"
+  },
+  {
+    "english": "concert",
+    "japanese": "コンサート",
+    "level": "中3"
+  },
+  {
+    "english": "action",
+    "japanese": "行動",
+    "level": "中3"
+  },
+  {
+    "english": "festival",
+    "japanese": "祭り",
+    "level": "中3"
+  },
+  {
+    "english": "pop",
+    "japanese": "ポピュラー音楽",
+    "level": "中3"
+  },
+  {
+    "english": "thought",
+    "japanese": "考え",
+    "level": "中3"
+  },
+  {
+    "english": "promise",
+    "japanese": "約束",
+    "level": "中3"
+  },
+  {
+    "english": "accident",
+    "japanese": "事故",
+    "level": "中3"
+  },
+  {
+    "english": "custom",
+    "japanese": "習慣",
+    "level": "中3"
+  },
+  {
+    "english": "waste",
+    "japanese": "浪費",
+    "level": "中3"
+  },
+  {
+    "english": "use",
+    "japanese": "使用",
+    "level": "中3"
+  },
+  {
+    "english": "reply",
+    "japanese": "返事",
+    "level": "中3"
+  },
+  {
+    "english": "race",
+    "japanese": "競走人種",
+    "level": "中3"
+  },
+  {
+    "english": "stay",
+    "japanese": "滞在",
+    "level": "中3"
+  },
+  {
+    "english": "valley",
+    "japanese": "谷",
+    "level": "中3"
+  },
+  {
+    "english": "silver",
+    "japanese": "銀",
+    "level": "中3"
+  },
+  {
+    "english": "heaven",
+    "japanese": "天",
+    "level": "中3"
+  },
+  {
+    "english": "ocean",
+    "japanese": "大洋",
+    "level": "中3"
+  },
+  {
+    "english": "soil",
+    "japanese": "土",
+    "level": "中3"
+  },
+  {
+    "english": "billion",
+    "japanese": "１０億",
+    "level": "中3"
+  },
+  {
+    "english": "couple",
+    "japanese": "一対",
+    "level": "中3"
+  },
+  {
+    "english": "area",
+    "japanese": "地域",
+    "level": "中3"
+  },
+  {
+    "english": "calendar",
+    "japanese": "カレンダー",
+    "level": "中3"
+  },
+  {
+    "english": "signal",
+    "japanese": "信号",
+    "level": "中3"
+  },
+  {
+    "english": "discussion",
+    "japanese": "討論",
+    "level": "中3"
+  },
+  {
+    "english": "sign",
+    "japanese": "合図標識",
+    "level": "中3"
+  },
+  {
+    "english": "volleyball",
+    "japanese": "バレーボール",
+    "level": "中3"
+  },
+  {
+    "english": "answer",
+    "japanese": "答え",
+    "level": "中3"
+  },
+  {
+    "english": "stop",
+    "japanese": "停留所",
+    "level": "中3"
+  },
+  {
+    "english": "courage",
+    "japanese": "勇気",
+    "level": "中3"
+  },
+  {
+    "english": "iron",
+    "japanese": "鉄",
+    "level": "中3"
+  },
+  {
+    "english": "universe",
+    "japanese": "宇宙",
+    "level": "中3"
+  },
+  {
+    "english": "silk",
+    "japanese": "絹",
+    "level": "中3"
+  },
+  {
+    "english": "wave",
+    "japanese": "波",
+    "level": "中3"
+  },
+  {
+    "english": "root",
+    "japanese": "根",
+    "level": "中3"
+  },
+  {
+    "english": "smoke",
+    "japanese": "煙",
+    "level": "中3"
+  },
+  {
+    "english": "course",
+    "japanese": "進路",
+    "level": "中3"
+  },
+  {
+    "english": "shade",
+    "japanese": "陰",
+    "level": "中3"
+  },
+  {
+    "english": "prize",
+    "japanese": "賞",
+    "level": "中3"
+  },
+  {
+    "english": "list",
+    "japanese": "リスト",
+    "level": "中3"
+  },
+  {
+    "english": "page",
+    "japanese": "ページ",
+    "level": "中3"
+  },
+  {
+    "english": "report",
+    "japanese": "報告",
+    "level": "中3"
+  },
+  {
+    "english": "step",
+    "japanese": "足元階段",
+    "level": "中3"
+  },
+  {
+    "english": "secret",
+    "japanese": "秘密",
+    "level": "中3"
+  },
+  {
+    "english": "quiz",
+    "japanese": "クイズ",
+    "level": "中3"
+  },
+  {
+    "english": "care",
+    "japanese": "世話管理",
+    "level": "中3"
+  },
+  {
+    "english": "rush",
+    "japanese": "殺到",
+    "level": "中3"
+  },
+  {
+    "english": "plant",
+    "japanese": "植物",
+    "level": "中3"
+  },
+  {
+    "english": "gas",
+    "japanese": "ガス",
+    "level": "中3"
+  },
+  {
+    "english": "climate",
+    "japanese": "気候",
+    "level": "中3"
+  },
+  {
+    "english": "jewel",
+    "japanese": "宝石",
+    "level": "中3"
+  },
+  {
+    "english": "rainbow",
+    "japanese": "虹",
+    "level": "中3"
+  },
+  {
+    "english": "weather",
+    "japanese": "天気",
+    "level": "中3"
+  },
+  {
+    "english": "model",
+    "japanese": "模型",
+    "level": "中3"
+  },
+  {
+    "english": "point",
+    "japanese": "点",
+    "level": "中3"
+  },
+  {
+    "english": "railway",
+    "japanese": "鉄道",
+    "level": "中3"
+  },
+  {
+    "english": "mark",
+    "japanese": "印",
+    "level": "中3"
+  },
+  {
+    "english": "bowl",
+    "japanese": "鉢",
+    "level": "中3"
+  },
+  {
+    "english": "lip",
+    "japanese": "くちびる",
+    "level": "中3"
+  },
+  {
+    "english": "net",
+    "japanese": "網",
+    "level": "中3"
+  },
+  {
+    "english": "melon",
+    "japanese": "メロン",
+    "level": "中3"
+  },
+  {
+    "english": "poem",
+    "japanese": "詩",
+    "level": "中3"
+  },
+  {
+    "english": "menu",
+    "japanese": "メニュー",
+    "level": "中3"
+  },
+  {
+    "english": "gram",
+    "japanese": "グラム",
+    "level": "中3"
+  },
+  {
+    "english": "cent",
+    "japanese": "セント",
+    "level": "中3"
+  },
+  {
+    "english": "address",
+    "japanese": "住所",
+    "level": "中3"
+  },
+  {
+    "english": "damage",
+    "japanese": "被害",
+    "level": "中3"
+  },
+  {
+    "english": "sort (of)",
+    "japanese": "種類",
+    "level": "中3"
+  },
+  {
+    "english": "reason",
+    "japanese": "理由，原因",
+    "level": "中3"
+  },
+  {
+    "english": "kilometer",
+    "japanese": "キロメートル",
+    "level": "中3"
+  },
+  {
+    "english": "middle",
+    "japanese": "中央",
+    "level": "中3"
+  },
+  {
+    "english": "shock",
+    "japanese": "ショック",
+    "level": "中3"
+  },
+  {
+    "english": "centimeter",
+    "japanese": "センチメートル",
+    "level": "中3"
+  },
+  {
+    "english": "zone",
+    "japanese": "地帯",
+    "level": "中3"
+  },
+  {
+    "english": "toast",
+    "japanese": "トースト",
+    "level": "中3"
+  },
+  {
+    "english": "curtain",
+    "japanese": "カーテン",
+    "level": "中3"
+  },
+  {
+    "english": "juice",
+    "japanese": "ジュース",
+    "level": "中3"
+  },
+  {
+    "english": "honey",
+    "japanese": "蜂蜜",
+    "level": "中3"
+  },
+  {
+    "english": "goods",
+    "japanese": "商品",
+    "level": "中3"
+  },
+  {
+    "english": "sense",
+    "japanese": "感じ",
+    "level": "中3"
+  },
+  {
+    "english": "type",
+    "japanese": "型",
+    "level": "中3"
+  },
+  {
+    "english": "symbol",
+    "japanese": "象徴",
+    "level": "中3"
+  },
+  {
+    "english": "energy",
+    "japanese": "エネルギー",
+    "level": "中3"
+  },
+  {
+    "english": "position",
+    "japanese": "位置（location）地位（social position）",
+    "level": "中3"
+  },
+  {
+    "english": "gray",
+    "japanese": "灰色",
+    "level": "中3"
+  },
+  {
+    "english": "bit",
+    "japanese": "少し",
+    "level": "中3"
+  },
+  {
+    "english": "matter",
+    "japanese": "問題困ったこと",
+    "level": "中3"
+  },
+  {
+    "english": "power",
+    "japanese": "力",
+    "level": "中3"
+  },
+  {
+    "english": "sentence",
+    "japanese": "文",
+    "level": "中3"
+  },
+  {
+    "english": "yen",
+    "japanese": "円",
+    "level": "中3"
+  },
+  {
+    "english": "grade",
+    "japanese": "評点等級",
+    "level": "中3"
+  },
+  {
+    "english": "plate",
+    "japanese": "皿",
+    "level": "中3"
+  },
+  {
+    "english": "cheese",
+    "japanese": "チーズ",
+    "level": "中3"
+  },
+  {
+    "english": "can",
+    "japanese": "カン",
+    "level": "中3"
+  },
+  {
+    "english": "treasure",
+    "japanese": "宝物",
+    "level": "中3"
+  },
+  {
+    "english": "hole",
+    "japanese": "穴",
+    "level": "中3"
+  },
+  {
+    "english": "price",
+    "japanese": "価格",
+    "level": "中3"
+  },
+  {
+    "english": "problem",
+    "japanese": "問題",
+    "level": "中3"
+  },
+  {
+    "english": "fact",
+    "japanese": "事実",
+    "level": "中3"
+  },
+  {
+    "english": "beauty",
+    "japanese": "美",
+    "level": "中3"
+  },
+  {
+    "english": "pair",
+    "japanese": "一組",
+    "level": "中3"
+  },
+  {
+    "english": "percent",
+    "japanese": "パーセント",
+    "level": "中3"
+  },
+  {
+    "english": "case",
+    "japanese": "場合（situation）容器（container）",
+    "level": "中3"
+  },
+  {
+    "english": "spelling",
+    "japanese": "綴り",
+    "level": "中3"
+  },
+  {
+    "english": "meaning",
+    "japanese": "意味",
+    "level": "中3"
+  },
+  {
+    "english": "square",
+    "japanese": "正方形",
+    "level": "中3"
+  },
+  {
+    "english": "youth",
+    "japanese": "若さ",
+    "level": "中3"
+  },
+  {
+    "english": "order",
+    "japanese": "注文する",
+    "level": "中3"
+  },
+  {
+    "english": "wonder",
+    "japanese": "不思議に思う",
+    "level": "中3"
+  },
+  {
+    "english": "smell",
+    "japanese": "においがする",
+    "level": "中3"
+  },
+  {
+    "english": "kiss",
+    "japanese": "キスをする",
+    "level": "中3"
+  },
+  {
+    "english": "cross",
+    "japanese": "横切る",
+    "level": "中3"
+  },
+  {
+    "english": "select",
+    "japanese": "選ぶ",
+    "level": "中3"
+  },
+  {
+    "english": "awake",
+    "japanese": "目が覚める",
+    "level": "中3"
+  },
+  {
+    "english": "fill",
+    "japanese": "いっぱいにする",
+    "level": "中3"
+  },
+  {
+    "english": "print",
+    "japanese": "印刷する",
+    "level": "中3"
+  },
+  {
+    "english": "succeed",
+    "japanese": "成功する",
+    "level": "中3"
+  },
+  {
+    "english": "receive",
+    "japanese": "受け取る",
+    "level": "中3"
+  },
+  {
+    "english": "date",
+    "japanese": "デートする",
+    "level": "中3"
+  },
+  {
+    "english": "raise",
+    "japanese": "(手などを)あげる持ち上げる育てる",
+    "level": "中3"
+  },
+  {
+    "english": "exercise",
+    "japanese": "練習する",
+    "level": "中3"
+  },
+  {
+    "english": "return",
+    "japanese": "帰る",
+    "level": "中3"
+  },
+  {
+    "english": "destroy",
+    "japanese": "破壊する",
+    "level": "中3"
+  },
+  {
+    "english": "belong",
+    "japanese": "ものである",
+    "level": "中3"
+  },
+  {
+    "english": "realize",
+    "japanese": "理解する，実現する",
+    "level": "中3"
+  },
+  {
+    "english": "sound",
+    "japanese": "(～のように)聞こえる",
+    "level": "中3"
+  },
+  {
+    "english": "invent",
+    "japanese": "発明する",
+    "level": "中3"
+  },
+  {
+    "english": "solve",
+    "japanese": "解決する",
+    "level": "中3"
+  },
+  {
+    "english": "hurt",
+    "japanese": "傷つける",
+    "level": "中3"
+  },
+  {
+    "english": "knock",
+    "japanese": "ノックする",
+    "level": "中3"
+  },
+  {
+    "english": "touch",
+    "japanese": "触れる感動する",
+    "level": "中3"
+  },
+  {
+    "english": "miss",
+    "japanese": "間違ういなくてさみしく思う",
+    "level": "中3"
+  },
+  {
+    "english": "reach",
+    "japanese": "着く，届く",
+    "level": "中3"
+  },
+  {
+    "english": "hand",
+    "japanese": "手渡す",
+    "level": "中3"
+  },
+  {
+    "english": "choose",
+    "japanese": "選ぶ",
+    "level": "中3"
+  },
+  {
+    "english": "share",
+    "japanese": "分け合う",
+    "level": "中3"
+  },
+  {
+    "english": "copy",
+    "japanese": "模写する",
+    "level": "中3"
+  },
+  {
+    "english": "boil",
+    "japanese": "ゆでる煮る",
+    "level": "中3"
+  },
+  {
+    "english": "train",
+    "japanese": "訓練する",
+    "level": "中3"
+  },
+  {
+    "english": "cover",
+    "japanese": "おおう",
+    "level": "中3"
+  },
+  {
+    "english": "break",
+    "japanese": "壊れる破る",
+    "level": "中3"
+  },
+  {
+    "english": "please",
+    "japanese": "気に入る喜ばせる",
+    "level": "中3"
+  },
+  {
+    "english": "explain",
+    "japanese": "説明する",
+    "level": "中3"
+  },
+  {
+    "english": "bake",
+    "japanese": "オーブンで焼く",
+    "level": "中3"
+  },
+  {
+    "english": "discuss",
+    "japanese": "話し合う",
+    "level": "中3"
+  },
+  {
+    "english": "lie",
+    "japanese": "横たわる～にある",
+    "level": "中3"
+  },
+  {
+    "english": "shake",
+    "japanese": "震える",
+    "level": "中3"
+  },
+  {
+    "english": "save",
+    "japanese": "救うとっておく節約する",
+    "level": "中3"
+  },
+  {
+    "english": "hit",
+    "japanese": "打つ",
+    "level": "中3"
+  },
+  {
+    "english": "mix",
+    "japanese": "混ぜる",
+    "level": "中3"
+  },
+  {
+    "english": "blow",
+    "japanese": "吹く",
+    "level": "中3"
+  },
+  {
+    "english": "shoot",
+    "japanese": "撃つ",
+    "level": "中3"
+  },
+  {
+    "english": "fight",
+    "japanese": "戦う",
+    "level": "中3"
+  },
+  {
+    "english": "introduce",
+    "japanese": "紹介する初めて伝える",
+    "level": "中3"
+  },
+  {
+    "english": "row",
+    "japanese": "こぐ",
+    "level": "中3"
+  },
+  {
+    "english": "drop",
+    "japanese": "落とす",
+    "level": "中3"
+  },
+  {
+    "english": "marry",
+    "japanese": "結婚する",
+    "level": "中3"
+  },
+  {
+    "english": "interested",
+    "japanese": "興味のある",
+    "level": "中3"
+  },
+  {
+    "english": "ashamed",
+    "japanese": "恥じて",
+    "level": "中3"
+  },
+  {
+    "english": "blind",
+    "japanese": "目の見えない",
+    "level": "中3"
+  },
+  {
+    "english": "gentle",
+    "japanese": "やさしい",
+    "level": "中3"
+  },
+  {
+    "english": "pleased",
+    "japanese": "喜んで",
+    "level": "中3"
+  },
+  {
+    "english": "monthly",
+    "japanese": "月刊",
+    "level": "中3"
+  },
+  {
+    "english": "open",
+    "japanese": "開いている",
+    "level": "中3"
+  },
+  {
+    "english": "flat",
+    "japanese": "平らな",
+    "level": "中3"
+  },
+  {
+    "english": "musical",
+    "japanese": "音楽の～",
+    "level": "中3"
+  },
+  {
+    "english": "noisy",
+    "japanese": "騒がしい",
+    "level": "中3"
+  },
+  {
+    "english": "holy",
+    "japanese": "神聖な",
+    "level": "中3"
+  },
+  {
+    "english": "lonely",
+    "japanese": "淋しいひとりの",
+    "level": "中3"
+  },
+  {
+    "english": "merry",
+    "japanese": "陽気な",
+    "level": "中3"
+  },
+  {
+    "english": "living",
+    "japanese": "生きている",
+    "level": "中3"
+  },
+  {
+    "english": "personal",
+    "japanese": "個人の",
+    "level": "中3"
+  },
+  {
+    "english": "necessary",
+    "japanese": "必要な",
+    "level": "中3"
+  },
+  {
+    "english": "wild",
+    "japanese": "荒々しい野生の～",
+    "level": "中3"
+  },
+  {
+    "english": "outside",
+    "japanese": "外側の～",
+    "level": "中3"
+  },
+  {
+    "english": "fresh",
+    "japanese": "新鮮な",
+    "level": "中3"
+  },
+  {
+    "english": "healthy",
+    "japanese": "健康な",
+    "level": "中3"
+  },
+  {
+    "english": "lovely",
+    "japanese": "美しい",
+    "level": "中3"
+  },
+  {
+    "english": "dumb",
+    "japanese": "口のきけない",
+    "level": "中3"
+  },
+  {
+    "english": "modern",
+    "japanese": "現代的な",
+    "level": "中3"
+  },
+  {
+    "english": "peaceful",
+    "japanese": "平和な",
+    "level": "中3"
+  },
+  {
+    "english": "raw",
+    "japanese": "生の～",
+    "level": "中3"
+  },
+  {
+    "english": "international",
+    "japanese": "国際的な",
+    "level": "中3"
+  },
+  {
+    "english": "back",
+    "japanese": "裏の～後ろの～",
+    "level": "中3"
+  },
+  {
+    "english": "natural",
+    "japanese": "自然の～",
+    "level": "中3"
+  },
+  {
+    "english": "lost",
+    "japanese": "道に迷った",
+    "level": "中3"
+  },
+  {
+    "english": "quick",
+    "japanese": "速い",
+    "level": "中3"
+  },
+  {
+    "english": "first",
+    "japanese": "1番目の",
+    "level": "中3"
+  },
+  {
+    "english": "second",
+    "japanese": "2番目の",
+    "level": "中3"
+  },
+  {
+    "english": "third",
+    "japanese": "3番目の",
+    "level": "中3"
+  },
+  {
+    "english": "forth",
+    "japanese": "4番目の",
+    "level": "中3"
+  },
+  {
+    "english": "fifth",
+    "japanese": "5番目の",
+    "level": "中3"
+  },
+  {
+    "english": "sixth",
+    "japanese": "6番目の",
+    "level": "中3"
+  },
+  {
+    "english": "seventh",
+    "japanese": "7番目の",
+    "level": "中3"
+  },
+  {
+    "english": "eighth",
+    "japanese": "8番目の",
+    "level": "中3"
+  },
+  {
+    "english": "ninth",
+    "japanese": "9番目の",
+    "level": "中3"
+  },
+  {
+    "english": "tenth",
+    "japanese": "10番目の",
+    "level": "中3"
+  },
+  {
+    "english": "eleventh",
+    "japanese": "11番目の",
+    "level": "中3"
+  },
+  {
+    "english": "twelfth",
+    "japanese": "12番目の",
+    "level": "中3"
+  },
+  {
+    "english": "thirteenth",
+    "japanese": "13番目の",
+    "level": "中3"
+  },
+  {
+    "english": "fourteenth",
+    "japanese": "14番目の",
+    "level": "中3"
+  },
+  {
+    "english": "fifteenth",
+    "japanese": "15番目の",
+    "level": "中3"
+  },
+  {
+    "english": "sixteenth",
+    "japanese": "16番目の",
+    "level": "中3"
+  },
+  {
+    "english": "seventeenth",
+    "japanese": "17番目の",
+    "level": "中3"
+  },
+  {
+    "english": "eighteenth",
+    "japanese": "18番目の",
+    "level": "中3"
+  },
+  {
+    "english": "nineteenth",
+    "japanese": "19番目の",
+    "level": "中3"
+  },
+  {
+    "english": "twentieth",
+    "japanese": "20番目の",
+    "level": "中3"
+  },
+  {
+    "english": "thirtieth",
+    "japanese": "30番目の",
+    "level": "中3"
+  },
+  {
+    "english": "unhappy",
+    "japanese": "不幸な",
+    "level": "中3"
+  },
+  {
+    "english": "lazy",
+    "japanese": "怠け者の",
+    "level": "中3"
+  },
+  {
+    "english": "brave",
+    "japanese": "勇敢な",
+    "level": "中3"
+  },
+  {
+    "english": "pale",
+    "japanese": "青ざめた",
+    "level": "中3"
+  },
+  {
+    "english": "simple",
+    "japanese": "簡単な質素な",
+    "level": "中3"
+  },
+  {
+    "english": "daily",
+    "japanese": "毎日の",
+    "level": "中3"
+  },
+  {
+    "english": "exciting",
+    "japanese": "興奮させる",
+    "level": "中3"
+  },
+  {
+    "english": "senior",
+    "japanese": "年上の (older)上級の (high level)",
+    "level": "中3"
+  },
+  {
+    "english": "safe",
+    "japanese": "安全な",
+    "level": "中3"
+  },
+  {
+    "english": "national",
+    "japanese": "国家の国民の",
+    "level": "中3"
+  },
+  {
+    "english": "Chinese",
+    "japanese": "中国の (belongs to the country)中国人の (belongs to the people)",
+    "level": "中3"
+  },
+  {
+    "english": "another",
+    "japanese": "ほかのもうひとつの",
+    "level": "中3"
+  },
+  {
+    "english": "than",
+    "japanese": "よりも",
+    "level": "中3"
+  },
+  {
+    "english": "while",
+    "japanese": "～する間",
+    "level": "中3"
+  },
+  {
+    "english": "but",
+    "japanese": "しかし",
+    "level": "中3"
+  },
+  {
+    "english": "when",
+    "japanese": "～するとき",
+    "level": "中3"
+  },
+  {
+    "english": "during",
+    "japanese": "～の間～を通じて",
+    "level": "中3"
+  },
+  {
+    "english": "excited",
+    "japanese": "興奮した",
+    "level": "中3"
+  },
+  {
+    "english": "fat",
+    "japanese": "太った",
+    "level": "中3"
+  },
+  {
+    "english": "funny",
+    "japanese": "おかしな",
+    "level": "中3"
+  },
+  {
+    "english": "cute",
+    "japanese": "可愛い",
+    "level": "中3"
+  },
+  {
+    "english": "sleepy",
+    "japanese": "眠い",
+    "level": "中3"
+  },
+  {
+    "english": "delicious",
+    "japanese": "おいしい",
+    "level": "中3"
+  },
+  {
+    "english": "calm",
+    "japanese": "落ちついた",
+    "level": "中3"
+  },
+  {
+    "english": "tiny",
+    "japanese": "小さな",
+    "level": "中3"
+  },
+  {
+    "english": "final",
+    "japanese": "最後の",
+    "level": "中3"
+  },
+  {
+    "english": "central",
+    "japanese": "中心の",
+    "level": "中3"
+  },
+  {
+    "english": "wet",
+    "japanese": "濡れている",
+    "level": "中3"
+  },
+  {
+    "english": "common",
+    "japanese": "共通の",
+    "level": "中3"
+  },
+  {
+    "english": "because",
+    "japanese": "なぜなら",
+    "level": "中3"
+  },
+  {
+    "english": "and",
+    "japanese": "～と",
+    "level": "中3"
+  },
+  {
+    "english": "however",
+    "japanese": "しかし",
+    "level": "中3"
+  },
+  {
+    "english": "hello",
+    "japanese": "こんにちは",
+    "level": "中3"
+  },
+  {
+    "english": "after",
+    "japanese": "～の後で",
+    "level": "中3"
+  },
+  {
+    "english": "crazy",
+    "japanese": "気の狂った",
+    "level": "中3"
+  },
+  {
+    "english": "fond",
+    "japanese": "好きで",
+    "level": "中3"
+  },
+  {
+    "english": "friendly",
+    "japanese": "好意的な",
+    "level": "中3"
+  },
+  {
+    "english": "silent",
+    "japanese": "静かな",
+    "level": "中3"
+  },
+  {
+    "english": "close",
+    "japanese": "接近した",
+    "level": "中3"
+  },
+  {
+    "english": "real",
+    "japanese": "ほんとうの",
+    "level": "中3"
+  },
+  {
+    "english": "certain",
+    "japanese": "ある",
+    "level": "中3"
+  },
+  {
+    "english": "wrong",
+    "japanese": "間違ったぐあいが悪い",
+    "level": "中3"
+  },
+  {
+    "english": "weekly",
+    "japanese": "週刊",
+    "level": "中3"
+  },
+  {
+    "english": "snowy",
+    "japanese": "雪の降る",
+    "level": "中3"
+  },
+  {
+    "english": "whole",
+    "japanese": "すべての",
+    "level": "中3"
+  },
+  {
+    "english": "if",
+    "japanese": "もし",
+    "level": "中3"
+  },
+  {
+    "english": "although",
+    "japanese": "であるけれど",
+    "level": "中3"
+  },
+  {
+    "english": "though",
+    "japanese": "だけれども",
+    "level": "中3"
+  },
+  {
+    "english": "or",
+    "japanese": "それとも",
+    "level": "中3"
+  },
+  {
+    "english": "between",
+    "japanese": "～と～の間",
+    "level": "中3"
+  },
+  {
+    "english": "tonight",
+    "japanese": "今夜(は)",
+    "level": "中3"
+  },
+  {
+    "english": "ever",
+    "japanese": "今まで",
+    "level": "中3"
+  },
+  {
+    "english": "once",
+    "japanese": "かつて１度",
+    "level": "中3"
+  },
+  {
+    "english": "finally",
+    "japanese": "ついに",
+    "level": "中3"
+  },
+  {
+    "english": "straight",
+    "japanese": "まっすぐに",
+    "level": "中3"
+  },
+  {
+    "english": "everywhere",
+    "japanese": "どこでも",
+    "level": "中3"
+  },
+  {
+    "english": "down",
+    "japanese": "下に",
+    "level": "中3"
+  },
+  {
+    "english": "pretty",
+    "japanese": "かなり",
+    "level": "中3"
+  },
+  {
+    "english": "besides",
+    "japanese": "その上",
+    "level": "中3"
+  },
+  {
+    "english": "maybe",
+    "japanese": "おそらく",
+    "level": "中3"
+  },
+  {
+    "english": "surely",
+    "japanese": "確かに",
+    "level": "中3"
+  },
+  {
+    "english": "certainly",
+    "japanese": "確かに",
+    "level": "中3"
+  },
+  {
+    "english": "easily",
+    "japanese": "かんたんに",
+    "level": "中3"
+  },
+  {
+    "english": "neither",
+    "japanese": "～も～も(ない)",
+    "level": "中3"
+  },
+  {
+    "english": "alone",
+    "japanese": "ひとりきりで",
+    "level": "中3"
+  },
+  {
+    "english": "hard",
+    "japanese": "いっしょうけんめい",
+    "level": "中3"
+  },
+  {
+    "english": "forever",
+    "japanese": "永久に",
+    "level": "中3"
+  },
+  {
+    "english": "suddenly",
+    "japanese": "突然",
+    "level": "中3"
+  },
+  {
+    "english": "especially",
+    "japanese": "特に",
+    "level": "中3"
+  },
+  {
+    "english": "quickly",
+    "japanese": "すばやく",
+    "level": "中3"
+  },
+  {
+    "english": "long",
+    "japanese": "長く",
+    "level": "中3"
+  },
+  {
+    "english": "away",
+    "japanese": "離れて",
+    "level": "中3"
+  },
+  {
+    "english": "abroad",
+    "japanese": "外国へ",
+    "level": "中3"
+  },
+  {
+    "english": "ahead",
+    "japanese": "前方に",
+    "level": "中3"
+  },
+  {
+    "english": "all",
+    "japanese": "まったく",
+    "level": "中3"
+  },
+  {
+    "english": "almost",
+    "japanese": "ほとんど",
+    "level": "中3"
+  },
+  {
+    "english": "indeed",
+    "japanese": "実に",
+    "level": "中3"
+  },
+  {
+    "english": "else",
+    "japanese": "そのほかに",
+    "level": "中3"
+  },
+  {
+    "english": "anyway",
+    "japanese": "ともかく",
+    "level": "中3"
+  },
+  {
+    "english": "either",
+    "japanese": "(もまた)～でない",
+    "level": "中3"
+  },
+  {
+    "english": "gently",
+    "japanese": "やさしく",
+    "level": "中3"
+  },
+  {
+    "english": "probably",
+    "japanese": "多分",
+    "level": "中3"
+  },
+  {
+    "english": "happily",
+    "japanese": "幸せに楽しく",
+    "level": "中3"
+  },
+  {
+    "english": "then",
+    "japanese": "それからそのときそれでは",
+    "level": "中3"
+  },
+  {
+    "english": "twice",
+    "japanese": "２回",
+    "level": "中3"
+  },
+  {
+    "english": "still",
+    "japanese": "まだ",
+    "level": "中3"
+  },
+  {
+    "english": "recently",
+    "japanese": "最近",
+    "level": "中3"
+  },
+  {
+    "english": "off",
+    "japanese": "離れて",
+    "level": "中3"
+  },
+  {
+    "english": "across",
+    "japanese": "横にさし渡し (△ This is a little strange and not used very often)横切って",
+    "level": "中3"
+  },
+  {
+    "english": "round",
+    "japanese": "まわりに (Ex. There are chairs around the table.)まわりを (Ex. There is a table surrounded by chairs.)",
+    "level": "中3"
+  },
+  {
+    "english": "just",
+    "japanese": "ちょうどただ単に",
+    "level": "中3"
+  },
+  {
+    "english": "quite",
+    "japanese": "まったく",
+    "level": "中3"
+  },
+  {
+    "english": "perhaps",
+    "japanese": "多分",
+    "level": "中3"
+  },
+  {
+    "english": "even",
+    "japanese": "～さえ",
+    "level": "中3"
+  },
+  {
+    "english": "quietly",
+    "japanese": "静かに",
+    "level": "中3"
+  },
+  {
+    "english": "fine",
+    "japanese": "うまく",
+    "level": "中3"
+  },
+  {
+    "english": "carefully",
+    "japanese": "注意深く",
+    "level": "中3"
+  },
+  {
+    "english": "never",
+    "japanese": "１度も～ない",
+    "level": "中3"
+  },
+  {
+    "english": "really",
+    "japanese": "本当に",
+    "level": "中3"
+  }
+]

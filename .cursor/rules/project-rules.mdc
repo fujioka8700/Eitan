@@ -1,0 +1,92 @@
+---
+alwaysApply: true
+---
+
+# プロジェクトルール
+
+## 作業開始前の必須確認事項
+
+### ドキュメントディレクトリの確認
+
+システムを始める前に、必ず `src/docs/` ディレクトリ配下のドキュメントを確認すること。
+
+確認すべきドキュメント:
+
+- `requirements.md` - 要件定義書（機能要件、非機能要件を確認）
+- `tech-stack.md` - 技術スタック（使用する技術とバージョンを確認）
+- `progress.md` - 進捗管理（現在の開発状況を確認）
+- `project-management.md` - プロジェクト管理（開発フロー、ブランチ戦略を確認）
+
+これらのドキュメントを確認してから、コードの実装や変更を行うこと。
+
+## 技術スタックのベストプラクティス
+
+### Next.js
+
+- Next.js の最新の安定版を使用
+- App Router を使用（Next.js 13+）
+- Server Components と Client Components を適切に使い分ける
+- API Routes を使用する場合は `/app/api/` ディレクトリに配置
+- 公式ドキュメントのベストプラクティスに従う: https://nextjs.org/docs
+
+### TypeScript
+
+- 厳密な型定義を使用
+- `any` 型の使用を避ける
+- 型安全性を優先する
+- TypeScript のベストプラクティスに従う
+
+### Prisma
+
+- Prisma 6.x を使用
+- スキーマファイル (`schema.prisma`) を適切に管理
+- マイグレーションを使用してデータベーススキーマを管理
+- Prisma Client の生成を忘れない (`npx prisma generate`)
+- Prisma のベストプラクティスに従う: https://www.prisma.io/docs/guides
+
+### PostgreSQL
+
+- PostgreSQL 16.x を使用
+- データベース接続文字列は環境変数で管理
+- トランザクションを適切に使用
+- インデックスの最適化を考慮
+
+## コーディング規約
+
+### ファイル命名規則
+
+- コンポーネント: PascalCase (例: `QuizComponent.tsx`)
+- ユーティリティ関数: camelCase (例: `formatDate.ts`)
+- 定数: UPPER_SNAKE_CASE (例: `MAX_QUESTIONS.ts`)
+
+### コード品質
+
+- ESLint と Prettier を使用してコードフォーマットを統一
+- 型安全性を最優先
+- エラーハンドリングを適切に実装
+- コメントは必要最小限（自己説明的なコードを書く）
+
+## 開発フロー
+
+### ブランチ戦略
+
+- `main`: 本番環境用ブランチ
+- `develop`: 開発用ブランチ
+- `feature/`: 機能開発用ブランチ
+- `fix/`: バグ修正用ブランチ
+
+### コミットメッセージ
+
+Conventional Commits に従う:
+
+- `feat`: 新機能
+- `fix`: バグ修正
+- `docs`: ドキュメントのみの変更
+- `refactor`: リファクタリング
+
+## その他の注意事項
+
+- ゲストモード（登録不要）での動作を最優先で実装
+- ローカルストレージを使用した進捗管理を実装
+- レスポンシブデザインを考慮
+- パフォーマンスを意識した実装（ページ読み込み時間: 2 秒以内）

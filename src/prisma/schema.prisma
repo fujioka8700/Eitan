@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -12,4 +9,48 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+// 英単語モデル
+model Word {
+  id          Int      @id @default(autoincrement())
+  english     String   @unique // 英単語
+  japanese    String   // 日本語訳
+  level       String   @default("中1") // レベル（中1/中2/中3）
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userWords   UserWord[]
+
+  @@index([level])
+  @@index([english])
+}
+
+// ユーザーモデル（オプション機能用）
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  password  String    // パスワード（ハッシュ化）
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userWords UserWord[]
+}
+
+// ユーザー学習記録モデル（オプション機能用）
+model UserWord {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  wordId        Int
+  status        String   @default("未学習") // 未学習/学習中/習得済み
+  correctCount  Int      @default(0) // 正解回数
+  mistakeCount  Int      @default(0) // 間違い回数
+  lastStudiedAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word          Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@index([userId])
+  @@index([wordId])
 }
