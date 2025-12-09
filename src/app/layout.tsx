@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Eitan - 英語暗記アプリ',
+  title: 'Eitan - 英単語暗記アプリ',
   description:
     '中学1年〜3年レベルの英単語を効率的に学習できるWebアプリケーション',
 };
