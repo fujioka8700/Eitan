@@ -20,6 +20,11 @@ interface WordData {
 async function main() {
   console.log('英単語データのインポートを開始します...')
 
+  // 既存のデータをすべて削除
+  console.log('既存のデータを削除しています...')
+  const deleteCount = await prisma.word.deleteMany({})
+  console.log(`既存のデータ ${deleteCount.count} 件を削除しました。`)
+
   // JSONファイルを読み込む
   const jsonPath = path.join(__dirname, '../data/words.json')
   
@@ -114,4 +119,5 @@ main()
   .finally(async () => {
     await prisma.$disconnect()
   })
+
 

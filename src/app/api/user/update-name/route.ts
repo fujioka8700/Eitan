@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { verifyToken } from '../../../lib/auth'
 import { prisma } from '../../../lib/prisma'
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const authHeader = request.headers.get('authorization')
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -16,9 +16,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: '無効なトークンです' }, { status: 401 })
     }
 
-    // データベースから最新のユーザー情報を取得
-    const dbUser = await prisma.user.findUnique({
+    const body = await request.json()
+    const { name } = body
+
+    // バリデーション
+    if (name !== null && name !== undefined && name.trim() === '') {
+      return NextResponse.json(
+        { error: '名前は空にできません' },
+        { status: 400 }
+      )
+    }
+
+    // 名前を更新
+    const updatedUser = await prisma.user.update({
       where: { id: user.id },
+      data: { name: name?.trim() || null },
       select: {
         id: true,
         email: true,
@@ -27,18 +39,16 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    if (!dbUser) {
-      return NextResponse.json({ error: 'ユーザーが見つかりません' }, { status: 404 })
-    }
-
-    return NextResponse.json({ user: dbUser })
+    return NextResponse.json({
+      user: updatedUser,
+      message: '名前が正常に更新されました',
+    })
   } catch (error) {
-    console.error('Auth error:', error)
+    console.error('Update name error:', error)
     return NextResponse.json(
-      { error: '認証に失敗しました' },
+      { error: error instanceof Error ? error.message : '名前の更新に失敗しました' },
       { status: 500 }
     )
   }
 }
-
 

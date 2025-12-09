@@ -24,8 +24,10 @@ interface QuizResult {
 export default function QuizPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const level = searchParams.get('level') || 'all'
-  const count = parseInt(searchParams.get('count') || '10')
+  const initialLevel = searchParams.get('level') || 'all'
+  const initialCount = parseInt(searchParams.get('count') || '10')
+
+  const [selectedLevel, setSelectedLevel] = useState(initialLevel)
 
   const [words, setWords] = useState<Word[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -40,16 +42,19 @@ export default function QuizPage() {
   const [quizStarted, setQuizStarted] = useState(false)
   const [quizFinished, setQuizFinished] = useState(false)
   const [hasTimeLimit, setHasTimeLimit] = useState(true) // 全問題で時間制限
+  const [questionCount, setQuestionCount] = useState(initialCount) // 選択された問題数
 
   // クイズ用の単語を取得
   useEffect(() => {
+    if (quizStarted) return // クイズ開始後は再取得しない
+
     const fetchWords = async () => {
       try {
         const params = new URLSearchParams()
-        if (level !== 'all') {
-          params.set('level', level)
+        if (selectedLevel !== 'all') {
+          params.set('level', selectedLevel)
         }
-        params.set('count', count.toString())
+        params.set('count', questionCount.toString())
 
         const response = await fetch(`/api/quiz/words?${params.toString()}`)
         const data = await response.json()
@@ -72,7 +77,29 @@ export default function QuizPage() {
     }
 
     fetchWords()
-  }, [level, count, router])
+  }, [selectedLevel, questionCount, router, quizStarted])
+
+  // レベルが変更されたらURLを更新
+  const handleLevelChange = (newLevel: string) => {
+    setSelectedLevel(newLevel)
+    const params = new URLSearchParams()
+    if (newLevel !== 'all') {
+      params.set('level', newLevel)
+    }
+    params.set('count', questionCount.toString())
+    router.push(`/quiz?${params.toString()}`)
+  }
+
+  // 問題数が変更されたらURLを更新
+  const handleQuestionCountChange = (count: number) => {
+    setQuestionCount(count)
+    const params = new URLSearchParams()
+    if (selectedLevel !== 'all') {
+      params.set('level', selectedLevel)
+    }
+    params.set('count', count.toString())
+    router.push(`/quiz?${params.toString()}`)
+  }
 
   // 選択肢を生成（正解1つ + ランダムな誤答3つ）
   const generateOptions = (question: Word, allWords: Word[]) => {
@@ -231,16 +258,64 @@ export default function QuizPage() {
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl bg-white p-4 shadow-xl sm:p-8">
             <h1 className="mb-4 text-3xl font-bold text-gray-900">4択クイズ</h1>
-            <div className="mb-6 space-y-2 text-gray-600">
-              <p>問題数: {words.length} 問</p>
-              <p>レベル: {level === 'all' ? '全レベル' : level}</p>
-              <p className="text-sm text-gray-500">
-                各問題は10秒以内に回答してください。
-              </p>
+            <div className="mb-6 space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  レベルを選択
+                </label>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                  {[
+                    { label: '全て', value: 'all' },
+                    { label: '中1', value: '中1' },
+                    { label: '中2', value: '中2' },
+                    { label: '中3', value: '中3' },
+                  ].map((item) => (
+                    <button
+                      key={item.value}
+                      onClick={() => handleLevelChange(item.value)}
+                      className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                        selectedLevel === item.value
+                          ? 'border-green-600 bg-green-600 text-white'
+                          : 'border-gray-300 bg-white text-gray-700 hover:border-green-300 hover:bg-green-50'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  問題数を選択
+                </label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[10, 30, 50].map((count) => (
+                    <button
+                      key={count}
+                      onClick={() => handleQuestionCountChange(count)}
+                      className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                        questionCount === count
+                          ? 'border-green-600 bg-green-600 text-white'
+                          : 'border-gray-300 bg-white text-gray-700 hover:border-green-300 hover:bg-green-50'
+                      }`}
+                    >
+                      {count}問
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2 text-gray-600">
+                <p>問題数: {words.length} 問</p>
+                <p>レベル: {selectedLevel === 'all' ? '全て' : selectedLevel}</p>
+                <p className="text-sm text-gray-500">
+                  各問題は10秒以内に回答してください。
+                </p>
+              </div>
             </div>
             <button
               onClick={startQuiz}
-              className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+              disabled={words.length === 0}
+              className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               クイズを開始
             </button>
@@ -456,6 +531,16 @@ export default function QuizPage() {
               )}
             </div>
           )}
+
+          {/* ホームへ戻る */}
+          <div className="mt-6">
+            <Link
+              href="/"
+              className="block text-center text-blue-600 hover:underline"
+            >
+              ホームへ戻る
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ export default function Navigation() {
   ]
 
   if (user) {
-    navLinks.push({ href: '/stats', label: '統計' })
+    navLinks.push({ href: '/stats', label: 'レポート' })
   }
 
   const isActive = (href: string) => {
@@ -43,11 +43,12 @@ export default function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* ロゴ */}
           <div className="flex items-center">
-            <Link
-              href="/"
-              className="text-xl font-bold text-gray-900 hover:text-blue-600"
-            >
-              📚 英単語暗記 ✨
+            <Link href="/" className="flex items-center">
+              <img
+                src="/images/logo.jpg"
+                alt="英単語暗記"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
           </div>
 

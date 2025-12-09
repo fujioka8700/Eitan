@@ -481,7 +481,7 @@
   },
   {
     "english": "field",
-    "japanese": "野原競技場",
+    "japanese": "野原、競技場",
     "level": "中1"
   },
   {
@@ -611,7 +611,7 @@
   },
   {
     "english": "work",
-    "japanese": "仕事作品",
+    "japanese": "仕事、作品",
     "level": "中1"
   },
   {
@@ -826,12 +826,12 @@
   },
   {
     "english": "stop",
-    "japanese": "止める止まる",
+    "japanese": "止める、止まる",
     "level": "中1"
   },
   {
     "english": "have",
-    "japanese": "持っている食べる",
+    "japanese": "持っている、食べる",
     "level": "中1"
   },
   {
@@ -881,7 +881,7 @@
   },
   {
     "english": "play",
-    "japanese": "遊ぶ(スポーツを)する演奏する",
+    "japanese": "遊ぶ(スポーツを)する、演奏する",
     "level": "中1"
   },
   {
@@ -906,7 +906,7 @@
   },
   {
     "english": "write",
-    "japanese": "書く手紙を書く",
+    "japanese": "書く、手紙を書く",
     "level": "中1"
   },
   {
@@ -921,7 +921,7 @@
   },
   {
     "english": "move",
-    "japanese": "動く感動させる",
+    "japanese": "動く、感動させる",
     "level": "中1"
   },
   {
@@ -936,7 +936,7 @@
   },
   {
     "english": "leave",
-    "japanese": "去る残す置いて行く",
+    "japanese": "去る、残す、置いて行く",
     "level": "中1"
   },
   {
@@ -976,7 +976,7 @@
   },
   {
     "english": "learn",
-    "japanese": "学ぶ覚える",
+    "japanese": "学ぶ、覚える",
     "level": "中1"
   },
   {
@@ -1001,7 +1001,7 @@
   },
   {
     "english": "get",
-    "japanese": "得る着く乗る",
+    "japanese": "得る、着く、乗る",
     "level": "中1"
   },
   {
@@ -1086,7 +1086,7 @@
   },
   {
     "english": "strong",
-    "japanese": "強いじょうぶな",
+    "japanese": "強い、じょうぶな",
     "level": "中1"
   },
   {
@@ -1096,12 +1096,12 @@
   },
   {
     "english": "fine",
-    "japanese": "すばらしい元気な晴れた",
+    "japanese": "すばらしい、元気な、晴れた",
     "level": "中1"
   },
   {
     "english": "happy",
-    "japanese": "幸福な楽しい",
+    "japanese": "幸福な、楽しい",
     "level": "中1"
   },
   {
@@ -1121,7 +1121,7 @@
   },
   {
     "english": "poor",
-    "japanese": "貧乏なかわいそうな不十分な",
+    "japanese": "貧乏な、かわいそうな、不十分な",
     "level": "中1"
   },
   {
@@ -1161,7 +1161,7 @@
   },
   {
     "english": "well",
-    "japanese": "よくじょうずに",
+    "japanese": "よく、じょうずに",
     "level": "中1"
   },
   {
@@ -1211,7 +1211,7 @@
   },
   {
     "english": "easy",
-    "japanese": "やさしい気楽に",
+    "japanese": "やさしい、気楽に",
     "level": "中1"
   },
   {
@@ -1256,22 +1256,22 @@
   },
   {
     "english": "short",
-    "japanese": "短い背が低い",
+    "japanese": "短い、背が低い",
     "level": "中1"
   },
   {
     "english": "little",
-    "japanese": "小さい幼いちょっとした",
+    "japanese": "小さい、幼い、ちょっとした",
     "level": "中1"
   },
   {
     "english": "dark",
-    "japanese": "暗い黒い",
+    "japanese": "暗い、黒い",
     "level": "中1"
   },
   {
     "english": "old",
-    "japanese": "年をとった古い",
+    "japanese": "年をとった、古い",
     "level": "中1"
   },
   {
@@ -1281,7 +1281,7 @@
   },
   {
     "english": "junior",
-    "japanese": "年下の下級の",
+    "japanese": "年下の、下級の",
     "level": "中1"
   },
   {
@@ -1301,7 +1301,7 @@
   },
   {
     "english": "today",
-    "japanese": "今日現在",
+    "japanese": "今日、現在",
     "level": "中1"
   },
   {
@@ -1331,7 +1331,7 @@
   },
   {
     "english": "much",
-    "japanese": "ずっとたいへん",
+    "japanese": "ずっと、たいへん",
     "level": "中1"
   },
   {
@@ -1406,7 +1406,7 @@
   },
   {
     "english": "far",
-    "japanese": "遠くにはるかに",
+    "japanese": "遠くに、はるかに",
     "level": "中1"
   },
   {
@@ -1441,7 +1441,7 @@
   },
   {
     "english": "next",
-    "japanese": "次の隣の",
+    "japanese": "次の、隣の",
     "level": "中1"
   },
   {
@@ -1451,12 +1451,12 @@
   },
   {
     "english": "rich",
-    "japanese": "金持ちの豊かな",
+    "japanese": "金持ちの、豊かな",
     "level": "中1"
   },
   {
     "english": "able",
-    "japanese": "できる有能な",
+    "japanese": "できる、有能な",
     "level": "中1"
   },
   {
@@ -1501,7 +1501,7 @@
   },
   {
     "english": "cold",
-    "japanese": "冷たい寒い",
+    "japanese": "冷たい、寒い",
     "level": "中1"
   },
   {
@@ -1656,7 +1656,7 @@
   },
   {
     "english": "way",
-    "japanese": "道方法",
+    "japanese": "道、方法",
     "level": "中1"
   },
   {
@@ -1671,12 +1671,12 @@
   },
   {
     "english": "age",
-    "japanese": "年齢時代",
+    "japanese": "年齢、時代",
     "level": "中1"
   },
   {
     "english": "right",
-    "japanese": "右権利",
+    "japanese": "右、権利",
     "level": "中1"
   },
   {
@@ -1691,7 +1691,7 @@
   },
   {
     "english": "class",
-    "japanese": "学級授業",
+    "japanese": "学級、授業",
     "level": "中1"
   },
   {
@@ -1711,7 +1711,7 @@
   },
   {
     "english": "subject",
-    "japanese": "科目題目",
+    "japanese": "科目、題目",
     "level": "中1"
   },
   {
@@ -1786,22 +1786,22 @@
   },
   {
     "english": "you",
-    "japanese": "あなたに(を)あなたがたを",
+    "japanese": "あなたに(を)、あなたがたを",
     "level": "中1"
   },
   {
     "english": "your",
-    "japanese": "あなたのあなたがたの",
+    "japanese": "あなたの、あなたがたの",
     "level": "中1"
   },
   {
     "english": "you",
-    "japanese": "あなたはあなたがたは",
+    "japanese": "あなたは、あなたがたは",
     "level": "中1"
   },
   {
     "english": "yours",
-    "japanese": "あなたのものあなたがたのもの",
+    "japanese": "あなたのもの、あなたがたのもの",
     "level": "中1"
   },
   {
@@ -1836,7 +1836,7 @@
   },
   {
     "english": "her",
-    "japanese": "彼女を彼女に",
+    "japanese": "彼女を、彼女に",
     "level": "中1"
   },
   {
@@ -1856,7 +1856,7 @@
   },
   {
     "english": "it",
-    "japanese": "それをそれに",
+    "japanese": "それを、それに",
     "level": "中1"
   },
   {
@@ -1871,7 +1871,7 @@
   },
   {
     "english": "us",
-    "japanese": "私たちを私たちに",
+    "japanese": "私たちを、私たちに",
     "level": "中1"
   },
   {
@@ -1886,7 +1886,7 @@
   },
   {
     "english": "their",
-    "japanese": "彼らの彼女らの女らの",
+    "japanese": "彼らの、彼女らの、女らの",
     "level": "中1"
   },
   {
@@ -2146,7 +2146,7 @@
   },
   {
     "english": "head",
-    "japanese": "頭先頭",
+    "japanese": "頭、先頭",
     "level": "中2"
   },
   {
@@ -2221,7 +2221,7 @@
   },
   {
     "english": "mouse",
-    "japanese": "はつかねずみねずみ",
+    "japanese": "はつかねずみ、ねずみ",
     "level": "中2"
   },
   {
@@ -2466,7 +2466,7 @@
   },
   {
     "english": "earth",
-    "japanese": "地球大地",
+    "japanese": "地球、大地",
     "level": "中2"
   },
   {
@@ -2681,7 +2681,7 @@
   },
   {
     "english": "love",
-    "japanese": "愛愛する人",
+    "japanese": "愛、愛する人",
     "level": "中2"
   },
   {
@@ -2926,7 +2926,7 @@
   },
   {
     "english": "art",
-    "japanese": "美術芸術",
+    "japanese": "美術、芸術",
     "level": "中2"
   },
   {
@@ -3306,7 +3306,7 @@
   },
   {
     "english": "see",
-    "japanese": "見るわかる調査する",
+    "japanese": "見る、わかる、調査する",
     "level": "中2"
   },
   {
@@ -3386,7 +3386,7 @@
   },
   {
     "english": "remember",
-    "japanese": "思い出す覚えている",
+    "japanese": "思い出す、覚えている",
     "level": "中2"
   },
   {
@@ -4086,7 +4086,7 @@
   },
   {
     "english": "entrance",
-    "japanese": "入り口入学",
+    "japanese": "入り口、入学",
     "level": "中3"
   },
   {
@@ -4176,7 +4176,7 @@
   },
   {
     "english": "hall",
-    "japanese": "玄関の広間ろうか",
+    "japanese": "玄関の広間、ろうか",
     "level": "中3"
   },
   {
@@ -4556,7 +4556,7 @@
   },
   {
     "english": "race",
-    "japanese": "競走人種",
+    "japanese": "競走、人種",
     "level": "中3"
   },
   {
@@ -4621,7 +4621,7 @@
   },
   {
     "english": "sign",
-    "japanese": "合図標識",
+    "japanese": "合図、標識",
     "level": "中3"
   },
   {
@@ -4706,7 +4706,7 @@
   },
   {
     "english": "step",
-    "japanese": "足元階段",
+    "japanese": "足元、階段",
     "level": "中3"
   },
   {
@@ -4721,7 +4721,7 @@
   },
   {
     "english": "care",
-    "japanese": "世話管理",
+    "japanese": "世話、管理",
     "level": "中3"
   },
   {
@@ -4946,7 +4946,7 @@
   },
   {
     "english": "grade",
-    "japanese": "評点等級",
+    "japanese": "評点、等級",
     "level": "中3"
   },
   {
@@ -5091,7 +5091,7 @@
   },
   {
     "english": "raise",
-    "japanese": "(手などを)あげる持ち上げる育てる",
+    "japanese": "(手などを)あげる、持ち上げる、育てる",
     "level": "中3"
   },
   {
@@ -5151,7 +5151,7 @@
   },
   {
     "english": "miss",
-    "japanese": "間違ういなくてさみしく思う",
+    "japanese": "間違う、いなくてさみしく思う",
     "level": "中3"
   },
   {
@@ -5231,7 +5231,7 @@
   },
   {
     "english": "save",
-    "japanese": "救うとっておく節約する",
+    "japanese": "救う、とっておく、節約する",
     "level": "中3"
   },
   {
@@ -5261,7 +5261,7 @@
   },
   {
     "english": "introduce",
-    "japanese": "紹介する初めて伝える",
+    "japanese": "紹介する、初めて伝える",
     "level": "中3"
   },
   {
@@ -5616,7 +5616,7 @@
   },
   {
     "english": "during",
-    "japanese": "～の間～を通じて",
+    "japanese": "～の間、～を通じて",
     "level": "中3"
   },
   {
@@ -5741,7 +5741,7 @@
   },
   {
     "english": "wrong",
-    "japanese": "間違ったぐあいが悪い",
+    "japanese": "間違った、ぐあいが悪い",
     "level": "中3"
   },
   {

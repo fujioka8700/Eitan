@@ -57,13 +57,19 @@ export default function Home() {
           </div>
 
           <div className="mt-8 rounded-lg bg-gray-50 p-6">
+            <p className="mb-6 text-base leading-relaxed text-gray-700">
+              英単語の勉強、もっと楽しくしない？✨
+              <br />
+              <br />
+              このアプリは、中学3年間で習う大切な英単語を、あなたの「今知りたい！」「今覚えたい！」に合わせて優しくサポートするために作られました。難しい単語帳はもう卒業！クイズで遊ぶみたいに、スキマ時間でサクッと単語をマスターしちゃおう。
+            </p>
             <h3 className="mb-4 text-lg font-semibold text-gray-900">
               主な機能
             </h3>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-center gap-2">
                 <span className="text-green-500">✓</span>
-                レベル別フィルタリング（中1/中2/中3）
+                学年ごとに絞り込み（中1/中2/中3）
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-green-500">✓</span>

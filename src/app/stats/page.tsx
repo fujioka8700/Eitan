@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAuth } from '../hooks/useAuth'
 
 interface UserWord {
   id: number
@@ -21,9 +22,14 @@ interface UserWord {
 
 export default function StatsPage() {
   const router = useRouter()
+  const { user, updateUser } = useAuth()
   const [userWords, setUserWords] = useState<UserWord[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [newName, setNewName] = useState('')
+  const [nameError, setNameError] = useState('')
+  const [nameLoading, setNameLoading] = useState(false)
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -61,6 +67,47 @@ export default function StatsPage() {
 
     fetchStats()
   }, [router])
+
+  useEffect(() => {
+    if (user) {
+      setNewName(user.name || '')
+    }
+  }, [user])
+
+  const handleUpdateName = async () => {
+    setNameError('')
+    setNameLoading(true)
+
+    try {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.push('/login')
+        return
+      }
+
+      const response = await fetch('/api/user/update-name', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name: newName.trim() || null }),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || '名前の更新に失敗しました')
+      }
+
+      const data = await response.json()
+      updateUser(data.user)
+      setIsEditingName(false)
+    } catch (error) {
+      setNameError(error instanceof Error ? error.message : '名前の更新に失敗しました')
+    } finally {
+      setNameLoading(false)
+    }
+  }
 
   // 統計を計算
   const totalWords = userWords.length
@@ -115,7 +162,72 @@ export default function StatsPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <h1 className="mb-6 text-3xl font-bold text-gray-900">学習統計</h1>
+          <div className="mb-6 flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">これまでのレポート</h1>
+            {user && (
+              <div className="flex items-center gap-4">
+                {!isEditingName ? (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-600">表示名:</span>
+                      <span className="font-semibold text-gray-900">
+                        {user.name || user.email}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setIsEditingName(true)}
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-700"
+                    >
+                      名前を変更
+                    </button>
+                  </>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                      placeholder="名前を入力"
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleUpdateName()
+                        } else if (e.key === 'Escape') {
+                          setIsEditingName(false)
+                          setNewName(user.name || '')
+                          setNameError('')
+                        }
+                      }}
+                      autoFocus
+                    />
+                    <button
+                      onClick={handleUpdateName}
+                      disabled={nameLoading}
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-700 disabled:bg-gray-400"
+                    >
+                      {nameLoading ? '保存中...' : '保存'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsEditingName(false)
+                        setNewName(user.name || '')
+                        setNameError('')
+                      }}
+                      disabled={nameLoading}
+                      className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 disabled:bg-gray-100"
+                    >
+                      キャンセル
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          {nameError && (
+            <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">
+              {nameError}
+            </div>
+          )}
 
           {/* 全体統計 */}
           <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -229,4 +341,5 @@ export default function StatsPage() {
     </div>
   )
 }
+
 
