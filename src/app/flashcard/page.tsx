@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -17,7 +17,7 @@ interface Progress {
   studyCount: number;
 }
 
-export default function FlashcardPage() {
+function FlashcardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const level = searchParams.get('level') || 'all';
@@ -478,5 +478,21 @@ export default function FlashcardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function FlashcardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <div className="mb-4 text-lg text-gray-600">読み込み中...</div>
+          </div>
+        </div>
+      }
+    >
+      <FlashcardContent />
+    </Suspense>
   );
 }

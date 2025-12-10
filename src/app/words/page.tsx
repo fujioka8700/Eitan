@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 interface Word {
@@ -17,7 +17,7 @@ interface Pagination {
   totalPages: number;
 }
 
-export default function WordsPage() {
+function WordsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [words, setWords] = useState<Word[]>([]);
@@ -319,5 +319,21 @@ export default function WordsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function WordsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <div className="mb-4 text-lg text-gray-600">読み込み中...</div>
+          </div>
+        </div>
+      }
+    >
+      <WordsContent />
+    </Suspense>
   );
 }

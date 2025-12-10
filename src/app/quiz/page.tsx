@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -21,7 +21,7 @@ interface QuizResult {
   timeSpent: number
 }
 
-export default function QuizPage() {
+function QuizContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const initialLevel = searchParams.get('level') || 'all'
@@ -544,6 +544,22 @@ export default function QuizPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <div className="mb-4 text-lg text-gray-600">読み込み中...</div>
+          </div>
+        </div>
+      }
+    >
+      <QuizContent />
+    </Suspense>
   )
 }
 
