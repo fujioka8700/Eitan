@@ -5,7 +5,7 @@
  * npx tsx scripts/import-words-from-json.ts
  */
 
-import { PrismaClient } from '../app/generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
 
@@ -106,7 +106,7 @@ async function main() {
   })
 
   console.log('\nレベル別統計:')
-  stats.forEach((stat) => {
+  stats.forEach((stat: { level: string; _count: number }) => {
     console.log(`  ${stat.level}: ${stat._count} 件`)
   })
 }
