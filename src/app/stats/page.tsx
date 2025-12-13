@@ -162,10 +162,10 @@ export default function StatsPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex flex-col gap-3">
             <h1 className="text-3xl font-bold text-gray-900">これまでのレポート</h1>
             {user && (
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-2">
                 {!isEditingName ? (
                   <>
                     <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export default function StatsPage() {
                     </button>
                   </>
                 ) : (
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <input
                       type="text"
                       value={newName}

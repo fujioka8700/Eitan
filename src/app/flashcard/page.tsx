@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -15,6 +15,7 @@ interface Progress {
   wordId: number;
   lastStudied: number;
   studyCount: number;
+  isLearned: boolean;
 }
 
 function FlashcardContent() {
@@ -33,6 +34,9 @@ function FlashcardContent() {
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
+  const touchStartX = useRef<number | null>(null);
+  const mouseStartX = useRef<number | null>(null);
+  const swipeThreshold = useMemo(() => 50, []);
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -42,7 +46,11 @@ function FlashcardContent() {
         const parsed = JSON.parse(savedProgress);
         const progressMap = new Map<number, Progress>();
         Object.entries(parsed).forEach(([key, value]) => {
-          progressMap.set(parseInt(key), value as Progress);
+          const record = value as Progress;
+          progressMap.set(parseInt(key), {
+            ...record,
+            isLearned: record.isLearned ?? false,
+          });
         });
         setProgress(progressMap);
       } catch (error) {
@@ -243,11 +251,20 @@ function FlashcardContent() {
         wordId,
         lastStudied: Date.now(),
         studyCount: 0,
+        isLearned: false,
       };
+      if (existing.isLearned) {
+        setProgress(newProgress);
+        saveProgress(newProgress);
+        saveUserWord(wordId);
+        return;
+      }
+
       newProgress.set(wordId, {
         ...existing,
         lastStudied: Date.now(),
         studyCount: existing.studyCount + 1,
+        isLearned: true,
       });
       setProgress(newProgress);
       saveProgress(newProgress);
@@ -371,6 +388,38 @@ function FlashcardContent() {
   const currentWord = words[currentIndex];
   const wordProgress = progress.get(currentWord.id);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    touchStartX.current = null;
+    if (delta > swipeThreshold) {
+      markAsStudied();
+      nextCard();
+    } else if (delta < -swipeThreshold) {
+      prevCard();
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    mouseStartX.current = e.clientX;
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (mouseStartX.current === null) return;
+    const delta = e.clientX - mouseStartX.current;
+    mouseStartX.current = null;
+    if (delta > swipeThreshold) {
+      markAsStudied();
+      nextCard();
+    } else if (delta < -swipeThreshold) {
+      prevCard();
+    }
+  };
+
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
@@ -391,17 +440,20 @@ function FlashcardContent() {
                 }}
               />
             </div>
-            {wordProgress && (
-              <div className="mt-2 text-xs text-gray-500">
-                学習回数: {wordProgress.studyCount} 回
-              </div>
-            )}
           </div>
 
           {/* フラッシュカード */}
           <div
             onClick={flipCard}
-            className="mb-6 min-h-[250px] cursor-pointer rounded-lg border-2 border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-lg transition-transform active:scale-95 sm:mb-8 sm:min-h-[300px] sm:p-8 sm:hover:scale-105"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            className={`mb-6 min-h-[250px] cursor-pointer rounded-lg border-2 p-6 shadow-lg transition-transform active:scale-95 sm:mb-8 sm:min-h-[300px] sm:p-8 sm:hover:scale-105 ${
+              wordProgress?.isLearned
+                ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
+                : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
+            }`}
           >
             <div className="flex h-full items-center justify-center">
               {!isFlipped ? (
@@ -443,9 +495,10 @@ function FlashcardContent() {
             </button>
             <button
               onClick={markAsStudied}
-              className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-colors active:bg-green-700 sm:px-6 sm:py-3 sm:text-base sm:hover:bg-green-700"
+              disabled={wordProgress?.isLearned}
+              className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-colors disabled:cursor-not-allowed disabled:bg-green-300 active:bg-green-700 sm:px-6 sm:py-3 sm:text-base sm:hover:bg-green-700"
             >
-              学習済み
+              {wordProgress?.isLearned ? '覚えた（済）' : '覚えた'}
             </button>
             <button
               onClick={nextCard}

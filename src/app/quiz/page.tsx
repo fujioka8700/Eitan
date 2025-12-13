@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, Suspense } from 'react'
+import { useEffect, useMemo, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -28,6 +28,7 @@ function QuizContent() {
   const initialCount = parseInt(searchParams.get('count') || '10')
 
   const [selectedLevel, setSelectedLevel] = useState(initialLevel)
+  const [quizMode, setQuizMode] = useState<'en-to-ja' | 'ja-to-en'>('en-to-ja') // クイズモード
 
   const [words, setWords] = useState<Word[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -36,13 +37,16 @@ function QuizContent() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
   const [isAnswered, setIsAnswered] = useState(false)
   const [results, setResults] = useState<QuizResult[]>([])
-  const [timeLeft, setTimeLeft] = useState(10)
   const [isTimeUp, setIsTimeUp] = useState(false)
   const [loading, setLoading] = useState(true)
   const [quizStarted, setQuizStarted] = useState(false)
   const [quizFinished, setQuizFinished] = useState(false)
   const [hasTimeLimit, setHasTimeLimit] = useState(true) // 全問題で時間制限
   const [questionCount, setQuestionCount] = useState(initialCount) // 選択された問題数
+  const [timeLeftMs, setTimeLeftMs] = useState(10000) // ミリ秒単位で管理して滑らかに
+  const [previousCorrectAnswer, setPreviousCorrectAnswer] = useState<string | null>(null)
+
+  const timeLimitMs = useMemo(() => 10000, [])
 
   // クイズ用の単語を取得
   useEffect(() => {
@@ -62,7 +66,8 @@ function QuizContent() {
         if (data.words && data.words.length > 0) {
           setWords(data.words)
           setCurrentQuestion(data.words[0])
-          generateOptions(data.words[0], data.words)
+          setPreviousCorrectAnswer(null)
+          generateOptions(data.words[0], data.words, null)
         } else {
           alert('単語が見つかりませんでした。')
           router.push('/')
@@ -102,47 +107,106 @@ function QuizContent() {
   }
 
   // 選択肢を生成（正解1つ + ランダムな誤答3つ）
-  const generateOptions = (question: Word, allWords: Word[]) => {
-    const correctAnswer = question.japanese
-    const wrongAnswers = allWords
-      .filter((w) => w.id !== question.id)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map((w) => w.japanese)
+  const shuffleArray = <T,>(array: T[]) => {
+    const copy = [...array]
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[copy[i], copy[j]] = [copy[j], copy[i]]
+    }
+    return copy
+  }
 
-    const allOptions = [correctAnswer, ...wrongAnswers].sort(
-      () => Math.random() - 0.5
-    )
-    setOptions(allOptions)
+  const generateOptions = (
+    question: Word,
+    allWords: Word[],
+    prevAnswer: string | null = previousCorrectAnswer
+  ) => {
+    if (quizMode === 'en-to-ja') {
+      // 英語→日本語: 英語が出題、日本語の選択肢
+      const correctAnswer = question.japanese
+      const candidatePool = allWords.filter(
+        (w) => w.id !== question.id && (prevAnswer ? w.japanese !== prevAnswer : true)
+      )
+
+      const uniqueWrong = new Set<string>()
+      for (const word of shuffleArray(candidatePool)) {
+        if (uniqueWrong.size >= 3) break
+        uniqueWrong.add(word.japanese)
+      }
+
+      if (uniqueWrong.size < 3) {
+        // フォールバック: prevAnswer を除外しつつ不足分を補う
+        const fallbackPool = allWords.filter((w) => w.id !== question.id)
+        for (const word of shuffleArray(fallbackPool)) {
+          if (uniqueWrong.size >= 3) break
+          if (word.japanese === prevAnswer) continue
+          uniqueWrong.add(word.japanese)
+        }
+      }
+
+      const combined = shuffleArray([correctAnswer, ...Array.from(uniqueWrong).slice(0, 3)])
+      setOptions(combined)
+    } else {
+      // 日本語→英語: 日本語が出題、英語の選択肢
+      const correctAnswer = question.english
+      const candidatePool = allWords.filter(
+        (w) => w.id !== question.id && (prevAnswer ? w.english !== prevAnswer : true)
+      )
+
+      const uniqueWrong = new Set<string>()
+      for (const word of shuffleArray(candidatePool)) {
+        if (uniqueWrong.size >= 3) break
+        uniqueWrong.add(word.english)
+      }
+
+      if (uniqueWrong.size < 3) {
+        // フォールバック: prevAnswer を除外しつつ不足分を補う
+        const fallbackPool = allWords.filter((w) => w.id !== question.id)
+        for (const word of shuffleArray(fallbackPool)) {
+          if (uniqueWrong.size >= 3) break
+          if (word.english === prevAnswer) continue
+          uniqueWrong.add(word.english)
+        }
+      }
+
+      const combined = shuffleArray([correctAnswer, ...Array.from(uniqueWrong).slice(0, 3)])
+      setOptions(combined)
+    }
   }
 
   // タイマーの処理（全問題で時間制限）
   useEffect(() => {
     if (!quizStarted || quizFinished || isAnswered || !hasTimeLimit) return
 
-    if (timeLeft > 0) {
-      const timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 1)
-      }, 1000)
-      return () => clearTimeout(timer)
+    if (timeLeftMs > 0) {
+      const timer = setInterval(() => {
+        setTimeLeftMs((prev) => {
+          const next = Math.max(0, prev - 100)
+          if (next === 0) {
+            setIsTimeUp(true)
+          }
+          return next
+        })
+      }, 100)
+      return () => clearInterval(timer)
     } else {
       // 時間切れ
-      setIsTimeUp(true)
       handleTimeUp()
     }
-  }, [timeLeft, quizStarted, quizFinished, isAnswered, hasTimeLimit])
+  }, [timeLeftMs, quizStarted, quizFinished, isAnswered, hasTimeLimit])
 
   // 時間切れの処理
   const handleTimeUp = () => {
     if (currentQuestion) {
+      const correctAnswer = quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english
       const result: QuizResult = {
         wordId: currentQuestion.id,
         english: currentQuestion.english,
         japanese: currentQuestion.japanese,
         userAnswer: '',
-        correctAnswer: currentQuestion.japanese,
+        correctAnswer,
         isCorrect: false,
-        timeSpent: 10 - timeLeft,
+        timeSpent: Math.round((timeLimitMs - timeLeftMs) / 1000),
       }
       setResults([...results, result])
       setIsAnswered(true)
@@ -188,15 +252,16 @@ function QuizContent() {
     setIsAnswered(true)
 
     if (currentQuestion) {
-      const isCorrect = answer === currentQuestion.japanese
+      const correctAnswer = quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english
+      const isCorrect = answer === correctAnswer
       const result: QuizResult = {
         wordId: currentQuestion.id,
         english: currentQuestion.english,
         japanese: currentQuestion.japanese,
         userAnswer: answer,
-        correctAnswer: currentQuestion.japanese,
+        correctAnswer,
         isCorrect,
-        timeSpent: 10 - timeLeft,
+        timeSpent: Math.round((timeLimitMs - timeLeftMs) / 1000),
       }
       setResults([...results, result])
 
@@ -218,21 +283,30 @@ function QuizContent() {
       // クイズ終了
       setQuizFinished(true)
     } else {
+      const prevCorrect = currentQuestion
+        ? (quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english)
+        : null
+      setPreviousCorrectAnswer(prevCorrect)
       setCurrentIndex(nextIndex)
       setCurrentQuestion(words[nextIndex])
-      generateOptions(words[nextIndex], words)
+      generateOptions(words[nextIndex], words, prevCorrect)
       setSelectedAnswer(null)
       setIsAnswered(false)
       setIsTimeUp(false)
       // 全問題で時間制限を維持（10秒にリセット）
       setHasTimeLimit(true)
-      setTimeLeft(10)
+      setTimeLeftMs(timeLimitMs)
     }
   }
 
   // クイズ開始
   const startQuiz = () => {
     setQuizStarted(true)
+    setTimeLeftMs(timeLimitMs)
+    // 最初の問題の選択肢を再生成（モードに応じて）
+    if (words.length > 0 && currentQuestion) {
+      generateOptions(currentQuestion, words, null)
+    }
   }
 
   // 正答率を計算
@@ -259,6 +333,33 @@ function QuizContent() {
           <div className="rounded-2xl bg-white p-4 shadow-xl sm:p-8">
             <h1 className="mb-4 text-3xl font-bold text-gray-900">4択クイズ</h1>
             <div className="mb-6 space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  クイズモードを選択
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => setQuizMode('en-to-ja')}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      quizMode === 'en-to-ja'
+                        ? 'border-green-600 bg-green-600 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-green-300 hover:bg-green-50'
+                    }`}
+                  >
+                    英語→日本語
+                  </button>
+                  <button
+                    onClick={() => setQuizMode('ja-to-en')}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      quizMode === 'ja-to-en'
+                        ? 'border-green-600 bg-green-600 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-green-300 hover:bg-green-50'
+                    }`}
+                  >
+                    日本語→英語
+                  </button>
+                </div>
+              </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
                   レベルを選択
@@ -373,9 +474,12 @@ function QuizContent() {
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="font-semibold text-gray-900">
-                          {result.english}
+                          {quizMode === 'en-to-ja' ? result.english : result.japanese}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-xs text-gray-500 mt-1">
+                          {quizMode === 'en-to-ja' ? `(${result.japanese})` : `(${result.english})`}
+                        </div>
+                        <div className="text-sm text-gray-600 mt-2">
                           正解: {result.correctAnswer}
                           {!result.isCorrect && (
                             <span className="ml-2 text-red-600">
@@ -408,7 +512,7 @@ function QuizContent() {
                   setSelectedAnswer(null)
                   setIsAnswered(false)
                   setIsTimeUp(false)
-                  setTimeLeft(10)
+                  setTimeLeftMs(timeLimitMs)
                   setHasTimeLimit(true)
                   // ページをリロードして状態を完全にリセット
                   window.location.href = '/quiz?' + searchParams.toString()
@@ -441,7 +545,8 @@ function QuizContent() {
   }
 
   // 進捗バーの幅を計算（10秒から0秒まで）
-  const progressPercentage = (timeLeft / 10) * 100
+  const progressPercentage = (timeLeftMs / timeLimitMs) * 100
+  const displayTime = Math.ceil(timeLeftMs / 1000)
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
@@ -453,14 +558,14 @@ function QuizContent() {
               <span>
                 問題 {currentIndex + 1} / {words.length}
               </span>
-              <span>残り時間: {timeLeft}秒</span>
+              <span>残り時間: {displayTime}秒</span>
             </div>
             <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
               <div
-                className={`h-full transition-all duration-1000 ${
-                  timeLeft <= 3
+                className={`h-full transition-[width] duration-100 ease-linear ${
+                  displayTime <= 3
                     ? 'bg-red-500'
-                    : timeLeft <= 5
+                    : displayTime <= 5
                       ? 'bg-yellow-500'
                       : 'bg-blue-500'
                 }`}
@@ -472,10 +577,10 @@ function QuizContent() {
           {/* 問題表示 */}
           <div className="mb-6 text-center sm:mb-8">
             <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
-              {currentQuestion.english}
+              {quizMode === 'en-to-ja' ? currentQuestion.english : currentQuestion.japanese}
             </h2>
             <p className="text-sm text-gray-600 sm:text-base">
-              日本語の意味を選んでください
+              {quizMode === 'en-to-ja' ? '日本語の意味を選んでください' : '英語を選んでください'}
             </p>
           </div>
 
@@ -483,7 +588,8 @@ function QuizContent() {
           <div className="space-y-2 sm:space-y-3">
             {options.map((option, index) => {
               const isSelected = selectedAnswer === option
-              const isCorrect = option === currentQuestion.japanese
+              const correctAnswer = quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english
+              const isCorrect = option === correctAnswer
               let buttonClass =
                 'w-full rounded-lg px-6 py-4 text-left transition-colors'
 
@@ -517,16 +623,16 @@ function QuizContent() {
           {isAnswered && (
             <div
               className={`mt-6 rounded-lg p-4 text-center ${
-                selectedAnswer === currentQuestion.japanese
+                selectedAnswer === (quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english)
                   ? 'bg-green-50 text-green-800'
                   : 'bg-red-50 text-red-800'
               }`}
             >
-              {selectedAnswer === currentQuestion.japanese ? (
+              {selectedAnswer === (quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english) ? (
                 <p className="font-semibold">正解です！</p>
               ) : (
                 <p className="font-semibold">
-                  不正解です。正解は「{currentQuestion.japanese}」です。
+                  不正解です。正解は「{quizMode === 'en-to-ja' ? currentQuestion.japanese : currentQuestion.english}」です。
                 </p>
               )}
             </div>
