@@ -73,6 +73,7 @@ function FlashcardContent() {
   // 単語を取得
   useEffect(() => {
     if (sessionStarted) return; // セッション開始後は再取得しない
+    if (sessionFinished) return; // 結果画面表示中は再取得しない
 
     const fetchWords = async () => {
       try {
@@ -101,7 +102,7 @@ function FlashcardContent() {
     };
 
     fetchWords();
-  }, [level, wordCount, router, sessionStarted]);
+  }, [level, wordCount, router, sessionStarted, sessionFinished]);
 
   // 単語数が変更されたらURLを更新
   const handleWordCountChange = (count: number) => {
@@ -508,7 +509,8 @@ function FlashcardContent() {
                   setIsFlipped(false);
                   setTimeLeft(5);
                   setIsTimeUp(false);
-                  window.location.href = '/flashcard?' + searchParams.toString();
+                  // ページをリロードせずに状態をリセット
+                  // 単語は既に取得されているので、再取得は不要
                 }}
                 className="flex-1 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
               >
