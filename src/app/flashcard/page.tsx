@@ -1,8 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense, useMemo } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCards } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-cards';
 
 interface Word {
   id: number;
@@ -21,7 +25,7 @@ interface Progress {
 function FlashcardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const level = searchParams.get('level') || 'all';
+  const initialLevel = searchParams.get('level') || 'all';
   const initialCount = parseInt(searchParams.get('count') || '10');
 
   const [words, setWords] = useState<Word[]>([]);
@@ -34,11 +38,10 @@ function FlashcardContent() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
+  const [level, setLevel] = useState(initialLevel); // レベルを状態として管理
   const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>('en-to-ja'); // フラッシュカードモード
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
-  const touchStartX = useRef<number | null>(null);
-  const mouseStartX = useRef<number | null>(null);
-  const swipeThreshold = useMemo(() => 50, []);
+  const swiperRef = useRef<any>(null); // Swiperインスタンスの参照
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -76,6 +79,10 @@ function FlashcardContent() {
     if (sessionFinished) return; // 結果画面表示中は再取得しない
 
     const fetchWords = async () => {
+      // 初回読み込み時のみ読み込み状態を表示（単語が既に存在する場合は表示しない）
+      if (words.length === 0) {
+        setLoading(true);
+      }
       try {
         const params = new URLSearchParams();
         if (level !== 'all') {
@@ -117,20 +124,15 @@ function FlashcardContent() {
 
   // レベル変更
   const handleLevelChange = (nextLevel: string) => {
-    setLoading(true);
+    setLevel(nextLevel);
     setSessionStarted(false);
     setSessionFinished(false);
     setCurrentIndex(0);
     setIsFlipped(false);
     setTimeLeft(5);
     setIsTimeUp(false);
-
-    const params = new URLSearchParams();
-    if (nextLevel !== 'all') {
-      params.set('level', nextLevel);
-    }
-    params.set('count', wordCount.toString());
-    router.push(`/flashcard?${params.toString()}`);
+    // レベルを更新（URLは更新しない）
+    // 単語取得のuseEffectがlevelの変更を検知して自動的に再取得する
   };
 
   // タイマーの処理
@@ -189,6 +191,12 @@ function FlashcardContent() {
     }
   }, [currentIndex, sessionStarted, words.length]);
 
+  // SwiperのスライドをcurrentIndexに同期
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideTo(currentIndex);
+    }
+  }, [currentIndex]);
 
   // カードをめくる
   const flipCard = () => {
@@ -253,36 +261,40 @@ function FlashcardContent() {
     }
   };
 
-  // 学習済みとしてマーク
+  // 学習済みとしてマーク（現在のカード）
   const markAsStudied = () => {
     if (words[currentIndex]) {
-      const wordId = words[currentIndex].id;
-      const newProgress = new Map(progress);
-      const existing = newProgress.get(wordId) || {
-        wordId,
-        lastStudied: Date.now(),
-        studyCount: 0,
-        isLearned: false,
-      };
-      if (existing.isLearned) {
-        setProgress(newProgress);
-        saveProgress(newProgress);
-        saveUserWord(wordId);
-        return;
-      }
+      markAsStudiedForWord(words[currentIndex].id);
+    }
+  };
 
-      newProgress.set(wordId, {
-        ...existing,
-        lastStudied: Date.now(),
-        studyCount: existing.studyCount + 1,
-        isLearned: true,
-      });
+  // 特定の単語を学習済みとしてマーク
+  const markAsStudiedForWord = (wordId: number) => {
+    const newProgress = new Map(progress);
+    const existing = newProgress.get(wordId) || {
+      wordId,
+      lastStudied: Date.now(),
+      studyCount: 0,
+      isLearned: false,
+    };
+    if (existing.isLearned) {
       setProgress(newProgress);
       saveProgress(newProgress);
-
-      // データベースにも保存（ログインユーザーの場合）
       saveUserWord(wordId);
+      return;
     }
+
+    newProgress.set(wordId, {
+      ...existing,
+      lastStudied: Date.now(),
+      studyCount: existing.studyCount + 1,
+      isLearned: true,
+    });
+    setProgress(newProgress);
+    saveProgress(newProgress);
+
+    // データベースにも保存（ログインユーザーの場合）
+    saveUserWord(wordId);
   };
 
   // セッション開始
@@ -393,6 +405,9 @@ function FlashcardContent() {
                 <p>レベル: {level === 'all' ? '全て' : level}</p>
                 <p className="text-sm text-gray-500">
                   カードをクリックして裏面を表示できます。
+                </p>
+                <p className="text-sm text-gray-500">
+                  カードを左スワイプすると、覚えた（済）になります。
                 </p>
               </div>
             </div>
@@ -532,38 +547,6 @@ function FlashcardContent() {
   const currentWord = words[currentIndex];
   const wordProgress = progress.get(currentWord.id);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.changedTouches[0]?.clientX ?? null;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
-    touchStartX.current = null;
-    if (delta > swipeThreshold) {
-      markAsStudied();
-      nextCard();
-    } else if (delta < -swipeThreshold) {
-      prevCard();
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    mouseStartX.current = e.clientX;
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (mouseStartX.current === null) return;
-    const delta = e.clientX - mouseStartX.current;
-    mouseStartX.current = null;
-    if (delta > swipeThreshold) {
-      markAsStudied();
-      nextCard();
-    } else if (delta < -swipeThreshold) {
-      prevCard();
-    }
-  };
-
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
@@ -587,75 +570,119 @@ function FlashcardContent() {
           </div>
 
           {/* フラッシュカード */}
-          <div
-            onClick={flipCard}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            className={`mb-6 min-h-[250px] cursor-pointer rounded-lg border-2 p-6 shadow-lg transition-transform active:scale-95 sm:mb-8 sm:min-h-[300px] sm:p-8 sm:hover:scale-105 ${
-              wordProgress?.isLearned
-                ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
-                : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
-            }`}
-          >
-            <div className="flex h-full items-center justify-center">
-              {flashcardMode === 'en-to-ja' ? (
-                // 英語→日本語モード
-                !isFlipped ? (
-                  <div className="text-center">
-                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                      英単語
+          <div className="mb-6 sm:mb-8" style={{ height: '320px', overflow: 'visible', position: 'relative', width: '100%', background: 'transparent' }}>
+            <Swiper
+              ref={swiperRef}
+              effect="cards"
+              grabCursor={true}
+              modules={[EffectCards]}
+              className="w-full h-full"
+              style={{ width: '100%', height: '100%', overflow: 'visible', background: 'transparent' }}
+              cardsEffect={{
+                slideShadows: false,
+                perSlideOffset: 8,
+                perSlideRotate: 2,
+              }}
+              onSlideChange={(swiper) => {
+                const newIndex = swiper.activeIndex;
+                const prevIndex = currentIndex;
+                setCurrentIndex(newIndex);
+                setIsFlipped(false);
+                setTimeLeft(5);
+                setIsTimeUp(false);
+                // 右スワイプ（次のカード）の時に「覚えた」扱いにする
+                if (newIndex > prevIndex && prevIndex >= 0) {
+                  const prevWord = words[prevIndex];
+                  if (prevWord) {
+                    const prevWordProgress = progress.get(prevWord.id);
+                    if (!prevWordProgress?.isLearned) {
+                      markAsStudiedForWord(prevWord.id);
+                    }
+                  }
+                }
+              }}
+              initialSlide={currentIndex}
+            >
+              {words.map((word, index) => {
+                const wordProgress = progress.get(word.id);
+                const isFlippedForWord = index === currentIndex ? isFlipped : false;
+                return (
+                  <SwiperSlide key={word.id}>
+                    <div
+                      onClick={() => {
+                        if (index === currentIndex) {
+                          flipCard();
+                        }
+                      }}
+                      className={`cursor-pointer rounded-lg border-2 p-4 shadow-lg transition-transform sm:p-6 ${
+                        wordProgress?.isLearned
+                          ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
+                          : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
+                      }`}
+                      style={{ width: 'calc(100% - 120px)', height: '280px', maxWidth: 'calc(100% - 120px)', margin: '0 auto' }}
+                    >
+                      <div className="flex h-full items-center justify-center">
+                        {flashcardMode === 'en-to-ja' ? (
+                          // 英語→日本語モード
+                          !isFlippedForWord ? (
+                            <div className="text-center">
+                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                                英単語
+                              </div>
+                              <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                                {word.english}
+                              </div>
+                              <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                                クリックして意味を表示
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="text-center">
+                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                                日本語
+                              </div>
+                              <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                                {word.japanese}
+                              </div>
+                              <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                                {word.level}
+                              </div>
+                            </div>
+                          )
+                        ) : (
+                          // 日本語→英語モード
+                          !isFlippedForWord ? (
+                            <div className="text-center">
+                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                                日本語
+                              </div>
+                              <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                                {word.japanese}
+                              </div>
+                              <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                                {word.level}
+                              </div>
+                              <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                                クリックして英語を表示
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="text-center">
+                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                                英単語
+                              </div>
+                              <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                                {word.english}
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                      {currentWord.english}
-                    </div>
-                    <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                      クリックして意味を表示
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                      日本語
-                    </div>
-                    <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                      {currentWord.japanese}
-                    </div>
-                    <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                      {currentWord.level}
-                    </div>
-                  </div>
-                )
-              ) : (
-                // 日本語→英語モード
-                !isFlipped ? (
-                  <div className="text-center">
-                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                      日本語
-                    </div>
-                    <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                      {currentWord.japanese}
-                    </div>
-                    <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                      {currentWord.level}
-                    </div>
-                    <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                      クリックして英語を表示
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                      英単語
-                    </div>
-                    <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                      {currentWord.english}
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
 
           {/* 操作ボタン */}
