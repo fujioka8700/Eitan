@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -15,6 +15,7 @@ interface Progress {
   wordId: number;
   lastStudied: number;
   studyCount: number;
+  isLearned: boolean;
 }
 
 function FlashcardContent() {
@@ -28,11 +29,16 @@ function FlashcardContent() {
   const [progress, setProgress] = useState<Map<number, Progress>>(new Map());
   const [loading, setLoading] = useState(true);
   const [sessionStarted, setSessionStarted] = useState(false);
+  const [sessionFinished, setSessionFinished] = useState(false); // セッション終了フラグ
   const [timeLeft, setTimeLeft] = useState(5); // 5秒のカウントダウン
   const [isFlipped, setIsFlipped] = useState(false);
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
+  const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>('en-to-ja'); // フラッシュカードモード
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
+  const touchStartX = useRef<number | null>(null);
+  const mouseStartX = useRef<number | null>(null);
+  const swipeThreshold = useMemo(() => 50, []);
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -42,7 +48,11 @@ function FlashcardContent() {
         const parsed = JSON.parse(savedProgress);
         const progressMap = new Map<number, Progress>();
         Object.entries(parsed).forEach(([key, value]) => {
-          progressMap.set(parseInt(key), value as Progress);
+          const record = value as Progress;
+          progressMap.set(parseInt(key), {
+            ...record,
+            isLearned: record.isLearned ?? false,
+          });
         });
         setProgress(progressMap);
       } catch (error) {
@@ -108,6 +118,7 @@ function FlashcardContent() {
   const handleLevelChange = (nextLevel: string) => {
     setLoading(true);
     setSessionStarted(false);
+    setSessionFinished(false);
     setCurrentIndex(0);
     setIsFlipped(false);
     setTimeLeft(5);
@@ -152,6 +163,9 @@ function FlashcardContent() {
           setIsFlipped(false);
           setTimeLeft(5); // タイマーをリセット
           setIsTimeUp(false);
+        } else {
+          // 最後のカードに到達したら結果画面を表示
+          setSessionFinished(true);
         }
       }, 1000); // 0秒を1秒間表示
       timeUpTimerRef.current = timer;
@@ -174,6 +188,7 @@ function FlashcardContent() {
     }
   }, [currentIndex, sessionStarted, words.length]);
 
+
   // カードをめくる
   const flipCard = () => {
     setIsFlipped(!isFlipped);
@@ -192,6 +207,9 @@ function FlashcardContent() {
       setIsFlipped(false);
       setTimeLeft(5); // タイマーをリセット
       setIsTimeUp(false);
+    } else {
+      // 最後のカードに到達したら結果画面を表示
+      setSessionFinished(true);
     }
   };
 
@@ -243,11 +261,20 @@ function FlashcardContent() {
         wordId,
         lastStudied: Date.now(),
         studyCount: 0,
+        isLearned: false,
       };
+      if (existing.isLearned) {
+        setProgress(newProgress);
+        saveProgress(newProgress);
+        saveUserWord(wordId);
+        return;
+      }
+
       newProgress.set(wordId, {
         ...existing,
         lastStudied: Date.now(),
         studyCount: existing.studyCount + 1,
+        isLearned: true,
       });
       setProgress(newProgress);
       saveProgress(newProgress);
@@ -260,6 +287,11 @@ function FlashcardContent() {
   // セッション開始
   const startSession = () => {
     setSessionStarted(true);
+    setSessionFinished(false);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    setTimeLeft(5);
+    setIsTimeUp(false);
   };
 
   if (loading) {
@@ -283,6 +315,33 @@ function FlashcardContent() {
             <div className="mb-6 space-y-6">
               <div className="space-y-2">
                 <label className="mb-1 block text-sm font-medium text-gray-700">
+                  フラッシュカードモードを選択
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => setFlashcardMode('en-to-ja')}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      flashcardMode === 'en-to-ja'
+                        ? 'border-purple-600 bg-purple-600 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50'
+                    }`}
+                  >
+                    英語→日本語
+                  </button>
+                  <button
+                    onClick={() => setFlashcardMode('ja-to-en')}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      flashcardMode === 'ja-to-en'
+                        ? 'border-purple-600 bg-purple-600 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50'
+                    }`}
+                  >
+                    日本語→英語
+                  </button>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="mb-1 block text-sm font-medium text-gray-700">
                   レベルを選択
                 </label>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -297,8 +356,8 @@ function FlashcardContent() {
                       onClick={() => handleLevelChange(item.value)}
                       className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                         level === item.value
-                          ? 'border-indigo-600 bg-indigo-600 text-white'
-                          : 'border-gray-300 bg-white text-gray-700 hover:border-indigo-300 hover:bg-indigo-50'
+                          ? 'border-purple-600 bg-purple-600 text-white'
+                          : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50'
                       }`}
                     >
                       {item.label}
@@ -318,8 +377,8 @@ function FlashcardContent() {
                       onClick={() => handleWordCountChange(count)}
                       className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                         wordCount === count
-                          ? 'border-blue-600 bg-blue-600 text-white'
-                          : 'border-gray-300 bg-white text-gray-700 hover:border-blue-300 hover:bg-blue-50'
+                          ? 'border-purple-600 bg-purple-600 text-white'
+                          : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50'
                       }`}
                     >
                       {count}枚
@@ -368,8 +427,140 @@ function FlashcardContent() {
     );
   }
 
+  // 結果画面を表示する時（「次へ」ボタンを押した時のみ）
+  const shouldShowResults = sessionFinished;
+
+  // 結果画面を表示
+  if (shouldShowResults) {
+    const learnedCount = words.filter((word) => {
+      const wordProgress = progress.get(word.id);
+      return wordProgress?.isLearned;
+    }).length;
+    const learnedPercentage = words.length > 0 ? Math.round((learnedCount / words.length) * 100) : 0;
+
+    return (
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl bg-white p-4 shadow-xl sm:p-8">
+            <h1 className="mb-6 text-3xl font-bold text-gray-900">結果</h1>
+
+            <div className="mb-8 grid grid-cols-2 gap-4">
+              <div className="rounded-lg bg-blue-50 p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">
+                  {learnedCount} / {words.length}
+                </div>
+                <div className="text-sm text-gray-600">覚えた単語数</div>
+              </div>
+              <div className="rounded-lg bg-green-50 p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">
+                  {learnedPercentage}%
+                </div>
+                <div className="text-sm text-gray-600">覚えた割合</div>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h2 className="mb-4 text-xl font-semibold text-gray-900">
+                単語別結果
+              </h2>
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {words.map((word) => {
+                  const wordProgress = progress.get(word.id);
+                  const isLearned = wordProgress?.isLearned || false;
+                  return (
+                    <div
+                      key={word.id}
+                      className={`rounded-lg p-4 ${
+                        isLearned
+                          ? 'bg-green-50 border border-green-200'
+                          : 'bg-gray-50 border border-gray-200'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-gray-900">
+                            {flashcardMode === 'en-to-ja' ? word.english : word.japanese}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {flashcardMode === 'en-to-ja' ? word.japanese : word.english} ({word.level})
+                          </div>
+                        </div>
+                        <div
+                          className={`text-2xl ${
+                            isLearned ? 'text-green-600' : 'text-gray-400'
+                          }`}
+                        >
+                          {isLearned ? '✓' : '○'}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={() => {
+                  setSessionFinished(false);
+                  setSessionStarted(false);
+                  setCurrentIndex(0);
+                  setIsFlipped(false);
+                  setTimeLeft(5);
+                  setIsTimeUp(false);
+                  window.location.href = '/flashcard?' + searchParams.toString();
+                }}
+                className="flex-1 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+              >
+                もう一度挑戦
+              </button>
+              <Link
+                href="/"
+                className="flex-1 rounded-lg border border-gray-300 px-6 py-3 text-center text-gray-700 transition-colors hover:bg-gray-50"
+              >
+                ホームに戻る
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const currentWord = words[currentIndex];
   const wordProgress = progress.get(currentWord.id);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    touchStartX.current = null;
+    if (delta > swipeThreshold) {
+      markAsStudied();
+      nextCard();
+    } else if (delta < -swipeThreshold) {
+      prevCard();
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    mouseStartX.current = e.clientX;
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (mouseStartX.current === null) return;
+    const delta = e.clientX - mouseStartX.current;
+    mouseStartX.current = null;
+    if (delta > swipeThreshold) {
+      markAsStudied();
+      nextCard();
+    } else if (delta < -swipeThreshold) {
+      prevCard();
+    }
+  };
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
@@ -391,89 +582,134 @@ function FlashcardContent() {
                 }}
               />
             </div>
-            {wordProgress && (
-              <div className="mt-2 text-xs text-gray-500">
-                学習回数: {wordProgress.studyCount} 回
-              </div>
-            )}
           </div>
 
           {/* フラッシュカード */}
           <div
             onClick={flipCard}
-            className="mb-6 min-h-[250px] cursor-pointer rounded-lg border-2 border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-lg transition-transform active:scale-95 sm:mb-8 sm:min-h-[300px] sm:p-8 sm:hover:scale-105"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            className={`mb-6 min-h-[250px] cursor-pointer rounded-lg border-2 p-6 shadow-lg transition-transform active:scale-95 sm:mb-8 sm:min-h-[300px] sm:p-8 sm:hover:scale-105 ${
+              wordProgress?.isLearned
+                ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
+                : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
+            }`}
           >
             <div className="flex h-full items-center justify-center">
-              {!isFlipped ? (
-                <div className="text-center">
-                  <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                    英単語
+              {flashcardMode === 'en-to-ja' ? (
+                // 英語→日本語モード
+                !isFlipped ? (
+                  <div className="text-center">
+                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                      英単語
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                      {currentWord.english}
+                    </div>
+                    <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                      クリックして意味を表示
+                    </div>
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                    {currentWord.english}
+                ) : (
+                  <div className="text-center">
+                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                      日本語
+                    </div>
+                    <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                      {currentWord.japanese}
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                      {currentWord.level}
+                    </div>
                   </div>
-                  <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                    クリックして意味を表示
-                  </div>
-                </div>
+                )
               ) : (
-                <div className="text-center">
-                  <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                    日本語
+                // 日本語→英語モード
+                !isFlipped ? (
+                  <div className="text-center">
+                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                      日本語
+                    </div>
+                    <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                      {currentWord.japanese}
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                      {currentWord.level}
+                    </div>
+                    <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                      クリックして英語を表示
+                    </div>
                   </div>
-                  <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                    {currentWord.japanese}
+                ) : (
+                  <div className="text-center">
+                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                      英単語
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                      {currentWord.english}
+                    </div>
                   </div>
-                  <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                    {currentWord.level}
-                  </div>
-                </div>
+                )
               )}
             </div>
           </div>
 
           {/* 操作ボタン */}
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+            {/* モバイル版: 「覚えた」ボタンを上に表示 */}
+            <button
+              onClick={markAsStudied}
+              disabled={wordProgress?.isLearned}
+              className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-colors disabled:cursor-not-allowed disabled:bg-green-300 active:bg-green-700 sm:hidden flex items-center justify-center text-center"
+            >
+              {wordProgress?.isLearned ? '覚えた（済）' : '覚えた'}
+            </button>
+            {/* 前へ/次へボタン（モバイル版は横並び、デスクトップ版は個別に配置） */}
+            <div className="flex gap-2 sm:hidden">
+              <button
+                onClick={prevCard}
+                disabled={currentIndex === 0}
+                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:bg-gray-50 flex items-center justify-center text-center"
+              >
+                前へ
+              </button>
+              <button
+                onClick={nextCard}
+                className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors active:bg-blue-700 flex items-center justify-center text-center"
+              >
+                {currentIndex === words.length - 1 ? '結果を表示する' : '次へ'}
+              </button>
+            </div>
+            {/* デスクトップ版: 「前へ」「覚えた」「次へ」を横並び1列で表示 */}
             <button
               onClick={prevCard}
               disabled={currentIndex === 0}
-              className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:bg-gray-50 sm:px-6 sm:py-3 sm:text-base sm:hover:bg-gray-50"
+              className="hidden flex-1 rounded-lg border border-gray-300 bg-white px-6 py-3 text-base text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed sm:flex hover:bg-gray-50 items-center justify-center text-center"
             >
               前へ
             </button>
             <button
               onClick={markAsStudied}
-              className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm text-white transition-colors active:bg-green-700 sm:px-6 sm:py-3 sm:text-base sm:hover:bg-green-700"
+              disabled={wordProgress?.isLearned}
+              className="hidden flex-1 rounded-lg bg-green-600 px-6 py-3 text-base text-white transition-colors disabled:cursor-not-allowed disabled:bg-green-300 sm:flex hover:bg-green-700 items-center justify-center text-center"
             >
-              学習済み
+              {wordProgress?.isLearned ? '覚えた（済）' : '覚えた'}
             </button>
             <button
               onClick={nextCard}
-              disabled={currentIndex === words.length - 1}
-              className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:bg-blue-700 sm:px-6 sm:py-3 sm:text-base sm:hover:bg-blue-700"
+              className="hidden flex-1 rounded-lg bg-blue-600 px-6 py-3 text-base text-white transition-colors sm:flex hover:bg-blue-700 items-center justify-center text-center"
             >
-              次へ
+              {currentIndex === words.length - 1 ? '結果を表示する' : '次へ'}
             </button>
           </div>
 
-          {/* ホームに戻る / フラッシュカードのTOPへ */}
+          {/* ホームに戻る */}
           <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-4">
             <Link href="/" className="text-blue-600 hover:underline">
               ホームに戻る
             </Link>
-            {currentIndex === words.length - 1 && (
-              <>
-                <span className="hidden text-gray-400 sm:inline">|</span>
-                <button
-                  onClick={() => {
-                    window.location.href = '/flashcard';
-                  }}
-                  className="text-blue-600 hover:underline"
-                >
-                  フラッシュカードのTOPへ
-                </button>
-              </>
-            )}
           </div>
         </div>
       </div>
@@ -496,3 +732,4 @@ export default function FlashcardPage() {
     </Suspense>
   );
 }
+

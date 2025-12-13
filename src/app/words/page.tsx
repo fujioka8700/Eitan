@@ -270,49 +270,55 @@ function WordsContent() {
 
             {/* ページネーション */}
             {pagination && pagination.totalPages > 1 && (
-              <div className="mt-6 flex justify-center gap-2">
-                <button
-                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
-                  className="rounded bg-white px-4 py-2 text-gray-700 shadow disabled:opacity-50 hover:bg-gray-50"
-                >
-                  前へ
-                </button>
-                {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
-                  .filter(
-                    (page) =>
-                      page === 1 ||
-                      page === pagination.totalPages ||
-                      Math.abs(page - currentPage) <= 2,
-                  )
-                  .map((page, index, array) => (
-                    <div key={page} className="flex items-center gap-2">
-                      {index > 0 && array[index - 1] !== page - 1 && (
-                        <span className="px-2 text-gray-500">...</span>
-                      )}
-                      <button
-                        onClick={() => setCurrentPage(page)}
-                        className={`rounded px-4 py-2 shadow transition-colors ${
-                          currentPage === page
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-white text-gray-700 hover:bg-gray-50'
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    </div>
-                  ))}
-                <button
-                  onClick={() =>
-                    setCurrentPage(
-                      Math.min(pagination.totalPages, currentPage + 1),
+              <div className="mt-6 space-y-3">
+                {/* ページ番号 */}
+                <div className="flex justify-center gap-1.5 sm:gap-2 flex-wrap">
+                  {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
+                    .filter(
+                      (page) =>
+                        page === 1 ||
+                        page === pagination.totalPages ||
+                        Math.abs(page - currentPage) <= 1,
                     )
-                  }
-                  disabled={currentPage === pagination.totalPages}
-                  className="rounded bg-white px-4 py-2 text-gray-700 shadow disabled:opacity-50 hover:bg-gray-50"
-                >
-                  次へ
-                </button>
+                    .map((page, index, array) => (
+                      <div key={page} className="flex items-center gap-1.5 sm:gap-2">
+                        {index > 0 && array[index - 1] !== page - 1 && (
+                          <span className="px-1 sm:px-2 text-gray-500 text-base sm:text-lg">...</span>
+                        )}
+                        <button
+                          onClick={() => setCurrentPage(page)}
+                          className={`rounded px-4 py-2.5 sm:px-5 sm:py-3 text-base sm:text-lg font-medium shadow transition-colors min-w-[48px] sm:min-w-[56px] min-h-[44px] sm:min-h-[48px] flex items-center justify-center ${
+                            currentPage === page
+                              ? 'bg-gray-700 text-white'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      </div>
+                    ))}
+                </div>
+                {/* 前へ/次へボタン */}
+                <div className="flex justify-center gap-6 sm:gap-8">
+                  <button
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                    className="text-gray-700 text-base sm:text-lg font-medium py-2 px-3 min-h-[44px] sm:min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed hover:text-gray-900 active:text-gray-600 transition-colors"
+                  >
+                    &lt; 前へ
+                  </button>
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        Math.min(pagination.totalPages, currentPage + 1),
+                      )
+                    }
+                    disabled={currentPage === pagination.totalPages}
+                    className="text-gray-700 text-base sm:text-lg font-medium py-2 px-3 min-h-[44px] sm:min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed hover:text-gray-900 active:text-gray-600 transition-colors"
+                  >
+                    次へ &gt;
+                  </button>
+                </div>
               </div>
             )}
           </>
