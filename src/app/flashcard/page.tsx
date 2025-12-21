@@ -27,6 +27,7 @@ function FlashcardContent() {
   const searchParams = useSearchParams();
   const initialLevel = searchParams.get('level') || 'all';
   const initialCount = parseInt(searchParams.get('count') || '10');
+  const initialMode = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en';
 
   const [words, setWords] = useState<Word[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,9 +40,11 @@ function FlashcardContent() {
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
   const [level, setLevel] = useState(initialLevel); // レベルを状態として管理
-  const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>('en-to-ja'); // フラッシュカードモード
+  const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>(initialMode); // フラッシュカードモード
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
   const swiperRef = useRef<any>(null); // Swiperインスタンスの参照
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null); // タッチ開始位置と時間
+  const isFlippedBeforeSlideRef = useRef<boolean>(false); // スライド変更前のisFlippedの状態
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -72,6 +75,14 @@ function FlashcardContent() {
     });
     localStorage.setItem('flashcard-progress', JSON.stringify(obj));
   };
+
+  // クエリパラメータからフラッシュカードモードを読み取って更新
+  useEffect(() => {
+    const modeFromParams = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en';
+    if (modeFromParams !== flashcardMode) {
+      setFlashcardMode(modeFromParams);
+    }
+  }, [searchParams, flashcardMode]);
 
   // 単語を取得
   useEffect(() => {
@@ -111,10 +122,23 @@ function FlashcardContent() {
     fetchWords();
   }, [level, wordCount, router, sessionStarted, sessionFinished]);
 
+  // フラッシュカードモードが変更されたらURLを更新
+  const handleFlashcardModeChange = (newMode: 'en-to-ja' | 'ja-to-en') => {
+    setFlashcardMode(newMode);
+    const params = new URLSearchParams();
+    params.set('mode', newMode);
+    if (level !== 'all') {
+      params.set('level', level);
+    }
+    params.set('count', wordCount.toString());
+    router.push(`/flashcard?${params.toString()}`);
+  };
+
   // 単語数が変更されたらURLを更新
   const handleWordCountChange = (count: number) => {
     setWordCount(count);
     const params = new URLSearchParams();
+    params.set('mode', flashcardMode);
     if (level !== 'all') {
       params.set('level', level);
     }
@@ -131,8 +155,14 @@ function FlashcardContent() {
     setIsFlipped(false);
     setTimeLeft(5);
     setIsTimeUp(false);
-    // レベルを更新（URLは更新しない）
-    // 単語取得のuseEffectがlevelの変更を検知して自動的に再取得する
+    // URLを更新
+    const params = new URLSearchParams();
+    params.set('mode', flashcardMode);
+    if (nextLevel !== 'all') {
+      params.set('level', nextLevel);
+    }
+    params.set('count', wordCount.toString());
+    router.push(`/flashcard?${params.toString()}`);
   };
 
   // タイマーの処理
@@ -203,6 +233,43 @@ function FlashcardContent() {
     setIsFlipped(!isFlipped);
   };
 
+  // タッチ開始時の処理
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.currentTarget !== e.target) return; // 子要素のタッチイベントは無視
+    const touch = e.touches[0];
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now(),
+    };
+  };
+
+  // タッチ終了時の処理（タップとスワイプを区別）
+  const handleTouchEnd = (e: React.TouchEvent, index: number) => {
+    if (!touchStartRef.current || index !== currentIndex) {
+      touchStartRef.current = null;
+      return;
+    }
+
+    const touch = e.changedTouches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+    const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+    const deltaTime = Date.now() - touchStartRef.current.time;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    // スワイプの判定: 移動距離が15px以上、または時間が300ms以上かかった場合はスワイプとみなす
+    if (distance > 15 || deltaTime > 300) {
+      // スワイプの場合は何もしない（Swiperのデフォルト動作を許可）
+      touchStartRef.current = null;
+      return;
+    }
+
+    // タップの場合はカードをめくる
+    e.stopPropagation();
+    flipCard();
+    touchStartRef.current = null;
+  };
+
   // 次のカードへ
   const nextCard = () => {
     // 0秒表示後のタイマーをクリア
@@ -254,6 +321,7 @@ function FlashcardContent() {
           wordId,
           isCorrect: true, // フラッシュカードは学習済みとして扱う
           status: '学習中',
+          studyType: 'flashcard', // フラッシュカードであることを明示
         }),
       });
     } catch (error) {
@@ -332,7 +400,7 @@ function FlashcardContent() {
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
-                    onClick={() => setFlashcardMode('en-to-ja')}
+                    onClick={() => handleFlashcardModeChange('en-to-ja')}
                     className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                       flashcardMode === 'en-to-ja'
                         ? 'border-purple-600 bg-purple-600 text-white'
@@ -342,7 +410,7 @@ function FlashcardContent() {
                     英語→日本語
                   </button>
                   <button
-                    onClick={() => setFlashcardMode('ja-to-en')}
+                    onClick={() => handleFlashcardModeChange('ja-to-en')}
                     className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                       flashcardMode === 'ja-to-en'
                         ? 'border-purple-600 bg-purple-600 text-white'
@@ -578,20 +646,28 @@ function FlashcardContent() {
               modules={[EffectCards]}
               className="w-full h-full"
               style={{ width: '100%', height: '100%', overflow: 'visible', background: 'transparent' }}
+              touchEventsTarget="container"
               cardsEffect={{
                 slideShadows: false,
                 perSlideOffset: 8,
                 perSlideRotate: 2,
               }}
+              onSlideChangeTransitionStart={() => {
+                // スライド変更のトランジション開始時に、現在のisFlippedの状態を保存
+                isFlippedBeforeSlideRef.current = isFlipped;
+              }}
               onSlideChange={(swiper) => {
                 const newIndex = swiper.activeIndex;
                 const prevIndex = currentIndex;
+                // スライド変更前のisFlippedの状態を取得
+                const wasFlipped = isFlippedBeforeSlideRef.current;
                 setCurrentIndex(newIndex);
                 setIsFlipped(false);
                 setTimeLeft(5);
                 setIsTimeUp(false);
                 // 右スワイプ（次のカード）の時に「覚えた」扱いにする
-                if (newIndex > prevIndex && prevIndex >= 0) {
+                // ただし、裏側を表示していた場合は「覚えた」扱いにしない
+                if (newIndex > prevIndex && prevIndex >= 0 && !wasFlipped) {
                   const prevWord = words[prevIndex];
                   if (prevWord) {
                     const prevWordProgress = progress.get(prevWord.id);
@@ -600,6 +676,8 @@ function FlashcardContent() {
                     }
                   }
                 }
+                // リセット
+                isFlippedBeforeSlideRef.current = false;
               }}
               initialSlide={currentIndex}
             >
@@ -614,6 +692,8 @@ function FlashcardContent() {
                           flipCard();
                         }
                       }}
+                      onTouchStart={handleTouchStart}
+                      onTouchEnd={(e) => handleTouchEnd(e, index)}
                       className={`cursor-pointer rounded-lg border-2 p-4 shadow-lg transition-transform sm:p-6 ${
                         wordProgress?.isLearned
                           ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'

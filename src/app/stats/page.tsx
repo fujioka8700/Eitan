@@ -11,6 +11,9 @@ interface UserWord {
   status: string
   correctCount: number
   mistakeCount: number
+  quizCorrectCount: number
+  quizMistakeCount: number
+  flashcardLearnedCount: number
   lastStudiedAt: string | null
   word: {
     id: number
@@ -111,22 +114,53 @@ export default function StatsPage() {
 
   // 統計を計算
   const totalWords = userWords.length
+  
+  // 4択クイズの統計
+  const quizCorrect = userWords.reduce((sum, uw) => sum + (uw.quizCorrectCount || 0), 0)
+  const quizMistakes = userWords.reduce((sum, uw) => sum + (uw.quizMistakeCount || 0), 0)
+  const quizAttempts = quizCorrect + quizMistakes
+  const quizAccuracy = quizAttempts > 0 ? Math.round((quizCorrect / quizAttempts) * 100) : 0
+  
+  // フラッシュカードの統計（覚えた単語数）
+  const flashcardLearned = userWords.filter((uw) => (uw.flashcardLearnedCount || 0) > 0).length
+  
+  // 全体統計（後方互換性のため）
   const totalCorrect = userWords.reduce((sum, uw) => sum + uw.correctCount, 0)
   const totalMistakes = userWords.reduce((sum, uw) => sum + uw.mistakeCount, 0)
   const totalAttempts = totalCorrect + totalMistakes
   const accuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0
 
-  // レベル別統計
+  // レベル別統計（4択クイズ）
   const levelStats = userWords.reduce((acc, uw) => {
     const level = uw.word.level
     if (!acc[level]) {
-      acc[level] = { count: 0, correct: 0, mistakes: 0 }
+      acc[level] = { 
+        count: 0, 
+        correct: 0, 
+        mistakes: 0,
+        quizCorrect: 0,
+        quizMistakes: 0,
+        flashcardLearned: 0
+      }
     }
     acc[level].count++
     acc[level].correct += uw.correctCount
     acc[level].mistakes += uw.mistakeCount
+    acc[level].quizCorrect += uw.quizCorrectCount || 0
+    acc[level].quizMistakes += uw.quizMistakeCount || 0
+    // フラッシュカードで覚えた単語数をカウント（回数ではなく）
+    if ((uw.flashcardLearnedCount || 0) > 0) {
+      acc[level].flashcardLearned += 1
+    }
     return acc
-  }, {} as Record<string, { count: number; correct: number; mistakes: number }>)
+  }, {} as Record<string, { 
+    count: number
+    correct: number
+    mistakes: number
+    quizCorrect: number
+    quizMistakes: number
+    flashcardLearned: number
+  }>)
 
   if (loading) {
     return (
@@ -230,22 +264,55 @@ export default function StatsPage() {
           )}
 
           {/* 全体統計 */}
-          <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-            <div className="rounded-lg bg-blue-50 p-4 text-center">
-              <div className="text-2xl font-bold text-blue-600">{totalWords}</div>
-              <div className="text-sm text-gray-600">学習単語数</div>
+          <div className="mb-8">
+            <h2 className="mb-4 text-xl font-semibold text-gray-900">全体統計</h2>
+            <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div className="rounded-lg bg-blue-50 p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">{totalWords}</div>
+                <div className="text-sm text-gray-600">学習単語数</div>
+              </div>
+              <div className="rounded-lg bg-green-50 p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">{totalCorrect}</div>
+                <div className="text-sm text-gray-600">正解数（全体）</div>
+              </div>
+              <div className="rounded-lg bg-red-50 p-4 text-center">
+                <div className="text-2xl font-bold text-red-600">{totalMistakes}</div>
+                <div className="text-sm text-gray-600">間違い数（全体）</div>
+              </div>
+              <div className="rounded-lg bg-purple-50 p-4 text-center">
+                <div className="text-2xl font-bold text-purple-600">{accuracy}%</div>
+                <div className="text-sm text-gray-600">正答率（全体）</div>
+              </div>
             </div>
-            <div className="rounded-lg bg-green-50 p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">{totalCorrect}</div>
-              <div className="text-sm text-gray-600">正解数</div>
+            
+            {/* 4択クイズの統計 */}
+            <div className="mb-6">
+              <h3 className="mb-3 text-lg font-semibold text-gray-800">4択クイズ</h3>
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                <div className="rounded-lg bg-green-50 p-4 text-center">
+                  <div className="text-2xl font-bold text-green-600">{quizCorrect}</div>
+                  <div className="text-sm text-gray-600">正解数</div>
+                </div>
+                <div className="rounded-lg bg-red-50 p-4 text-center">
+                  <div className="text-2xl font-bold text-red-600">{quizMistakes}</div>
+                  <div className="text-sm text-gray-600">間違い数</div>
+                </div>
+                <div className="rounded-lg bg-purple-50 p-4 text-center">
+                  <div className="text-2xl font-bold text-purple-600">{quizAccuracy}%</div>
+                  <div className="text-sm text-gray-600">正答率</div>
+                </div>
+              </div>
             </div>
-            <div className="rounded-lg bg-red-50 p-4 text-center">
-              <div className="text-2xl font-bold text-red-600">{totalMistakes}</div>
-              <div className="text-sm text-gray-600">間違い数</div>
-            </div>
-            <div className="rounded-lg bg-purple-50 p-4 text-center">
-              <div className="text-2xl font-bold text-purple-600">{accuracy}%</div>
-              <div className="text-sm text-gray-600">正答率</div>
+            
+            {/* フラッシュカードの統計 */}
+            <div>
+              <h3 className="mb-3 text-lg font-semibold text-gray-800">フラッシュカード</h3>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="rounded-lg bg-blue-50 p-4 text-center">
+                  <div className="text-2xl font-bold text-blue-600">{flashcardLearned}</div>
+                  <div className="text-sm text-gray-600">覚えた単語数</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -253,35 +320,53 @@ export default function StatsPage() {
           {Object.keys(levelStats).length > 0 && (
             <div className="mb-8">
               <h2 className="mb-4 text-xl font-semibold text-gray-900">レベル別統計</h2>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {Object.entries(levelStats).map(([level, stats]) => {
                   const levelAccuracy =
                     stats.correct + stats.mistakes > 0
                       ? Math.round((stats.correct / (stats.correct + stats.mistakes)) * 100)
+                      : 0
+                  const quizLevelAccuracy =
+                    stats.quizCorrect + stats.quizMistakes > 0
+                      ? Math.round((stats.quizCorrect / (stats.quizCorrect + stats.quizMistakes)) * 100)
                       : 0
                   return (
                     <div
                       key={level}
                       className="rounded-lg border border-gray-200 p-4"
                     >
-                      <div className="mb-2 flex items-center justify-between">
+                      <div className="mb-3 flex items-center justify-between">
                         <span className="font-semibold text-gray-900">{level}</span>
                         <span className="text-sm text-gray-600">
-                          正答率: {levelAccuracy}%
+                          学習単語数: {stats.count}
                         </span>
                       </div>
-                      <div className="grid grid-cols-3 gap-4 text-sm">
-                        <div>
-                          <span className="text-gray-600">学習単語数:</span>{' '}
-                          <span className="font-semibold">{stats.count}</span>
+                      
+                      {/* 4択クイズの統計 */}
+                      <div className="mb-3 rounded-lg bg-blue-50 p-3">
+                        <h4 className="mb-2 text-sm font-semibold text-gray-800">4択クイズ</h4>
+                        <div className="grid grid-cols-3 gap-2 text-sm">
+                          <div>
+                            <span className="text-gray-600">正解:</span>{' '}
+                            <span className="font-semibold text-green-600">{stats.quizCorrect}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">間違い:</span>{' '}
+                            <span className="font-semibold text-red-600">{stats.quizMistakes}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">正答率:</span>{' '}
+                            <span className="font-semibold text-purple-600">{quizLevelAccuracy}%</span>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-gray-600">正解:</span>{' '}
-                          <span className="font-semibold text-green-600">{stats.correct}</span>
-                        </div>
-                        <div>
-                          <span className="text-gray-600">間違い:</span>{' '}
-                          <span className="font-semibold text-red-600">{stats.mistakes}</span>
+                      </div>
+                      
+                      {/* フラッシュカードの統計 */}
+                      <div className="rounded-lg bg-green-50 p-3">
+                        <h4 className="mb-2 text-sm font-semibold text-gray-800">フラッシュカード</h4>
+                        <div className="text-sm">
+                          <span className="text-gray-600">覚えた単語数:</span>{' '}
+                          <span className="font-semibold text-blue-600">{stats.flashcardLearned}</span>
                         </div>
                       </div>
                     </div>
@@ -294,29 +379,43 @@ export default function StatsPage() {
           {/* 学習履歴 */}
           {userWords.length > 0 ? (
             <div>
-              <h2 className="mb-4 text-xl font-semibold text-gray-900">学習履歴</h2>
+              <h2 className="mb-4 text-xl font-semibold text-gray-900">学習履歴（最新20件）</h2>
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {userWords.map((uw) => (
+                {userWords.slice(0, 20).map((uw) => (
                   <div
                     key={uw.id}
                     className="rounded-lg border border-gray-200 p-4"
                   >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-semibold text-gray-900">
-                          {uw.word.english}
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          {uw.word.japanese} ({uw.word.level})
+                    <div className="mb-2">
+                      <div className="font-semibold text-gray-900">
+                        {uw.word.english}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {uw.word.japanese} ({uw.word.level})
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
+                      {/* 4択クイズの結果 */}
+                      <div className="rounded-lg bg-blue-50 p-2">
+                        <div className="font-semibold text-gray-800 mb-1">4択クイズ</div>
+                        <div className="text-green-600">正解: {uw.quizCorrectCount || 0}</div>
+                        <div className="text-red-600">間違い: {uw.quizMistakeCount || 0}</div>
+                        {(uw.quizCorrectCount || 0) + (uw.quizMistakeCount || 0) > 0 && (
+                          <div className="text-purple-600">
+                            正答率: {Math.round(((uw.quizCorrectCount || 0) / ((uw.quizCorrectCount || 0) + (uw.quizMistakeCount || 0))) * 100)}%
+                          </div>
+                        )}
+                      </div>
+                      {/* フラッシュカードの結果 */}
+                      <div className="rounded-lg bg-green-50 p-2">
+                        <div className="font-semibold text-gray-800 mb-1">フラッシュカード</div>
+                        <div className={`font-semibold ${(uw.flashcardLearnedCount || 0) > 0 ? 'text-green-600' : 'text-gray-400'}`}>
+                          {(uw.flashcardLearnedCount || 0) > 0 ? '覚えた' : '覚えていない'}
                         </div>
                       </div>
-                      <div className="text-right text-sm">
-                        <div className="text-green-600">正解: {uw.correctCount}</div>
-                        <div className="text-red-600">間違い: {uw.mistakeCount}</div>
-                        <div className="text-gray-500">
-                          状態: {uw.status}
-                        </div>
-                      </div>
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500">
+                      状態: {uw.status}
                     </div>
                   </div>
                 ))}

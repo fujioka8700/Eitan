@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
       orderBy: {
         lastStudiedAt: 'desc',
       },
-      take: 100, // 最新100件に制限（パフォーマンス向上）
+      // 統計計算には全件が必要なため、制限を削除
+      // フロントエンド側で表示を20件に制限
     })
 
     return NextResponse.json({ userWords })
@@ -61,7 +62,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { wordId, isCorrect, status } = body
+    const { wordId, isCorrect, status, studyType } = body // studyType: 'quiz' | 'flashcard'
 
     if (!wordId) {
       return NextResponse.json(
@@ -82,20 +83,48 @@ export async function POST(request: NextRequest) {
 
     if (existing) {
       // 更新
+      const updateData: any = {
+        lastStudiedAt: new Date(),
+        status: status || existing.status,
+      }
+
+      // 4択クイズの場合
+      if (studyType === 'quiz') {
+        updateData.quizCorrectCount = isCorrect
+          ? existing.quizCorrectCount + 1
+          : existing.quizCorrectCount
+        updateData.quizMistakeCount = !isCorrect
+          ? existing.quizMistakeCount + 1
+          : existing.quizMistakeCount
+        // 後方互換性のため、correctCountとmistakeCountも更新
+        updateData.correctCount = isCorrect
+          ? existing.correctCount + 1
+          : existing.correctCount
+        updateData.mistakeCount = !isCorrect
+          ? existing.mistakeCount + 1
+          : existing.mistakeCount
+      }
+      // フラッシュカードの場合
+      else if (studyType === 'flashcard') {
+        updateData.flashcardLearnedCount = existing.flashcardLearnedCount + 1
+        // 後方互換性のため、correctCountも更新
+        updateData.correctCount = existing.correctCount + 1
+      }
+      // 後方互換性のため、studyTypeが指定されていない場合は従来の動作
+      else {
+        updateData.correctCount = isCorrect
+          ? existing.correctCount + 1
+          : existing.correctCount
+        updateData.mistakeCount = !isCorrect
+          ? existing.mistakeCount + 1
+          : existing.mistakeCount
+      }
+
       const updated = await prisma.userWord.update({
         where: {
           id: existing.id,
         },
-        data: {
-          correctCount: isCorrect
-            ? existing.correctCount + 1
-            : existing.correctCount,
-          mistakeCount: !isCorrect
-            ? existing.mistakeCount + 1
-            : existing.mistakeCount,
-          lastStudiedAt: new Date(),
-          status: status || existing.status,
-        },
+        data: updateData,
         include: {
           word: true,
         },
@@ -103,15 +132,36 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ userWord: updated })
     } else {
       // 新規作成
+      const createData: any = {
+        userId: user.id,
+        wordId: parseInt(wordId),
+        lastStudiedAt: new Date(),
+        status: status || '学習中',
+      }
+
+      // 4択クイズの場合
+      if (studyType === 'quiz') {
+        createData.quizCorrectCount = isCorrect ? 1 : 0
+        createData.quizMistakeCount = !isCorrect ? 1 : 0
+        // 後方互換性のため、correctCountとmistakeCountも設定
+        createData.correctCount = isCorrect ? 1 : 0
+        createData.mistakeCount = !isCorrect ? 1 : 0
+      }
+      // フラッシュカードの場合
+      else if (studyType === 'flashcard') {
+        createData.flashcardLearnedCount = 1
+        // 後方互換性のため、correctCountも設定
+        createData.correctCount = 1
+        createData.mistakeCount = 0
+      }
+      // 後方互換性のため、studyTypeが指定されていない場合は従来の動作
+      else {
+        createData.correctCount = isCorrect ? 1 : 0
+        createData.mistakeCount = !isCorrect ? 1 : 0
+      }
+
       const created = await prisma.userWord.create({
-        data: {
-          userId: user.id,
-          wordId: parseInt(wordId),
-          correctCount: isCorrect ? 1 : 0,
-          mistakeCount: !isCorrect ? 1 : 0,
-          lastStudiedAt: new Date(),
-          status: status || '学習中',
-        },
+        data: createData,
         include: {
           word: true,
         },
