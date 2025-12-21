@@ -73,8 +73,8 @@ select:focus {
 }
 
 .swiper-effect-cards .swiper-slide {
-  width: calc(100% - 120px) !important;
-  height: 280px !important;
+  width: 85% !important;
+  height: 250px !important;
   background: transparent !important;
 }
 
