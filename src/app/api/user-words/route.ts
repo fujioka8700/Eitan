@@ -133,10 +133,10 @@ export async function POST(request: NextRequest) {
     } else {
       // 新規作成
       const createData: any = {
-        userId: user.id,
-        wordId: parseInt(wordId),
-        lastStudiedAt: new Date(),
-        status: status || '学習中',
+          userId: user.id,
+          wordId: parseInt(wordId),
+          lastStudiedAt: new Date(),
+          status: status || '学習中',
       }
 
       // 4択クイズの場合

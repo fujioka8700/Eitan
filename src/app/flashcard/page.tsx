@@ -27,7 +27,9 @@ function FlashcardContent() {
   const searchParams = useSearchParams();
   const initialLevel = searchParams.get('level') || 'all';
   const initialCount = parseInt(searchParams.get('count') || '10');
-  const initialMode = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en';
+  const initialMode = (searchParams.get('mode') || 'en-to-ja') as
+    | 'en-to-ja'
+    | 'ja-to-en';
 
   const [words, setWords] = useState<Word[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,14 +39,23 @@ function FlashcardContent() {
   const [sessionFinished, setSessionFinished] = useState(false); // セッション終了フラグ
   const [timeLeft, setTimeLeft] = useState(5); // 5秒のカウントダウン
   const [isFlipped, setIsFlipped] = useState(false); // 後方互換性のため残す
-  const [flippedCards, setFlippedCards] = useState<Map<number, boolean>>(new Map()); // 各カードの裏表状態
+  const [flippedCards, setFlippedCards] = useState<Map<number, boolean>>(
+    new Map(),
+  ); // 各カードの裏表状態
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
   const [level, setLevel] = useState(initialLevel); // レベルを状態として管理
-  const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>(initialMode); // フラッシュカードモード
+  const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>(
+    initialMode,
+  ); // フラッシュカードモード
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
   const swiperRef = useRef<any>(null); // Swiperインスタンスの参照
-  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null); // タッチ開始位置と時間
+  const touchStartRef = useRef<{
+    x: number;
+    y: number;
+    time: number;
+    cardIndex: number;
+  } | null>(null); // タッチ開始位置、時間、カードインデックス
   const isFlippedBeforeSlideRef = useRef<boolean>(false); // スライド変更前のisFlippedの状態
   const touchMovedRef = useRef<boolean>(false); // タッチ中に移動したかどうか
   const touchHandledRef = useRef<boolean>(false); // タッチイベントで処理済みかどうか
@@ -81,7 +92,9 @@ function FlashcardContent() {
 
   // クエリパラメータからフラッシュカードモードを読み取って更新
   useEffect(() => {
-    const modeFromParams = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en';
+    const modeFromParams = (searchParams.get('mode') || 'en-to-ja') as
+      | 'en-to-ja'
+      | 'ja-to-en';
     if (modeFromParams !== flashcardMode) {
       setFlashcardMode(modeFromParams);
     }
@@ -237,7 +250,8 @@ function FlashcardContent() {
   // カードをめくる
   const flipCard = (cardIndex?: number) => {
     // cardIndexが指定されていない場合は、SwiperのactiveIndexを使用
-    const index = cardIndex ?? swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    const index =
+      cardIndex ?? swiperRef.current?.swiper?.activeIndex ?? currentIndex;
     setFlippedCards((prev) => {
       const newMap = new Map(prev);
       newMap.set(index, !newMap.get(index));
@@ -249,20 +263,39 @@ function FlashcardContent() {
 
   // タッチ開始時の処理
   const handleTouchStart = (e: React.TouchEvent) => {
+    // data-indexを確実に取得（子要素からタッチされた場合も親要素から取得）
+    const target = e.currentTarget as HTMLElement;
+    let indexStr = target.getAttribute('data-index');
+
+    // フォールバック: 親要素から取得を試みる
+    if (!indexStr) {
+      const parent = target.closest('[data-index]') as HTMLElement;
+      if (parent) {
+        indexStr = parent.getAttribute('data-index');
+      }
+    }
+
+    if (!indexStr) return;
+
+    const index = parseInt(indexStr);
+    if (index === -1) return;
+
     // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
-    const index = parseInt(e.currentTarget.getAttribute('data-index') || '-1');
     const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
-    
+
     // 現在のカードでない場合は無視
     if (index !== activeIndex) {
       return;
     }
-    
+
     const touch = e.touches[0];
+    if (!touch) return;
+
     touchStartRef.current = {
       x: touch.clientX,
       y: touch.clientY,
       time: Date.now(),
+      cardIndex: index, // カードインデックスも保存
     };
     touchMovedRef.current = false;
     touchHandledRef.current = false;
@@ -271,12 +304,12 @@ function FlashcardContent() {
   // タッチ移動時の処理（スワイプを検出）
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!touchStartRef.current) return;
-    
+
     const touch = e.touches[0];
     const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
     const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    
+
     // 10px以上移動したらスワイプとみなす
     if (distance > 10) {
       touchMovedRef.current = true;
@@ -285,10 +318,21 @@ function FlashcardContent() {
 
   // タッチ終了時の処理（タップとスワイプを区別）
   const handleTouchEnd = (e: React.TouchEvent, index: number) => {
+    if (!touchStartRef.current) {
+      touchStartRef.current = null;
+      touchMovedRef.current = false;
+      touchHandledRef.current = false;
+      return;
+    }
+
+    // タッチ開始時に保存したカードインデックスを使用
+    const cardIndex = touchStartRef.current.cardIndex;
+
     // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
     const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
-    
-    if (!touchStartRef.current || index !== activeIndex) {
+
+    // カードインデックスが一致しない場合は無視
+    if (cardIndex !== activeIndex) {
       touchStartRef.current = null;
       touchMovedRef.current = false;
       touchHandledRef.current = false;
@@ -322,10 +366,10 @@ function FlashcardContent() {
     e.preventDefault();
     e.stopPropagation();
     touchHandledRef.current = true;
-    flipCard(index);
+    flipCard(cardIndex);
     touchStartRef.current = null;
     touchMovedRef.current = false;
-    
+
     // クリックイベントを防ぐために少し遅延
     setTimeout(() => {
       touchHandledRef.current = false;
@@ -587,7 +631,8 @@ function FlashcardContent() {
       const wordProgress = progress.get(word.id);
       return wordProgress?.isLearned;
     }).length;
-    const learnedPercentage = words.length > 0 ? Math.round((learnedCount / words.length) * 100) : 0;
+    const learnedPercentage =
+      words.length > 0 ? Math.round((learnedCount / words.length) * 100) : 0;
 
     return (
       <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
@@ -630,10 +675,15 @@ function FlashcardContent() {
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="font-semibold text-gray-900">
-                            {flashcardMode === 'en-to-ja' ? word.english : word.japanese}
+                            {flashcardMode === 'en-to-ja'
+                              ? word.english
+                              : word.japanese}
                           </div>
                           <div className="text-sm text-gray-600">
-                            {flashcardMode === 'en-to-ja' ? word.japanese : word.english} ({word.level})
+                            {flashcardMode === 'en-to-ja'
+                              ? word.japanese
+                              : word.english}{' '}
+                            ({word.level})
                           </div>
                         </div>
                         <div
@@ -706,18 +756,34 @@ function FlashcardContent() {
           </div>
 
           {/* フラッシュカード */}
-          <div className="mb-6 sm:mb-8" style={{ height: '320px', overflow: 'visible', position: 'relative', width: '100%', background: 'transparent' }}>
+          <div
+            className="mb-6 sm:mb-8"
+            style={{
+              height: '320px',
+              overflow: 'visible',
+              position: 'relative',
+              width: '100%',
+              background: 'transparent',
+            }}
+          >
             <Swiper
               ref={swiperRef}
               effect="cards"
               grabCursor={true}
               modules={[EffectCards]}
               className="w-full h-full"
-              style={{ width: '100%', height: '100%', overflow: 'visible', background: 'transparent' }}
-              touchEventsTarget="wrapper"
+              style={{
+                width: '100%',
+                height: '100%',
+                overflow: 'visible',
+                background: 'transparent',
+              }}
+              touchEventsTarget="container"
               allowTouchMove={true}
               touchRatio={1}
-              threshold={10}
+              threshold={15}
+              longSwipesRatio={0.5}
+              longSwipesMs={300}
               cardsEffect={{
                 slideShadows: false,
                 perSlideOffset: 8,
@@ -773,8 +839,11 @@ function FlashcardContent() {
                           e.stopPropagation();
                           return;
                         }
+                        // デスクトップやマウス操作の場合のフォールバック
                         // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
-                        const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+                        const activeIndex =
+                          swiperRef.current?.swiper?.activeIndex ??
+                          currentIndex;
                         if (index === activeIndex) {
                           flipCard(index);
                         }
@@ -787,12 +856,12 @@ function FlashcardContent() {
                           ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
                           : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
                       }`}
-                      style={{ 
-                        width: 'calc(100% - 120px)', 
-                        height: '280px', 
-                        maxWidth: 'calc(100% - 120px)', 
+                      style={{
+                        width: 'calc(100% - 120px)',
+                        height: '280px',
+                        maxWidth: 'calc(100% - 120px)',
                         margin: '0 auto',
-                        touchAction: 'manipulation' // ダブルタップズームを無効化し、タッチ操作を最適化
+                        touchAction: 'manipulation', // ダブルタップズームを無効化し、タッチ操作を最適化
                       }}
                     >
                       <div className="flex h-full items-center justify-center">
@@ -823,33 +892,31 @@ function FlashcardContent() {
                               </div>
                             </div>
                           )
+                        ) : // 日本語→英語モード
+                        !isFlippedForWord ? (
+                          <div className="text-center">
+                            <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                              日本語
+                            </div>
+                            <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                              {word.japanese}
+                            </div>
+                            <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                              {word.level}
+                            </div>
+                            <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                              クリックして英語を表示
+                            </div>
+                          </div>
                         ) : (
-                          // 日本語→英語モード
-                          !isFlippedForWord ? (
-                            <div className="text-center">
-                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                                日本語
-                              </div>
-                              <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                                {word.japanese}
-                              </div>
-                              <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                                {word.level}
-                              </div>
-                              <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                                クリックして英語を表示
-                              </div>
+                          <div className="text-center">
+                            <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                              英単語
                             </div>
-                          ) : (
-                            <div className="text-center">
-                              <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                                英単語
-                              </div>
-                              <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                                {word.english}
-                              </div>
+                            <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                              {word.english}
                             </div>
-                          )
+                          </div>
                         )}
                       </div>
                     </div>
@@ -935,4 +1002,3 @@ export default function FlashcardPage() {
     </Suspense>
   );
 }
-

@@ -168,7 +168,7 @@ function QuizContent() {
   ) => {
     if (quizMode === 'en-to-ja') {
       // 英語→日本語: 英語が出題、日本語の選択肢
-      const correctAnswer = question.japanese
+    const correctAnswer = question.japanese
       const candidatePool = allWords.filter(
         (w) => w.id !== question.id && (prevAnswer ? w.japanese !== prevAnswer : true)
       )
@@ -375,7 +375,7 @@ function QuizContent() {
 
     // 単語が取得されていることを確認してからクイズを開始
     if (words.length > 0 && currentQuestion) {
-      setQuizStarted(true)
+    setQuizStarted(true)
       setTimeLeftMs(timeLimitMs)
       // 最初の問題の選択肢を再生成（モードに応じて）
       generateOptions(currentQuestion, words, null)

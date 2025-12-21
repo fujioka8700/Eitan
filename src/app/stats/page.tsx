@@ -267,20 +267,20 @@ export default function StatsPage() {
           <div className="mb-8">
             <h2 className="mb-4 text-xl font-semibold text-gray-900">全体統計</h2>
             <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div className="rounded-lg bg-blue-50 p-4 text-center">
-                <div className="text-2xl font-bold text-blue-600">{totalWords}</div>
-                <div className="text-sm text-gray-600">学習単語数</div>
-              </div>
-              <div className="rounded-lg bg-green-50 p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">{totalCorrect}</div>
+            <div className="rounded-lg bg-blue-50 p-4 text-center">
+              <div className="text-2xl font-bold text-blue-600">{totalWords}</div>
+              <div className="text-sm text-gray-600">学習単語数</div>
+            </div>
+            <div className="rounded-lg bg-green-50 p-4 text-center">
+              <div className="text-2xl font-bold text-green-600">{totalCorrect}</div>
                 <div className="text-sm text-gray-600">正解数（全体）</div>
-              </div>
-              <div className="rounded-lg bg-red-50 p-4 text-center">
-                <div className="text-2xl font-bold text-red-600">{totalMistakes}</div>
+            </div>
+            <div className="rounded-lg bg-red-50 p-4 text-center">
+              <div className="text-2xl font-bold text-red-600">{totalMistakes}</div>
                 <div className="text-sm text-gray-600">間違い数（全体）</div>
-              </div>
-              <div className="rounded-lg bg-purple-50 p-4 text-center">
-                <div className="text-2xl font-bold text-purple-600">{accuracy}%</div>
+            </div>
+            <div className="rounded-lg bg-purple-50 p-4 text-center">
+              <div className="text-2xl font-bold text-purple-600">{accuracy}%</div>
                 <div className="text-sm text-gray-600">正答率（全体）</div>
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function StatsPage() {
                 </div>
                 <div className="rounded-lg bg-purple-50 p-4 text-center">
                   <div className="text-2xl font-bold text-purple-600">{quizAccuracy}%</div>
-                  <div className="text-sm text-gray-600">正答率</div>
+              <div className="text-sm text-gray-600">正答率</div>
                 </div>
               </div>
             </div>
@@ -346,12 +346,12 @@ export default function StatsPage() {
                       <div className="mb-3 rounded-lg bg-blue-50 p-3">
                         <h4 className="mb-2 text-sm font-semibold text-gray-800">4択クイズ</h4>
                         <div className="grid grid-cols-3 gap-2 text-sm">
-                          <div>
-                            <span className="text-gray-600">正解:</span>{' '}
+                        <div>
+                          <span className="text-gray-600">正解:</span>{' '}
                             <span className="font-semibold text-green-600">{stats.quizCorrect}</span>
-                          </div>
-                          <div>
-                            <span className="text-gray-600">間違い:</span>{' '}
+                        </div>
+                        <div>
+                          <span className="text-gray-600">間違い:</span>{' '}
                             <span className="font-semibold text-red-600">{stats.quizMistakes}</span>
                           </div>
                           <div>
@@ -387,13 +387,13 @@ export default function StatsPage() {
                     className="rounded-lg border border-gray-200 p-4"
                   >
                     <div className="mb-2">
-                      <div className="font-semibold text-gray-900">
-                        {uw.word.english}
+                        <div className="font-semibold text-gray-900">
+                          {uw.word.english}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {uw.word.japanese} ({uw.word.level})
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {uw.word.japanese} ({uw.word.level})
-                      </div>
-                    </div>
                     <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
                       {/* 4択クイズの結果 */}
                       <div className="rounded-lg bg-blue-50 p-2">
