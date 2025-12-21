@@ -37,17 +37,20 @@ model User {
 
 // ユーザー学習記録モデル（オプション機能用）
 model UserWord {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  wordId        Int
-  status        String   @default("未学習") // 未学習/学習中/習得済み
-  correctCount  Int      @default(0) // 正解回数
-  mistakeCount  Int      @default(0) // 間違い回数
-  lastStudiedAt DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  word          Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  id                  Int      @id @default(autoincrement())
+  userId              Int
+  wordId              Int
+  status              String   @default("未学習") // 未学習/学習中/習得済み
+  correctCount        Int      @default(0) // 正解回数（後方互換性のため残す）
+  mistakeCount        Int      @default(0) // 間違い回数（後方互換性のため残す）
+  quizCorrectCount    Int      @default(0) // 4択クイズの正解回数
+  quizMistakeCount    Int      @default(0) // 4択クイズの間違い回数
+  flashcardLearnedCount Int   @default(0) // フラッシュカードで覚えた回数
+  lastStudiedAt       DateTime?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word                Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
   @@index([userId])

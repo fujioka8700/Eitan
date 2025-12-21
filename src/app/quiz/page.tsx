@@ -282,6 +282,7 @@ function QuizContent() {
           wordId,
           isCorrect,
           status: isCorrect ? '習得済み' : '学習中',
+          studyType: 'quiz', // 4択クイズであることを明示
         }),
       })
     } catch (error) {

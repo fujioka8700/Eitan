@@ -321,6 +321,7 @@ function FlashcardContent() {
           wordId,
           isCorrect: true, // フラッシュカードは学習済みとして扱う
           status: '学習中',
+          studyType: 'flashcard', // フラッシュカードであることを明示
         }),
       });
     } catch (error) {
