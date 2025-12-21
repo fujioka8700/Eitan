@@ -237,9 +237,12 @@ function FlashcardContent() {
 
   // タッチ開始時の処理
   const handleTouchStart = (e: React.TouchEvent) => {
-    // 現在のカードでない場合は無視
+    // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
     const index = parseInt(e.currentTarget.getAttribute('data-index') || '-1');
-    if (index !== currentIndex) {
+    const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    
+    // 現在のカードでない場合は無視
+    if (index !== activeIndex) {
       return;
     }
     
@@ -270,7 +273,10 @@ function FlashcardContent() {
 
   // タッチ終了時の処理（タップとスワイプを区別）
   const handleTouchEnd = (e: React.TouchEvent, index: number) => {
-    if (!touchStartRef.current || index !== currentIndex) {
+    // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
+    const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    
+    if (!touchStartRef.current || index !== activeIndex) {
       touchStartRef.current = null;
       touchMovedRef.current = false;
       touchHandledRef.current = false;
@@ -733,7 +739,9 @@ function FlashcardContent() {
             >
               {words.map((word, index) => {
                 const wordProgress = progress.get(word.id);
-                const isFlippedForWord = index === currentIndex ? isFlipped : false;
+                // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
+                const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+                const isFlippedForWord = index === activeIndex ? isFlipped : false;
                 return (
                   <SwiperSlide key={word.id}>
                     <div
@@ -745,7 +753,9 @@ function FlashcardContent() {
                           e.stopPropagation();
                           return;
                         }
-                        if (index === currentIndex) {
+                        // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
+                        const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+                        if (index === activeIndex) {
                           flipCard();
                         }
                       }}
