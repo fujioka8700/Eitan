@@ -929,6 +929,23 @@ function FlashcardContent() {
 
           {/* 操作ボタン */}
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+            {/* モバイル版: カードの表裏を切り替えるボタン */}
+            <button
+              onClick={() => {
+                const activeIndex =
+                  swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+                flipCard(activeIndex);
+              }}
+              className="flex-1 rounded-lg bg-purple-600 px-4 py-2 text-sm text-white transition-colors active:bg-purple-700 sm:hidden flex items-center justify-center text-center"
+            >
+              {flashcardMode === 'en-to-ja'
+                ? flippedCards.get(currentIndex)
+                  ? '英単語を表示'
+                  : '日本語を表示'
+                : flippedCards.get(currentIndex)
+                ? '日本語を表示'
+                : '英単語を表示'}
+            </button>
             {/* モバイル版: 「覚えた」ボタンを上に表示 */}
             <button
               onClick={markAsStudied}
