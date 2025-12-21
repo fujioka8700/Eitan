@@ -36,7 +36,8 @@ function FlashcardContent() {
   const [sessionStarted, setSessionStarted] = useState(false);
   const [sessionFinished, setSessionFinished] = useState(false); // セッション終了フラグ
   const [timeLeft, setTimeLeft] = useState(5); // 5秒のカウントダウン
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false); // 後方互換性のため残す
+  const [flippedCards, setFlippedCards] = useState<Map<number, boolean>>(new Map()); // 各カードの裏表状態
   const [isTimeUp, setIsTimeUp] = useState(false); // 時間切れフラグ
   const [wordCount, setWordCount] = useState(initialCount); // 選択された単語数
   const [level, setLevel] = useState(initialLevel); // レベルを状態として管理
@@ -155,6 +156,7 @@ function FlashcardContent() {
     setSessionFinished(false);
     setCurrentIndex(0);
     setIsFlipped(false);
+    setFlippedCards(new Map()); // 裏表状態をリセット
     setTimeLeft(5);
     setIsTimeUp(false);
     // URLを更新
@@ -194,8 +196,10 @@ function FlashcardContent() {
         // タイマーをクリア
         timeUpTimerRef.current = null;
         if (currentIndex < words.length - 1) {
-          setCurrentIndex((prev) => prev + 1);
-          setIsFlipped(false);
+          const newIndex = currentIndex + 1;
+          setCurrentIndex(newIndex);
+          // 新しいカードの裏表状態を取得
+          setIsFlipped(flippedCards.get(newIndex) ?? false);
           setTimeLeft(5); // タイマーをリセット
           setIsTimeUp(false);
         } else {
@@ -231,15 +235,26 @@ function FlashcardContent() {
   }, [currentIndex]);
 
   // カードをめくる
-  const flipCard = () => {
-    setIsFlipped(!isFlipped);
+  const flipCard = (cardIndex?: number) => {
+    // cardIndexが指定されていない場合は、SwiperのactiveIndexを使用
+    const index = cardIndex ?? swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    setFlippedCards((prev) => {
+      const newMap = new Map(prev);
+      newMap.set(index, !newMap.get(index));
+      return newMap;
+    });
+    // 後方互換性のためisFlippedも更新
+    setIsFlipped((prev) => !prev);
   };
 
   // タッチ開始時の処理
   const handleTouchStart = (e: React.TouchEvent) => {
-    // 現在のカードでない場合は無視
+    // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
     const index = parseInt(e.currentTarget.getAttribute('data-index') || '-1');
-    if (index !== currentIndex) {
+    const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    
+    // 現在のカードでない場合は無視
+    if (index !== activeIndex) {
       return;
     }
     
@@ -270,7 +285,10 @@ function FlashcardContent() {
 
   // タッチ終了時の処理（タップとスワイプを区別）
   const handleTouchEnd = (e: React.TouchEvent, index: number) => {
-    if (!touchStartRef.current || index !== currentIndex) {
+    // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
+    const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+    
+    if (!touchStartRef.current || index !== activeIndex) {
       touchStartRef.current = null;
       touchMovedRef.current = false;
       touchHandledRef.current = false;
@@ -304,7 +322,7 @@ function FlashcardContent() {
     e.preventDefault();
     e.stopPropagation();
     touchHandledRef.current = true;
-    flipCard();
+    flipCard(index);
     touchStartRef.current = null;
     touchMovedRef.current = false;
     
@@ -323,8 +341,10 @@ function FlashcardContent() {
     }
 
     if (currentIndex < words.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setIsFlipped(false);
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      // 新しいカードの裏表状態を取得
+      setIsFlipped(flippedCards.get(newIndex) ?? false);
       setTimeLeft(5); // タイマーをリセット
       setIsTimeUp(false);
     } else {
@@ -342,8 +362,10 @@ function FlashcardContent() {
     }
 
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      setIsFlipped(false);
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      // 新しいカードの裏表状態を取得
+      setIsFlipped(flippedCards.get(newIndex) ?? false);
       setTimeLeft(5); // タイマーをリセット
       setIsTimeUp(false);
     }
@@ -415,6 +437,7 @@ function FlashcardContent() {
     setSessionFinished(false);
     setCurrentIndex(0);
     setIsFlipped(false);
+    setFlippedCards(new Map()); // 裏表状態をリセット
     setTimeLeft(5);
     setIsTimeUp(false);
   };
@@ -634,6 +657,7 @@ function FlashcardContent() {
                   setSessionStarted(false);
                   setCurrentIndex(0);
                   setIsFlipped(false);
+                  setFlippedCards(new Map()); // 裏表状態をリセット
                   setTimeLeft(5);
                   setIsTimeUp(false);
                   // ページをリロードせずに状態をリセット
@@ -701,15 +725,18 @@ function FlashcardContent() {
               }}
               onSlideChangeTransitionStart={() => {
                 // スライド変更のトランジション開始時に、現在のisFlippedの状態を保存
-                isFlippedBeforeSlideRef.current = isFlipped;
+                const currentFlipped = flippedCards.get(currentIndex) ?? false;
+                isFlippedBeforeSlideRef.current = currentFlipped;
               }}
               onSlideChange={(swiper) => {
                 const newIndex = swiper.activeIndex;
                 const prevIndex = currentIndex;
                 // スライド変更前のisFlippedの状態を取得
-                const wasFlipped = isFlippedBeforeSlideRef.current;
+                const wasFlipped = flippedCards.get(prevIndex) ?? false;
                 setCurrentIndex(newIndex);
-                setIsFlipped(false);
+                // 新しいカードの裏表状態は初期化しない（ユーザーがめくった状態を保持）
+                // ただし、新しいカードがまだMapにない場合はfalseとして扱う
+                setIsFlipped(flippedCards.get(newIndex) ?? false);
                 setTimeLeft(5);
                 setIsTimeUp(false);
                 // タッチ状態をリセット
@@ -733,7 +760,8 @@ function FlashcardContent() {
             >
               {words.map((word, index) => {
                 const wordProgress = progress.get(word.id);
-                const isFlippedForWord = index === currentIndex ? isFlipped : false;
+                // 各カードの裏表状態をMapから取得
+                const isFlippedForWord = flippedCards.get(index) ?? false;
                 return (
                   <SwiperSlide key={word.id}>
                     <div
@@ -745,8 +773,10 @@ function FlashcardContent() {
                           e.stopPropagation();
                           return;
                         }
-                        if (index === currentIndex) {
-                          flipCard();
+                        // SwiperのactiveIndexを直接取得して、現在のカードかどうかを確認
+                        const activeIndex = swiperRef.current?.swiper?.activeIndex ?? currentIndex;
+                        if (index === activeIndex) {
+                          flipCard(index);
                         }
                       }}
                       onTouchStart={handleTouchStart}
