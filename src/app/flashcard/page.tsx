@@ -45,6 +45,8 @@ function FlashcardContent() {
   const swiperRef = useRef<any>(null); // Swiperインスタンスの参照
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null); // タッチ開始位置と時間
   const isFlippedBeforeSlideRef = useRef<boolean>(false); // スライド変更前のisFlippedの状態
+  const touchMovedRef = useRef<boolean>(false); // タッチ中に移動したかどうか
+  const touchHandledRef = useRef<boolean>(false); // タッチイベントで処理済みかどうか
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -235,19 +237,51 @@ function FlashcardContent() {
 
   // タッチ開始時の処理
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.currentTarget !== e.target) return; // 子要素のタッチイベントは無視
+    // 現在のカードでない場合は無視
+    const index = parseInt(e.currentTarget.getAttribute('data-index') || '-1');
+    if (index !== currentIndex) {
+      return;
+    }
+    
     const touch = e.touches[0];
     touchStartRef.current = {
       x: touch.clientX,
       y: touch.clientY,
       time: Date.now(),
     };
+    touchMovedRef.current = false;
+    touchHandledRef.current = false;
+  };
+
+  // タッチ移動時の処理（スワイプを検出）
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return;
+    
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+    const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    // 10px以上移動したらスワイプとみなす
+    if (distance > 10) {
+      touchMovedRef.current = true;
+    }
   };
 
   // タッチ終了時の処理（タップとスワイプを区別）
   const handleTouchEnd = (e: React.TouchEvent, index: number) => {
     if (!touchStartRef.current || index !== currentIndex) {
       touchStartRef.current = null;
+      touchMovedRef.current = false;
+      touchHandledRef.current = false;
+      return;
+    }
+
+    // 移動していた場合はスワイプとみなす（Swiperのデフォルト動作を許可）
+    if (touchMovedRef.current) {
+      touchStartRef.current = null;
+      touchMovedRef.current = false;
+      touchHandledRef.current = false;
       return;
     }
 
@@ -257,17 +291,27 @@ function FlashcardContent() {
     const deltaTime = Date.now() - touchStartRef.current.time;
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    // スワイプの判定: 移動距離が15px以上、または時間が300ms以上かかった場合はスワイプとみなす
-    if (distance > 15 || deltaTime > 300) {
+    // スワイプの判定: 移動距離が20px以上、または時間が400ms以上かかった場合はスワイプとみなす
+    if (distance > 20 || deltaTime > 400) {
       // スワイプの場合は何もしない（Swiperのデフォルト動作を許可）
       touchStartRef.current = null;
+      touchMovedRef.current = false;
+      touchHandledRef.current = false;
       return;
     }
 
     // タップの場合はカードをめくる
+    e.preventDefault();
     e.stopPropagation();
+    touchHandledRef.current = true;
     flipCard();
     touchStartRef.current = null;
+    touchMovedRef.current = false;
+    
+    // クリックイベントを防ぐために少し遅延
+    setTimeout(() => {
+      touchHandledRef.current = false;
+    }, 300);
   };
 
   // 次のカードへ
@@ -646,7 +690,10 @@ function FlashcardContent() {
               modules={[EffectCards]}
               className="w-full h-full"
               style={{ width: '100%', height: '100%', overflow: 'visible', background: 'transparent' }}
-              touchEventsTarget="container"
+              touchEventsTarget="wrapper"
+              allowTouchMove={true}
+              touchRatio={1}
+              threshold={10}
               cardsEffect={{
                 slideShadows: false,
                 perSlideOffset: 8,
@@ -665,6 +712,9 @@ function FlashcardContent() {
                 setIsFlipped(false);
                 setTimeLeft(5);
                 setIsTimeUp(false);
+                // タッチ状態をリセット
+                touchStartRef.current = null;
+                touchMovedRef.current = false;
                 // 右スワイプ（次のカード）の時に「覚えた」扱いにする
                 // ただし、裏側を表示していた場合は「覚えた」扱いにしない
                 if (newIndex > prevIndex && prevIndex >= 0 && !wasFlipped) {
@@ -687,19 +737,33 @@ function FlashcardContent() {
                 return (
                   <SwiperSlide key={word.id}>
                     <div
-                      onClick={() => {
+                      data-index={index}
+                      onClick={(e) => {
+                        // タッチイベントで処理済みの場合はクリックイベントを無視
+                        if (touchHandledRef.current) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          return;
+                        }
                         if (index === currentIndex) {
                           flipCard();
                         }
                       }}
                       onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
                       onTouchEnd={(e) => handleTouchEnd(e, index)}
                       className={`cursor-pointer rounded-lg border-2 p-4 shadow-lg transition-transform sm:p-6 ${
                         wordProgress?.isLearned
                           ? 'border-green-400 bg-gradient-to-br from-emerald-50 to-green-50'
                           : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
                       }`}
-                      style={{ width: 'calc(100% - 120px)', height: '280px', maxWidth: 'calc(100% - 120px)', margin: '0 auto' }}
+                      style={{ 
+                        width: 'calc(100% - 120px)', 
+                        height: '280px', 
+                        maxWidth: 'calc(100% - 120px)', 
+                        margin: '0 auto',
+                        touchAction: 'manipulation' // ダブルタップズームを無効化し、タッチ操作を最適化
+                      }}
                     >
                       <div className="flex h-full items-center justify-center">
                         {flashcardMode === 'en-to-ja' ? (
