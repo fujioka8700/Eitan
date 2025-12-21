@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState, Suspense } from 'react'
+import { useEffect, useMemo, useState, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -26,9 +26,10 @@ function QuizContent() {
   const searchParams = useSearchParams()
   const initialLevel = searchParams.get('level') || 'all'
   const initialCount = parseInt(searchParams.get('count') || '10')
+  const initialMode = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en'
 
   const [selectedLevel, setSelectedLevel] = useState(initialLevel)
-  const [quizMode, setQuizMode] = useState<'en-to-ja' | 'ja-to-en'>('en-to-ja') // クイズモード
+  const [quizMode, setQuizMode] = useState<'en-to-ja' | 'ja-to-en'>(initialMode) // クイズモード
 
   const [words, setWords] = useState<Word[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -47,6 +48,29 @@ function QuizContent() {
   const [previousCorrectAnswer, setPreviousCorrectAnswer] = useState<string | null>(null)
 
   const timeLimitMs = useMemo(() => 10000, [])
+
+  // クエリパラメータからクイズモードを読み取って更新
+  useEffect(() => {
+    const modeFromParams = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en'
+    if (modeFromParams !== quizMode) {
+      setQuizMode(modeFromParams)
+    }
+  }, [searchParams, quizMode])
+
+  // クエリパラメータからレベルと問題数を読み取って更新
+  useEffect(() => {
+    const levelFromParams = searchParams.get('level') || 'all'
+    const countFromParams = parseInt(searchParams.get('count') || '10')
+    if (levelFromParams !== selectedLevel) {
+      setSelectedLevel(levelFromParams)
+    }
+    if (countFromParams !== questionCount) {
+      setQuestionCount(countFromParams)
+    }
+  }, [searchParams, selectedLevel, questionCount])
+
+  // クイズ開始待機フラグ（単語再取得後に自動的にクイズを開始するため）
+  const pendingQuizStartRef = useRef(false)
 
   // クイズ用の単語を取得
   useEffect(() => {
@@ -68,6 +92,13 @@ function QuizContent() {
           setCurrentQuestion(data.words[0])
           setPreviousCorrectAnswer(null)
           generateOptions(data.words[0], data.words, null)
+          
+          // クイズ開始待機中の場合、自動的にクイズを開始
+          if (pendingQuizStartRef.current) {
+            pendingQuizStartRef.current = false
+            setQuizStarted(true)
+            setTimeLeftMs(timeLimitMs)
+          }
         } else {
           alert('単語が見つかりませんでした。')
           router.push('/')
@@ -82,12 +113,25 @@ function QuizContent() {
     }
 
     fetchWords()
-  }, [selectedLevel, questionCount, router, quizStarted])
+  }, [selectedLevel, questionCount, router, quizStarted, timeLimitMs])
+
+  // クイズモードが変更されたらURLを更新
+  const handleQuizModeChange = (newMode: 'en-to-ja' | 'ja-to-en') => {
+    setQuizMode(newMode)
+    const params = new URLSearchParams()
+    params.set('mode', newMode)
+    if (selectedLevel !== 'all') {
+      params.set('level', selectedLevel)
+    }
+    params.set('count', questionCount.toString())
+    router.push(`/quiz?${params.toString()}`)
+  }
 
   // レベルが変更されたらURLを更新
   const handleLevelChange = (newLevel: string) => {
     setSelectedLevel(newLevel)
     const params = new URLSearchParams()
+    params.set('mode', quizMode)
     if (newLevel !== 'all') {
       params.set('level', newLevel)
     }
@@ -99,6 +143,7 @@ function QuizContent() {
   const handleQuestionCountChange = (count: number) => {
     setQuestionCount(count)
     const params = new URLSearchParams()
+    params.set('mode', quizMode)
     if (selectedLevel !== 'all') {
       params.set('level', selectedLevel)
     }
@@ -301,10 +346,37 @@ function QuizContent() {
 
   // クイズ開始
   const startQuiz = () => {
-    setQuizStarted(true)
-    setTimeLeftMs(timeLimitMs)
-    // 最初の問題の選択肢を再生成（モードに応じて）
+    // クエリパラメータから最新の値を取得して確認
+    const modeFromParams = (searchParams.get('mode') || 'en-to-ja') as 'en-to-ja' | 'ja-to-en'
+    const levelFromParams = searchParams.get('level') || 'all'
+    const countFromParams = parseInt(searchParams.get('count') || '10')
+
+    // クエリパラメータとステートが一致していない場合は、ステートを更新（useEffectで単語が再取得される）
+    let needsUpdate = false
+    if (modeFromParams !== quizMode) {
+      setQuizMode(modeFromParams)
+      needsUpdate = true
+    }
+    if (levelFromParams !== selectedLevel) {
+      setSelectedLevel(levelFromParams)
+      needsUpdate = true
+    }
+    if (countFromParams !== questionCount) {
+      setQuestionCount(countFromParams)
+      needsUpdate = true
+    }
+
+    // ステートが更新された場合、単語再取得後に自動的にクイズを開始する
+    if (needsUpdate) {
+      pendingQuizStartRef.current = true
+      return
+    }
+
+    // 単語が取得されていることを確認してからクイズを開始
     if (words.length > 0 && currentQuestion) {
+      setQuizStarted(true)
+      setTimeLeftMs(timeLimitMs)
+      // 最初の問題の選択肢を再生成（モードに応じて）
       generateOptions(currentQuestion, words, null)
     }
   }
@@ -339,7 +411,7 @@ function QuizContent() {
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
-                    onClick={() => setQuizMode('en-to-ja')}
+                    onClick={() => handleQuizModeChange('en-to-ja')}
                     className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                       quizMode === 'en-to-ja'
                         ? 'border-green-600 bg-green-600 text-white'
@@ -349,7 +421,7 @@ function QuizContent() {
                     英語→日本語
                   </button>
                   <button
-                    onClick={() => setQuizMode('ja-to-en')}
+                    onClick={() => handleQuizModeChange('ja-to-en')}
                     className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                       quizMode === 'ja-to-en'
                         ? 'border-green-600 bg-green-600 text-white'
