@@ -764,6 +764,7 @@ function FlashcardContent() {
               position: 'relative',
               width: '100%',
               background: 'transparent',
+              padding: '15px 10px',
             }}
           >
             <Swiper
@@ -786,8 +787,8 @@ function FlashcardContent() {
               longSwipesMs={300}
               cardsEffect={{
                 slideShadows: false,
-                perSlideOffset: 8,
-                perSlideRotate: 2,
+                perSlideOffset: 6,
+                perSlideRotate: 3,
               }}
               onSlideChangeTransitionStart={() => {
                 // スライド変更のトランジション開始時に、現在のisFlippedの状態を保存
@@ -857,9 +858,9 @@ function FlashcardContent() {
                           : 'border-gray-300 bg-gradient-to-br from-blue-50 to-indigo-50'
                       }`}
                       style={{
-                        width: 'calc(100% - 120px)',
-                        height: '280px',
-                        maxWidth: 'calc(100% - 120px)',
+                        width: '85%',
+                        height: '250px',
+                        maxWidth: '85%',
                         margin: '0 auto',
                         touchAction: 'manipulation', // ダブルタップズームを無効化し、タッチ操作を最適化
                       }}
