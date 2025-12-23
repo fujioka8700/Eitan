@@ -271,6 +271,8 @@ function FlashcardContent() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            borderRadius: '12px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
           }
         : {
             border: '2px solid #cbd5e1',
@@ -278,6 +280,8 @@ function FlashcardContent() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            borderRadius: '12px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
           };
 
       if (flashcardMode === 'en-to-ja') {
@@ -747,7 +751,7 @@ function FlashcardContent() {
           <div
             className="mb-6 sm:mb-8 flex justify-center"
             style={{
-              minHeight: '320px',
+              minHeight: '380px',
               width: '100%',
             }}
           >
@@ -755,22 +759,6 @@ function FlashcardContent() {
               <FlashcardArray
                 flipArrayHook={flipArrayHook}
                 deck={deck}
-                frontCardStyle={{
-                  width: '85%',
-                  height: '250px',
-                  maxWidth: '85%',
-                  margin: '0 auto',
-                  borderRadius: '12px',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-                }}
-                backCardStyle={{
-                  width: '85%',
-                  height: '250px',
-                  maxWidth: '85%',
-                  margin: '0 auto',
-                  borderRadius: '12px',
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-                }}
               />
             )}
           </div>
