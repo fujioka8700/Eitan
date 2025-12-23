@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { wordId, isCorrect, status, studyType } = body // studyType: 'quiz' | 'flashcard'
+    const { wordId, isCorrect, status, studyType, isLearned } = body // studyType: 'quiz' | 'flashcard', isLearned: boolean (フラッシュカード用)
 
     if (!wordId) {
       return NextResponse.json(
@@ -106,9 +106,19 @@ export async function POST(request: NextRequest) {
       }
       // フラッシュカードの場合
       else if (studyType === 'flashcard') {
-        updateData.flashcardLearnedCount = existing.flashcardLearnedCount + 1
-        // 後方互換性のため、correctCountも更新
-        updateData.correctCount = existing.correctCount + 1
+        if (isLearned === false) {
+          // 未学習に戻す場合
+          updateData.flashcardLearnedCount = 0
+          // 後方互換性のため、correctCountも0にリセット（ただし、既存の値が0より大きい場合は維持）
+          if (existing.correctCount > 0) {
+            updateData.correctCount = Math.max(0, existing.correctCount - 1)
+          }
+        } else {
+          // 学習済みにする場合
+          updateData.flashcardLearnedCount = existing.flashcardLearnedCount + 1
+          // 後方互換性のため、correctCountも更新
+          updateData.correctCount = existing.correctCount + 1
+        }
       }
       // 後方互換性のため、studyTypeが指定されていない場合は従来の動作
       else {

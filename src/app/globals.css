@@ -200,3 +200,8 @@ select:focus {
 .swiper-slide > div {
   /* カードの背景は保持（Tailwindのクラスで設定された背景色を保持） */
 }
+
+/* react-quizlet-flashcard のコントロール部分を非表示 */
+.flashcard-array__controls {
+  display: none !important;
+}
