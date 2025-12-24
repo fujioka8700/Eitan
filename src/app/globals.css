@@ -42,38 +42,4 @@ select:focus {
   color: #111827;
 }
 
-/* react-quizlet-flashcard のコントロール部分を非表示 */
-.flashcard-array__controls {
-  display: none !important;
-}
 
-/* react-quizlet-flashcard のカードスタイル */
-.flashcard-array {
-  width: 100% !important;
-  height: 340px !important;
-}
-
-.flashcard-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-}
-
-.flashcard {
-  width: 100% !important;
-  height: 340px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-  position: relative !important;
-}
-
-.flashcard__front,
-.flashcard__back {
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-}
