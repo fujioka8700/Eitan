@@ -577,7 +577,7 @@ function QuizContent() {
             <div className="flex gap-4">
               <button
                 onClick={() => {
-                  // 状態をリセットしてから遷移
+                  // 状態を完全にリセット（最初の設定画面に戻る）
                   setQuizFinished(false)
                   setQuizStarted(false)
                   setCurrentIndex(0)
@@ -587,8 +587,9 @@ function QuizContent() {
                   setIsTimeUp(false)
                   setTimeLeftMs(timeLimitMs)
                   setHasTimeLimit(true)
-                  // ページをリロードして状態を完全にリセット
-                  window.location.href = '/quiz?' + searchParams.toString()
+                  setCurrentQuestion(null) // 現在の問題もリセット
+                  setOptions([]) // 選択肢もリセット
+                  // 状態のリセットのみで設定画面に戻る（ページリロードなし）
                 }}
                 className="flex-1 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
               >
@@ -635,14 +636,17 @@ function QuizContent() {
             </div>
             <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
               <div
-                className={`h-full transition-[width] duration-100 ease-linear ${
+                className={`h-full ${
                   displayTime <= 3
                     ? 'bg-red-500'
                     : displayTime <= 5
                       ? 'bg-yellow-500'
                       : 'bg-blue-500'
                 }`}
-                style={{ width: `${progressPercentage}%` }}
+                style={{ 
+                  width: `${progressPercentage}%`,
+                  transition: timeLeftMs === timeLimitMs ? 'none' : 'width 0.1s linear'
+                }}
               />
             </div>
           </div>
