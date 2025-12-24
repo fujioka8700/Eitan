@@ -1,14 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense, useMemo } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import {
-  FlashcardArray,
-  IFlashcard,
-  useFlashcardArray,
-} from 'react-quizlet-flashcard';
-import 'react-quizlet-flashcard/dist/index.css';
 
 interface Word {
   id: number;
@@ -46,9 +40,10 @@ function FlashcardContent() {
   const [flashcardMode, setFlashcardMode] = useState<'en-to-ja' | 'ja-to-en'>(
     initialMode,
   ); // フラッシュカードモード
+  const [isFlipped, setIsFlipped] = useState(false); // カードの表裏状態
+  const [isNavigating, setIsNavigating] = useState(false); // ナビゲーション処理中フラグ
   const timeUpTimerRef = useRef<NodeJS.Timeout | null>(null); // 0秒表示後のタイマー（useRefで管理）
   const prevCardIndexRef = useRef<number>(0); // 前のカードインデックス（スワイプ検出用）
-  const lastSyncedIndexRef = useRef<number>(0); // 最後に同期したインデックス
 
   // ローカルストレージから進捗を読み込む
   useEffect(() => {
@@ -126,7 +121,7 @@ function FlashcardContent() {
     };
 
     fetchWords();
-  }, [level, wordCount, router, sessionStarted, sessionFinished]);
+  }, [level, wordCount, router, sessionStarted, sessionFinished, words.length]);
 
   // フラッシュカードモードが変更されたらURLを更新
   const handleFlashcardModeChange = (newMode: 'en-to-ja' | 'ja-to-en') => {
@@ -152,11 +147,6 @@ function FlashcardContent() {
     router.push(`/flashcard?${params.toString()}`);
   };
 
-  // useFlashcardArrayフックを使用（useEffectの前に定義する必要がある）
-  const flipArrayHook = useFlashcardArray({
-    deckLength: words.length,
-  }) as any; // 型定義が不明なため一時的にanyを使用
-
   // レベル変更
   const handleLevelChange = (nextLevel: string) => {
     setLevel(nextLevel);
@@ -176,25 +166,11 @@ function FlashcardContent() {
     router.push(`/flashcard?${params.toString()}`);
   };
 
-  // currentIndexをflipArrayHookと同期（ライブラリのコントロールボタンで変更された場合も同期）
-  // flipArrayHook.currentIndexを直接監視する代わりに、定期的にチェック
+  // カードが変わったら、表裏状態をリセット
   useEffect(() => {
-    if (!sessionStarted || !flipArrayHook || words.length === 0) return;
-
-    const syncInterval = setInterval(() => {
-      const hookIndex = flipArrayHook?.currentIndex;
-      if (hookIndex !== undefined && !isNaN(hookIndex) && typeof hookIndex === 'number') {
-        // 最後に同期したインデックスと比較して、変更があった場合のみ更新
-        if (hookIndex !== lastSyncedIndexRef.current && hookIndex >= 0 && hookIndex < words.length) {
-          setCurrentIndex(hookIndex);
-          prevCardIndexRef.current = hookIndex;
-          lastSyncedIndexRef.current = hookIndex;
-        }
-      }
-    }, 50); // 50msごとにチェック（より頻繁にチェックして応答性を向上）
-
-    return () => clearInterval(syncInterval);
-  }, [sessionStarted, words.length, flipArrayHook]);
+    if (!sessionStarted || currentIndex >= words.length) return;
+    setIsFlipped(false); // カードが変わったら表に戻す
+  }, [currentIndex, sessionStarted, words.length]);
 
   // タイマーの処理
   useEffect(() => {
@@ -224,16 +200,20 @@ function FlashcardContent() {
         timeUpTimerRef.current = null;
         if (currentIndex < words.length - 1) {
           const newIndex = currentIndex + 1;
-          if (flipArrayHook?.nextCard) {
-            flipArrayHook.nextCard();
-          }
           setCurrentIndex(newIndex);
           prevCardIndexRef.current = newIndex;
+          setIsFlipped(false); // カードが変わったら表に戻す
           setTimeLeft(5); // タイマーをリセット
           setIsTimeUp(false);
+          setIsNavigating(false); // ナビゲーション完了
         } else {
           // 最後のカードに到達したら結果画面を表示
           setSessionFinished(true);
+          // 状態もリセット
+          setCurrentIndex(0);
+          prevCardIndexRef.current = 0;
+          setIsFlipped(false);
+          setIsNavigating(false); // ナビゲーション完了
         }
       }, 1000); // 0秒を1秒間表示
       timeUpTimerRef.current = timer;
@@ -241,7 +221,7 @@ function FlashcardContent() {
         if (timer) clearTimeout(timer);
       };
     }
-  }, [timeLeft, sessionStarted, words.length, isTimeUp, flipArrayHook]);
+  }, [timeLeft, sessionStarted, words.length, isTimeUp, currentIndex]);
 
   // カードが変わったらタイマーをリセット
   useEffect(() => {
@@ -258,108 +238,14 @@ function FlashcardContent() {
     prevCardIndexRef.current = currentIndex;
   }, [currentIndex, sessionStarted, words.length]);
 
-  // フラッシュカードデッキを生成
-  const deck = useMemo<IFlashcard[]>(() => {
-    return words.map((word) => {
-      const wordProgress = progress.get(word.id);
-      const isLearned = wordProgress?.isLearned || false;
-
-      const cardStyle = isLearned
-        ? {
-            border: '2px solid #4ade80',
-            background: 'linear-gradient(135deg, #ecfdf5, #d1fae5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '12px',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-          }
-        : {
-            border: '2px solid #cbd5e1',
-            background: 'linear-gradient(135deg, #eff6ff, #eef2ff)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '12px',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-          };
-
-      if (flashcardMode === 'en-to-ja') {
-        return {
-          front: {
-            html: (
-              <div className="text-center">
-                <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                  英単語
-                </div>
-                <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                  {word.english}
-                </div>
-                <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                  クリックして意味を表示
-                </div>
-              </div>
-            ),
-            style: cardStyle,
-          },
-          back: {
-            html: (
-              <div className="text-center">
-                <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                  日本語
-                </div>
-                <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                  {word.japanese}
-                </div>
-                <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                  {word.level}
-                </div>
-              </div>
-            ),
-            style: cardStyle,
-          },
-        };
-      } else {
-        return {
-          front: {
-            html: (
-              <div className="text-center">
-                <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                  日本語
-                </div>
-                <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
-                  {word.japanese}
-                </div>
-                <div className="mt-2 text-xs text-gray-500 sm:text-sm">
-                  {word.level}
-                </div>
-                <div className="mt-4 text-xs text-gray-400 sm:text-sm">
-                  クリックして英語を表示
-                </div>
-              </div>
-            ),
-            style: cardStyle,
-          },
-          back: {
-            html: (
-              <div className="text-center">
-                <div className="mb-4 text-xs text-gray-500 sm:text-sm">
-                  英単語
-                </div>
-                <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                  {word.english}
-                </div>
-              </div>
-            ),
-            style: cardStyle,
-          },
-        };
-      }
-    });
-  }, [words, progress, flashcardMode]);
-
   // 次のカードへ
   const nextCard = () => {
+    // 処理中は何もしない（連打防止）
+    if (isNavigating) return;
+
+    // 処理開始
+    setIsNavigating(true);
+
     // 0秒表示後のタイマーをクリア
     if (timeUpTimerRef.current) {
       clearTimeout(timeUpTimerRef.current);
@@ -368,21 +254,34 @@ function FlashcardContent() {
 
     if (currentIndex < words.length - 1) {
       const newIndex = currentIndex + 1;
-      if (flipArrayHook?.nextCard) {
-        flipArrayHook.nextCard();
-      }
       setCurrentIndex(newIndex);
       prevCardIndexRef.current = newIndex;
+      setIsFlipped(false); // カードが変わったら表に戻す
       setTimeLeft(5); // タイマーをリセット
       setIsTimeUp(false);
     } else {
       // 最後のカードに到達したら結果画面を表示
       setSessionFinished(true);
+      // 状態もリセット
+      setCurrentIndex(0);
+      prevCardIndexRef.current = 0;
+      setIsFlipped(false);
     }
+
+    // 処理完了（少し遅延させて、状態更新が確実に反映されるようにする）
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 100);
   };
 
   // 前のカードへ
   const prevCard = () => {
+    // 処理中は何もしない（連打防止）
+    if (isNavigating) return;
+
+    // 処理開始
+    setIsNavigating(true);
+
     // 0秒表示後のタイマーをクリア
     if (timeUpTimerRef.current) {
       clearTimeout(timeUpTimerRef.current);
@@ -391,14 +290,17 @@ function FlashcardContent() {
 
     if (currentIndex > 0) {
       const newIndex = currentIndex - 1;
-      if (flipArrayHook?.prevCard) {
-        flipArrayHook.prevCard();
-      }
       setCurrentIndex(newIndex);
       prevCardIndexRef.current = newIndex;
+      setIsFlipped(false); // カードが変わったら表に戻す
       setTimeLeft(5); // タイマーをリセット
       setIsTimeUp(false);
     }
+
+    // 処理完了（少し遅延させて、状態更新が確実に反映されるようにする）
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 100);
   };
 
   // 学習履歴をデータベースに保存（ログインユーザーの場合）
@@ -462,17 +364,15 @@ function FlashcardContent() {
 
   // セッション開始
   const startSession = () => {
-    setSessionStarted(true);
+    // 状態をリセット
     setSessionFinished(false);
     setCurrentIndex(0);
     prevCardIndexRef.current = 0;
-    lastSyncedIndexRef.current = 0;
+    setIsFlipped(false);
     setTimeLeft(5);
     setIsTimeUp(false);
-    // フラッシュカード配列を最初のカードにリセット
-    if (flipArrayHook.resetArray) {
-      flipArrayHook.resetArray();
-    }
+    // セッション開始
+    setSessionStarted(true);
   };
 
   if (loading) {
@@ -692,18 +592,21 @@ function FlashcardContent() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => {
+                  // タイマーをクリア
+                  if (timeUpTimerRef.current) {
+                    clearTimeout(timeUpTimerRef.current);
+                    timeUpTimerRef.current = null;
+                  }
+                  // 状態を完全にリセット（最初の設定画面に戻る）
                   setSessionFinished(false);
                   setSessionStarted(false);
                   setCurrentIndex(0);
                   prevCardIndexRef.current = 0;
+                  setIsFlipped(false);
                   setTimeLeft(5);
                   setIsTimeUp(false);
-                  // フラッシュカード配列をリセット
-                  if (flipArrayHook.resetArray) {
-                    flipArrayHook.resetArray();
-                  }
-                  // ページをリロードせずに状態をリセット
-                  // 単語は既に取得されているので、再取得は不要
+                  // 画面を再レンダリングするために、強制的に状態を更新
+                  // これにより、最初の設定画面が表示される
                 }}
                 className="flex-1 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
               >
@@ -748,20 +651,75 @@ function FlashcardContent() {
           </div>
 
           {/* フラッシュカード */}
-          <div
-            className="mb-6 sm:mb-8 flex justify-center"
-            style={{
-              minHeight: '380px',
-              width: '100%',
-            }}
-          >
-            {words.length > 0 && (
-              <FlashcardArray
-                flipArrayHook={flipArrayHook}
-                deck={deck}
-              />
-            )}
-          </div>
+          {words.length > 0 && sessionStarted && currentWord && (
+            <div
+              className="mb-6 sm:mb-8 flex justify-center"
+              style={{
+                minHeight: '380px',
+                width: '100%',
+              }}
+            >
+              <div
+                onClick={() => setIsFlipped(!isFlipped)}
+                className="flex cursor-pointer items-center justify-center rounded-2xl border-2 p-8 shadow-lg transition-all hover:shadow-xl"
+                style={{
+                  width: '90%',
+                  maxWidth: '600px',
+                  minHeight: '300px',
+                  borderColor: wordProgress?.isLearned ? '#4ade80' : '#cbd5e1',
+                  background: wordProgress?.isLearned
+                    ? 'linear-gradient(135deg, #ecfdf5, #d1fae5)'
+                    : 'linear-gradient(135deg, #eff6ff, #eef2ff)',
+                }}
+              >
+                {flashcardMode === 'en-to-ja' ? (
+                  isFlipped ? (
+                    <div className="text-center">
+                      <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                        日本語
+                      </div>
+                      <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                        {currentWord.japanese}
+                      </div>
+                      <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                        {currentWord.level}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                        {currentWord.english}
+                      </div>
+                      <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                        クリックして意味を表示
+                      </div>
+                    </div>
+                  )
+                ) : isFlipped ? (
+                  <div className="text-center">
+                    <div className="mb-4 text-xs text-gray-500 sm:text-sm">
+                      英単語
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                      {currentWord.english}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <div className="text-2xl font-semibold text-gray-900 sm:text-3xl">
+                      {currentWord.japanese}
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500 sm:text-sm">
+                      {currentWord.level}
+                    </div>
+                    <div className="mt-4 text-xs text-gray-400 sm:text-sm">
+                      クリックして英語を表示
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* 操作ボタン */}
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
@@ -778,24 +736,25 @@ function FlashcardContent() {
             </button>
             {/* 前へ/次へボタン（モバイル版は横並び、デスクトップ版は個別に配置） */}
             <div className="flex gap-2 sm:hidden">
-            <button
-              onClick={prevCard}
-              disabled={currentIndex === 0}
-              className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:bg-gray-50 flex items-center justify-center text-center"
-            >
-              前へ
-            </button>
-            <button
-              onClick={nextCard}
-              className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors active:bg-blue-700 flex items-center justify-center text-center"
-            >
-              {currentIndex === words.length - 1 ? '結果を表示する' : '次へ'}
-            </button>
+              <button
+                onClick={prevCard}
+                disabled={currentIndex === 0 || isNavigating}
+                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed active:bg-gray-50 flex items-center justify-center text-center"
+              >
+                前へ
+              </button>
+              <button
+                onClick={nextCard}
+                disabled={isNavigating}
+                className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors active:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-center"
+              >
+                {currentIndex === words.length - 1 ? '結果を表示する' : '次へ'}
+              </button>
             </div>
             {/* デスクトップ版: 「前へ」「覚えた」「次へ」を横並び1列で表示 */}
             <button
               onClick={prevCard}
-              disabled={currentIndex === 0}
+              disabled={currentIndex === 0 || isNavigating}
               className="hidden flex-1 rounded-lg border border-gray-300 bg-white px-6 py-3 text-base text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed sm:flex hover:bg-gray-50 items-center justify-center text-center"
             >
               前へ
@@ -812,7 +771,8 @@ function FlashcardContent() {
             </button>
             <button
               onClick={nextCard}
-              className="hidden flex-1 rounded-lg bg-blue-600 px-6 py-3 text-base text-white transition-colors sm:flex hover:bg-blue-700 items-center justify-center text-center"
+              disabled={isNavigating}
+              className="hidden flex-1 rounded-lg bg-blue-600 px-6 py-3 text-base text-white transition-colors sm:flex hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed items-center justify-center text-center"
             >
               {currentIndex === words.length - 1 ? '結果を表示する' : '次へ'}
             </button>
